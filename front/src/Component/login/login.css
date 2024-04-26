@@ -1,0 +1,78 @@
+.login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+.left {
+    display: flex;
+    width: 70vw;
+    height: 100vh;
+    border-right: 2px solid #888888;
+}
+
+.right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 30vw;
+    height: 100vh;
+    background-color: #E5DDC5;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 40vh;
+    height: 40vh;
+    background-color: #E5DDC5;
+    border-radius: 7px;
+}
+
+.title {
+    text-align: center;
+    color: #B3C8CF;
+    font-weight: 600;
+    font-size: 50px;
+    margin: 1.5vh 0 2vh 0;
+}
+
+.entry {
+    font-weight: 600;
+}
+
+.entry > .name {
+    margin-left: 5px;
+}
+
+.entry > input {
+    width: 25vh;
+    margin-bottom: 2vh;
+    padding: 3px 5px;
+    border: 2px solid #888888;
+    border-radius: 3px;
+    background-color: #F1EEDC;
+}
+
+.entry > input:focus {
+    outline: none;
+    border: specify yours;
+ }
+
+button {
+    padding: 5px 10px;
+    margin-top: 10px;
+    border: 2px solid #888888;
+    border-radius: 5px;
+    background-color: #BED7DC;
+    font-size: medium;
+}
+
+.toRegister {
+    margin-top: 5px;
+    color: #888888;
+}
