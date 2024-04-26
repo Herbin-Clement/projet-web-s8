@@ -18,3 +18,7 @@ button {
 input {
   font-family: "Indie Flower";
 }
+
+a {
+  text-decoration: none;
+}
