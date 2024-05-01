@@ -6,13 +6,13 @@ const Register = ({}) => {
 
   return (
     <div className="register">
-        <div className="form">
-            <div className="title">Register</div>
-            <div className="entry">
+        <div className="register-form">
+            <div className="register-form-title">Register</div>
+            <div className="register-form-entry">
                 <div className="name">Username</div>
                 <input type="test" placeholder="Username"/>
             </div>
-            <div className="entry">
+            <div className="register-form-entry">
                 <div className="name">Password</div>
                 <input type="password" placeholder="Password"/>
             </div>

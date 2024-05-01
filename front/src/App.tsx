@@ -9,6 +9,9 @@ import {
 import Register from './Component/register/Register';
 import Login from './Component/login/Login';
 import Home from './Component/home/Home';
+import Create from './Component/create/Create';
+import Invite from './Component/invite/Invite';
+import Join from './Component/join/Join';
 
 function App() {
 
@@ -16,10 +19,13 @@ function App() {
     <div className="App">
       <Router>
         <Routes>
-          <Route path="/" element={<Login/>}/>
+          <Route path="/" element={<Home/>}/>
           <Route path="/login" element={<Login/>}/>
           <Route path="/register" element={<Register/>}/>
           <Route path="/home" element={<Home/>}/>
+          <Route path="/join" element={<Join/>}/>
+          <Route path="/create" element={<Create/>}/>
+          <Route path="/invite" element={<Invite/>}/>
         </Routes>
       </Router>
     </div>

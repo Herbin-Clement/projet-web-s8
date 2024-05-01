@@ -5,7 +5,7 @@
     margin: 0;
 }
 
-.homecontent {
+.home-content {
     box-sizing: border-box;
     width: 100vw;
     height: 88vh;
@@ -14,7 +14,7 @@
     align-items: center;
 }
 
-.homecontent > div {
+.home-button {
     margin: 0 10vh;
     padding: 10px 50px;
     border: 2px solid #888888;
@@ -24,7 +24,7 @@
     cursor: pointer;
 }
 
-.homecontent > div:hover {
+.home-button:hover {
     background-color: #F1EEDC;
     color: #B3C8CF;
 }

@@ -1,0 +1,68 @@
+.createContent {
+    box-sizing: border-box;
+    padding-top: 15px;
+    min-height: 88vh;
+}
+
+.line {
+    width: 100vw;
+    height: 1px;
+    margin: 10px 0;
+    background-color: #888888;
+}
+
+.createAnswer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.quizzInput {
+    margin: 0 25px;
+    font-weight: 600;
+}
+
+.quizzInput > input {
+    margin-bottom: 0;
+}
+
+.quizzInput > div {
+    margin-left: 5px;
+}
+
+.quizzInput > input {
+    width: 25vh;
+    padding: 3px 5px;
+    border: 2px solid #888888;
+    border-radius: 3px;
+    background-color: #E5DDC5;
+}
+
+.quizzInput > input:focus {
+    outline: none;
+    border: specify yours;
+ }
+
+ .createAnswer {
+    display: flex;
+ }
+
+.quizzInput > input[type="checkbox"] {
+    accent-color: #B3C8CF;
+    transform: scale(1.5);
+}
+
+ .quizzCheckboxName {
+    text-align: center;
+ }
+
+ .createContent button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    height: 35px;
+    border: 2px solid #888888;
+    border-radius: 5px;
+    background-color: #BED7DC;
+}

@@ -10,20 +10,20 @@ const Login = ({}) => {
             
         </div>
         <div className="right">
-            <div className="form">
-                <div className="title">Login</div>
-                <div className="entry">
+            <div className="login-form">
+                <div className="login-form-title">Login</div>
+                <div className="login-form-entry">
                     <div className="name">Username</div>
-                    <input type="test" placeholder="Username"/>
+                    <input type="text" placeholder="Username"/>
                 </div>
-                <div className="entry">
+                <div className="login-form-entry">
                     <div className="name">Password</div>
                     <input type="password" placeholder="Password"/>
                 </div>
                 <button type="button">Login</button>
             </div>
             <Link to="/register">
-                <div className="toRegister">Vous avez déjà un compte ?</div>
+                <div className="toRegister">Vous n'avez pas de compte ?</div>
             </Link>
         </div>
     </div>

@@ -17,8 +17,13 @@ button {
 
 input {
   font-family: "Indie Flower";
+  font-weight: 600;
 }
 
 a {
-  text-decoration: none;
+    text-decoration: none;
+}
+
+a:hover, a:visited, a:link, a:active {
+  color: inherit;
 }

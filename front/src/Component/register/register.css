@@ -7,7 +7,7 @@
     height: 100vh;
 }
 
-.form {
+.register-form {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -17,7 +17,7 @@
     border-radius: 7px;
 }
 
-.title {
+.register-form-title {
     text-align: center;
     color: #B3C8CF;
     font-weight: 600;
@@ -25,15 +25,15 @@
     margin: 1.5vh 0 2vh 0;
 }
 
-.entry {
+.register-form-entry {
     font-weight: 600;
 }
 
-.entry > .name {
+.register-form-entry > .name {
     margin-left: 5px;
 }
 
-.entry > input {
+.register-form-entry > input {
     width: 25vh;
     margin-bottom: 2vh;
     padding: 3px 5px;
@@ -42,18 +42,19 @@
     background-color: #F1EEDC;
 }
 
-.entry > input:focus {
+.register-form-entry > input:focus {
     outline: none;
     border: specify yours;
  }
 
-button {
+.register button {
     padding: 5px 10px;
     margin-top: 10px;
     border: 2px solid #888888;
     border-radius: 5px;
     background-color: #BED7DC;
     font-size: medium;
+    cursor: pointer;
 }
 
 .toLogin {
