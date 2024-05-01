@@ -6,7 +6,7 @@ const Join = () => {
     return (
         <div className="home">
             <Header/>
-            <div className="joincontent">
+            <div className="join*content">
                 join
             </div>
         </div>

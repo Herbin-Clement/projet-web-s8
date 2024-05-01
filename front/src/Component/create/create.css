@@ -1,4 +1,4 @@
-.createContent {
+.create-content {
     box-sizing: border-box;
     padding-top: 15px;
     min-height: 88vh;
@@ -11,26 +11,26 @@
     background-color: #888888;
 }
 
-.createAnswer {
+.create-answer {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.quizzInput {
+.create-input {
     margin: 0 25px;
     font-weight: 600;
 }
 
-.quizzInput > input {
+.create-input > input {
     margin-bottom: 0;
 }
 
-.quizzInput > div {
+.create-input > div {
     margin-left: 5px;
 }
 
-.quizzInput > input {
+.create-input > input {
     width: 25vh;
     padding: 3px 5px;
     border: 2px solid #888888;
@@ -38,25 +38,25 @@
     background-color: #E5DDC5;
 }
 
-.quizzInput > input:focus {
+.create-input > input:focus {
     outline: none;
     border: specify yours;
  }
 
- .createAnswer {
+ .create-answer {
     display: flex;
  }
 
-.quizzInput > input[type="checkbox"] {
+.create-input > input[type="checkbox"] {
     accent-color: #B3C8CF;
     transform: scale(1.5);
 }
 
- .quizzCheckboxName {
+ .create-cb {
     text-align: center;
  }
 
- .createContent button {
+ .create-content button {
     display: flex;
     align-items: center;
     justify-content: center;

@@ -13,16 +13,16 @@ const Create = () => {
     return (
         <div className="home">
             <Header/>
-            <div className="createContent">
-                <div className="quizzTitle">
-                    <div className="quizzInput">
+            <div className="create-content">
+                <div className="create-title">
+                    <div className="create-input">
                         <div>Quizz title</div>
                         <input type="text" placeholder="Quizz"/>
                     </div>
                 </div>
                 <Line/>
                 <CreateQuestion/>
-                <button className="quizzAddAnswerButton">Add</button>
+                <button className="quizz-add-button">Add</button>
             </div>
         </div>
     )

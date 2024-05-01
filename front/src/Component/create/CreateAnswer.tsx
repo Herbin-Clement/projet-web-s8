@@ -2,13 +2,13 @@ import './create.css';
 
 const CreateAnswer = () => {
     return (
-        <div className="createAnswer">
-            <div className="quizzInput">
+        <div className="create-answer">
+            <div className="create-input">
                 <div>Answer</div>
                 <input type="text" placeholder="Answer"/>
             </div>
-            <div className="quizzInput">
-                <div className="quizzCheckboxName">True</div>
+            <div className="create-input">
+                <div className="create-cb">True</div>
                 <input type="checkbox"/>
             </div>
         </div>

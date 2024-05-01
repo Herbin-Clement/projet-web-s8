@@ -4,7 +4,7 @@ import Answer from './CreateAnswer';
 
 const CreateQuestion = () => {
     return (
-        <div className="createQuestion">
+        <div className="create-question">
             <Answer/>
         </div>
     )

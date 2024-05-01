@@ -6,7 +6,7 @@ const Invite = () => {
     return (
         <div className="home">
             <Header/>
-            <div className="invitecontent">
+            <div className="invite-content">
                 invite
             </div>
         </div>
