@@ -1,20 +1,40 @@
+.create {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .create-content {
     box-sizing: border-box;
-    padding-top: 15px;
+    width: 90%;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
     min-height: 88vh;
+    padding-top: 15px;
 }
 
 .line {
-    width: 100vw;
+    width: 100%;
     height: 1px;
     margin: 10px 0;
     background-color: #888888;
 }
 
+.create-title>.create-input {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.create-title>.create-input input {
+    width: 50vw;
+    font-size: large;
+}
+
 .create-answer {
     display: flex;
     align-items: center;
-    justify-content: center;
 }
 
 .create-input {
@@ -22,47 +42,75 @@
     font-weight: 600;
 }
 
-.create-input > input {
+.create-input>input {
     margin-bottom: 0;
 }
 
-.create-input > div {
+.create-input>div {
     margin-left: 5px;
 }
 
-.create-input > input {
-    width: 25vh;
+.create-input>input {
+    min-width: 20vw;
     padding: 3px 5px;
     border: 2px solid #888888;
     border-radius: 3px;
     background-color: #E5DDC5;
 }
 
-.create-input > input:focus {
+.create-input>input:focus {
     outline: none;
     border: specify yours;
- }
+}
 
- .create-answer {
+.create-answer {
     display: flex;
- }
+}
 
-.create-input > input[type="checkbox"] {
+.create-input>input[type="checkbox"] {
     accent-color: #B3C8CF;
     transform: scale(1.5);
 }
 
- .create-cb {
+.create-cb {
     text-align: center;
- }
+}
 
- .create-content button {
+.quizz-button-add-answer {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 35px;
-    height: 35px;
+    margin-top: 10px;
+    padding: 5px;
     border: 2px solid #888888;
     border-radius: 5px;
     background-color: #BED7DC;
+    cursor: pointer;
+}
+
+.quizz-button-add-answer:hover {
+    background-color: #B3C8CF;
+}
+
+.quizz-button-add-question {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    padding: 10px;
+    border: 2px solid #888888;
+    border-radius: 5px;
+    background-color: #BED7DC;
+    font-size: medium;
+    cursor: pointer;
+}
+
+.quizz-button-add-question:hover {
+    background-color: #B3C8CF;
+}
+
+.test-question {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
