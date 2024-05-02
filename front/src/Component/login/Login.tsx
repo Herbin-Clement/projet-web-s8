@@ -24,10 +24,10 @@ const Login = () => {
 
     return (
         <div className="login">
-            <div className="left">
+            <div className="login-left">
 
             </div>
-            <div className="right">
+            <div className="login-right">
                 <div className="login-form">
                     <div className="login-form-title">Login</div>
                     <div className="login-form-entry">

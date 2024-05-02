@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import './register.css';
 
 
-const Register = ({ }) => {
+const Register = () => {
 
   const [username, setUsername] = useState<string>("");
   const [pwd, setPwd] = useState<string>("");

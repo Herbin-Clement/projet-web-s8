@@ -6,14 +6,14 @@
     height: 100vh;
 }
 
-.left {
+.login-left {
     display: flex;
     width: 70vw;
     height: 100vh;
     border-right: 2px solid #888888;
 }
 
-.right {
+.login-right {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -45,11 +45,11 @@
     font-weight: 600;
 }
 
-.login-form-entry > .name {
+.login-form-entry>.name {
     margin-left: 5px;
 }
 
-.login-form-entry > input {
+.login-form-entry>input {
     width: 25vh;
     margin-bottom: 2vh;
     padding: 3px 5px;
@@ -58,12 +58,12 @@
     background-color: #F1EEDC;
 }
 
-.login-form-entry > input:focus {
+.login-form-entry>input:focus {
     outline: none;
     border: specify yours;
- }
+}
 
-.login-form-login button {
+.login-form button {
     padding: 5px 10px;
     margin-top: 10px;
     border: 2px solid #888888;
@@ -71,6 +71,10 @@
     background-color: #BED7DC;
     font-size: medium;
     cursor: pointer;
+}
+
+.login-form button:hover {
+    background-color: #B3C8CF;
 }
 
 .toRegister {

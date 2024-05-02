@@ -29,11 +29,11 @@
     font-weight: 600;
 }
 
-.register-form-entry > .name {
+.register-form-entry>.name {
     margin-left: 5px;
 }
 
-.register-form-entry > input {
+.register-form-entry>input {
     width: 25vh;
     margin-bottom: 2vh;
     padding: 3px 5px;
@@ -42,10 +42,10 @@
     background-color: #F1EEDC;
 }
 
-.register-form-entry > input:focus {
+.register-form-entry>input:focus {
     outline: none;
     border: specify yours;
- }
+}
 
 .register button {
     padding: 5px 10px;
@@ -55,6 +55,10 @@
     background-color: #BED7DC;
     font-size: medium;
     cursor: pointer;
+}
+
+.register button:hover {
+    background-color: #B3C8CF;
 }
 
 .toLogin {
