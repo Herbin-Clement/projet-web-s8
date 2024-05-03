@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './create.css';
 
 import CreateAnswer from './CreateAnswer';
+import Line from '../utils/Line';
 
 type CreateQuestionProps = {
     id: number,
@@ -54,6 +55,7 @@ const CreateQuestion = ({ id }: CreateQuestionProps) => {
                     <button className="quizz-button-add-question" onClick={() => addAnswer()}>Add Answer</button>
                 </div>
             }
+            <Line />
         </div>
     )
 }

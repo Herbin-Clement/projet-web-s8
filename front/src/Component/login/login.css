@@ -2,13 +2,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100vw;
+    width: 100%;
     height: 100vh;
 }
 
 .login-left {
     display: flex;
-    width: 70vw;
+    width: 70%;
     height: 100vh;
     border-right: 2px solid #888888;
 }
@@ -18,7 +18,7 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    width: 30vw;
+    width: 30%;
     height: 100vh;
     background-color: #E5DDC5;
 }

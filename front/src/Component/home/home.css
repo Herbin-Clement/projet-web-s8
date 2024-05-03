@@ -1,6 +1,6 @@
 .home {
     box-sizing: border-box;
-    width: 100vw;
+    width: 100%;
     min-height: 100vh;
     padding: 0;
     margin: 0;
@@ -8,11 +8,11 @@
 
 .home-content {
     box-sizing: border-box;
-    width: 100vw;
-    height: 88vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
+    height: 88vh;
 }
 
 .home-button {

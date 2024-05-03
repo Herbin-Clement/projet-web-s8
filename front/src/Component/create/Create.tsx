@@ -2,17 +2,11 @@ import React, { useState } from 'react';
 
 import Header from '../header/Header';
 import CreateQuestion from './CreateQuestion';
-
+import Line from '../utils/Line';
 import './create.css';
 
 interface Question {
     id: number,
-}
-
-const Line = () => {
-    return (
-        <div className="line" />
-    )
 }
 
 const Create = () => {
@@ -33,6 +27,10 @@ const Create = () => {
         ])
     }
 
+    const submitQuizz = () => {
+        console.log("Click on submit !");
+    }
+
     return (
         <div className="home">
             <Header />
@@ -48,11 +46,11 @@ const Create = () => {
                     {questions.map(question => (
                         <>
                             <CreateQuestion key={question.id} id={question.id} />
-                            <Line />
                         </>
                     ))}
-                    <div className="create-input test-question">
+                    <div className="create-input create-button">
                         <button className="quizz-button-add-question" onClick={() => addQuestion()}>Add question</button>
+                        <button className="quizz-button-submit" onClick={() => submitQuizz()}>Submit Quizz</button>
                     </div>
                 </div>
             </div>
