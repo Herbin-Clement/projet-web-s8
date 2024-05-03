@@ -32,11 +32,17 @@ const Login = () => {
                     <div className="login-form-title">Login</div>
                     <div className="login-form-entry">
                         <div className="name">Username</div>
-                        <input type="text" placeholder="Username" value={username} onChange={e => updateUsername(e)} />
+                        <input type="text"
+                            placeholder="Username"
+                            value={username}
+                            onChange={e => updateUsername(e)} />
                     </div>
                     <div className="login-form-entry">
                         <div className="name">Password</div>
-                        <input type="password" placeholder="Password" value={pwd} onChange={e => updatePwd(e)} />
+                        <input type="password"
+                            placeholder="Password"
+                            value={pwd}
+                            onChange={e => updatePwd(e)} />
                     </div>
                     <button type="button" onClick={() => handleClick()}>Login</button>
                 </div>

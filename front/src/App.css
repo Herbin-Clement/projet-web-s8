@@ -1,6 +1,10 @@
-html, body, #root, .App {
+html,
+body,
+#root,
+.App {
+  box-sizing: border-box;
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   padding: 0;
   margin: 0;
   font-family: "Indie Flower";
@@ -21,9 +25,12 @@ input {
 }
 
 a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
-a:hover, a:visited, a:link, a:active {
+a:hover,
+a:visited,
+a:link,
+a:active {
   color: inherit;
 }

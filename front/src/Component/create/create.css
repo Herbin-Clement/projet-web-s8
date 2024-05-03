@@ -63,6 +63,11 @@
     border: specify yours;
 }
 
+.create-input>input.create-input-question {
+    min-width: 40vw;
+    margin-bottom: 10px;
+}
+
 .create-answer {
     display: flex;
 }

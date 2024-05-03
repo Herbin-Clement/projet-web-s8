@@ -1,7 +1,13 @@
-import './create.css';
+import React, { useState } from 'react';
 
 import Header from '../header/Header';
 import CreateQuestion from './CreateQuestion';
+
+import './create.css';
+
+interface Question {
+    id: number,
+}
 
 const Line = () => {
     return (
@@ -10,6 +16,23 @@ const Line = () => {
 }
 
 const Create = () => {
+
+    const [questions, setQuestions] = useState<Question[]>([
+        {
+            "id": 0
+        }
+    ]);
+
+    const addQuestion = () => {
+        const id = questions.length;
+        setQuestions([
+            ...questions,
+            {
+                "id": id
+            }
+        ])
+    }
+
     return (
         <div className="home">
             <Header />
@@ -22,10 +45,14 @@ const Create = () => {
                         </div>
                     </div>
                     <Line />
-                    <CreateQuestion />
-                    <Line />
+                    {questions.map(question => (
+                        <>
+                            <CreateQuestion key={question.id} id={question.id} />
+                            <Line />
+                        </>
+                    ))}
                     <div className="create-input test-question">
-                        <button className="quizz-button-add-question">Add question</button>
+                        <button className="quizz-button-add-question" onClick={() => addQuestion()}>Add question</button>
                     </div>
                 </div>
             </div>
