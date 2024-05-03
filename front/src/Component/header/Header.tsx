@@ -11,6 +11,8 @@ const Header = () => {
                 </Link>
             </div>
             <div className="header-quizz">
+            </div>
+            <div className="header-profil">
                 <Link to="/join">
                     <div className="header-text">Join quizz</div>
                 </Link>
@@ -18,8 +20,6 @@ const Header = () => {
                     <div className="header-text">Create quizz</div>
                 </Link>
                 <div className="header-text">My quizz</div>
-            </div>
-            <div className="header-profil">
                 <div className="header-text">Profil</div>
                 <div className="header-profil-logo"></div>
             </div>
