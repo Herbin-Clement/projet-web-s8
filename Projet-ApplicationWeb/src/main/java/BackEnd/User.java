@@ -15,9 +15,10 @@ public class User {
 	private String password;
 	
 	@OneToMany(mappedBy="creator", fetch = FetchType.EAGER)
-	Collection<Quizz> createdQuizzes;
-	@ManyToMany(mappedBy="participant", fetch = FetchType.EAGER) // TODO : bon ?
-	Collection<Quizz> answeredQuizzes;
+	private Collection<Quizz> createdQuizzes;
+	
+	@ManyToMany(fetch = FetchType.EAGER) 
+	private Collection<Quizz> answeredQuizzes;
 	
 	public User() {};
 	
