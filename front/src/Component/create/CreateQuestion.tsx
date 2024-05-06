@@ -19,6 +19,9 @@ const CreateQuestion = ({ id }: CreateQuestionProps) => {
     const [answers, setAnswers] = useState<Answer[]>([
         {
             "id": 0
+        },
+        {
+            "id": 1
         }
     ]);
 
@@ -36,6 +39,14 @@ const CreateQuestion = ({ id }: CreateQuestionProps) => {
         ])
     }
 
+    const removeAnswer = () => {
+        if (answers.length > 2) {
+            const as = [...answers];
+            as.pop();
+            setAnswers(as);
+        }
+    }
+
     return (
         <div className="create-question">
             <div className="create-input">
@@ -51,8 +62,9 @@ const CreateQuestion = ({ id }: CreateQuestionProps) => {
             ))}
             {
                 answers.length < 4 &&
-                <div className="create-input">
-                    <button className="quizz-button-add-question" onClick={() => addAnswer()}>Add Answer</button>
+                <div className="create-input create-button-answer">
+                    <button className="quizz-button-add-question" onClick={() => addAnswer()}>Add answer</button>
+                    <button className="quizz-button-remove-question" onClick={() => removeAnswer()}>Remove answer</button>
                 </div>
             }
             <Line />

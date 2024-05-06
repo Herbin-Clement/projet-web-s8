@@ -20,7 +20,9 @@ const Header = () => {
                     <div className="header-text">Create quizz</div>
                 </Link>
                 <div className="header-text">My quizz</div>
-                <div className="header-text">Profil</div>
+                <Link to="/profil">
+                    <div className="header-text">Profil</div>
+                </Link>
                 <div className="header-profil-logo"></div>
             </div>
         </div>

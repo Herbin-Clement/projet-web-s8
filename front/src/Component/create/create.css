@@ -102,7 +102,8 @@
 }
 
 .quizz-button-add-question,
-.quizz-button-submit {
+.quizz-button-submit,
+.quizz-button-remove-question {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -122,6 +123,14 @@
     background-color: #B3C8CF;
 }
 
+.quizz-button-remove-question {
+    background-color: #F15A59;
+}
+
+.quizz-button-remove-question:hover {
+    background-color: #ED2B2A;
+}
+
 .quizz-button-submit {
     background-color: #E5E483;
 }
@@ -130,8 +139,14 @@
     background-color: #D2D180;
 }
 
-.create-button {
+.create-button-question {
     display: flex;
     justify-content: center;
+    align-items: center;
+}
+
+.create-button-answer {
+    display: flex;
+    /* justify-content: center; */
     align-items: center;
 }

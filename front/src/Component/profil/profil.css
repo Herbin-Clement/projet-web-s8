@@ -1,0 +1,14 @@
+.profil-content {
+    box-sizing: border-box;
+    display: flex;
+    height: 91vh;
+}
+
+.profil-stat {
+    width: 25%;
+    height: 25%;
+    padding: 10px;
+    border: 2px solid #888888;
+    border-radius: 3px;
+    background-color: #E5DDC5;
+}
