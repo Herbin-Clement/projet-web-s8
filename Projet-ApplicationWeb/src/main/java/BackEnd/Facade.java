@@ -54,6 +54,30 @@ public class Facade {
 		 em.persist(quizz);
 		 return Response.status(Response.Status.CREATED).build();
 	 }
+
+	 @GET
+	 @Path("/quizz")
+	 // TODO : annotations
+	 public Collection<Quizz> getQuizzs() {
+		 // TODO
+		 return null;
+	 }
+	 
+	 @GET
+	 @Path("/user")
+	 // TODO : annotations
+	 public Collection<User> getUsers() {
+		 // TODO
+		 return null;
+	 }
+	
+	 @GET
+	 @Path("/stats")
+	 // TODO : annotations
+	 public Stats getStatsQuizz(int id_sondage) {
+		 // TODO
+	 }
+		 
 	 
 	@GET
 	@Path("/checkConnexion")
@@ -76,14 +100,9 @@ public class Facade {
     	return (user==null); // profil non trouvé ?  
     }
     
-    
 	 /*{
 	 majStats(int id_quizz)
 	 ajoutReponsesQuizz(Collection<Reponse> reponses, int id_quizz)
-	 listeQuizzs()
-	 listeUsers()
-	 associerCreateur(int id_quizz, int id_user)
-	 getStatistiquesSondage(int id_sondage)
 	 }*/
 
 }
