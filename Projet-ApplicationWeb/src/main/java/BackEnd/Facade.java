@@ -32,7 +32,7 @@ public class Facade {
 	 }
 	 
 	 @POST
-	 @Path("/addUser")
+	 @Path("/user")
 	 @Consumes(MediaType.APPLICATION_JSON) //TODO : bon ?
 	 public Response addUser(String username, String password) {
 		 if (UsernameNotUsed(username)) {
@@ -46,7 +46,7 @@ public class Facade {
 	 }
 
 	 @POST
-	 @Path("/addQuizz")
+	 @Path("/quizz")
 	 @Consumes(MediaType.APPLICATION_JSON) //TODO : bon ?
 	 public Response addQuizz(@PathParam("username_creator") String username_creator, String link, Collection<Mcq> Mcqs) {
 		 User creator = em.createQuery("SELECT u FROM Utilisateur u WHERE u.username = :username_creator", User.class).setParameter("username", username_creator).getSingleResult();
@@ -55,6 +55,7 @@ public class Facade {
 		 return Response.status(Response.Status.CREATED).build();
 	 }
 
+	 /*{
 	 @GET
 	 @Path("/quizz")
 	 // TODO : annotations
@@ -76,8 +77,9 @@ public class Facade {
 	 // TODO : annotations
 	 public Stats getStatsQuizz(int id_sondage) {
 		 // TODO
+		return null;
 	 }
-		 
+	}*/	 
 	 
 	@GET
 	@Path("/checkConnexion")
