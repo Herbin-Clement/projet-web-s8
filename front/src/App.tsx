@@ -10,6 +10,7 @@ import Register from './Component/register/Register';
 import Login from './Component/login/Login';
 import Home from './Component/home/Home';
 import Create from './Component/create/Create';
+import Quizz from './Component/quizz/Quizz';
 import Invite from './Component/invite/Invite';
 import Join from './Component/join/Join';
 import Profil from './Component/profil/Profil';
@@ -26,6 +27,7 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/join" element={<Join />} />
           <Route path="/create" element={<Create />} />
+          <Route path="/quizz" element={<Quizz />} />
           <Route path="/invite" element={<Invite />} />
           <Route path="/profil" element={<Profil />} />
           <Route path="*" element={<Home />} />
