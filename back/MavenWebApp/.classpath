@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" output="target/classes" path="src/main/java">
+		<attributes>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry excluding="**" kind="src" output="target/classes" path="src/main/resources">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="optional" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" output="target/test-classes" path="src/test/java">
+		<attributes>
+			<attribute name="test" value="true"/>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry excluding="**" kind="src" output="target/test-classes" path="src/test/resources">
+		<attributes>
+			<attribute name="test" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="optional" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
+		<attributes>
+			<attribute name="module" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/activation-1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/aopalliance-1.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/apache-mime4j-0.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/async-http-servlet-3.0-3.0.9.Final.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/bcmail-jdk16-1.46.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/bcprov-jdk16-1.46.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/classmate-0.8.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/commons-codec-1.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/commons-io-2.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/FastInfoset-1.2.7.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/guice-3.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/hibernate-jpa-2.0-api-1.0.1.Final.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/hibernate-validator-5.0.1.Final.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/httpclient-4.2.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/httpcore-4.2.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/infinispan-core-5.1.6.FINAL.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/istack-commons-runtime-2.16.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/jackson-annotations-2.4.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/jackson-core-2.4.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/jackson-core-asl-1.9.12.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/jackson-databind-2.4.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/jackson-jaxrs-1.9.12.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/jackson-jaxrs-base-2.4.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/jackson-jaxrs-json-provider-2.4.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/jackson-mapper-asl-1.9.12.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/jackson-module-jaxb-annotations-2.4.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/jackson-xc-1.9.12.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/javax.ejb-api-3.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/javax.el-3.0.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/javax.inject-1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/javax.json-1.0.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/javax.json-api-1.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/javax.persistence-api-2.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/javax.servlet-api-3.0.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/jaxb-api-2.2.7.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/jaxb-core-2.2.7.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/jaxb-impl-2.2.7.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/jaxrs-api-3.0.9.Final.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/jboss-annotations-api_1.1_spec-1.0.1.Final.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/jboss-el-api_3.0_spec-1.0.0.Final.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/jboss-logging-3.1.0.GA.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/jboss-marshalling-1.3.11.GA.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/jboss-marshalling-river-1.3.11.GA.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/jboss-transaction-api_1.1_spec-1.0.0.Final.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/jcip-annotations-1.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/jettison-1.3.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/jgroups-3.0.11.Final.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/jose-jwt-3.0.9.Final.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/jsr250-api-1.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/mail-1.5.0-b01.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/oauth-20100527.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/oauth-provider-20100527.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/resteasy-atom-provider-3.0.9.Final.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/resteasy-cache-core-3.0.9.Final.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/resteasy-cdi-3.0.9.Final.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/resteasy-client-3.0.9.Final.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/resteasy-crypto-3.0.9.Final.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/resteasy-fastinfoset-provider-3.0.9.Final.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/resteasy-guice-3.0.9.Final.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/resteasy-hibernatevalidator-provider-3.0.9.Final.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/resteasy-jackson2-provider-3.0.9.Final.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/resteasy-jackson-provider-3.0.9.Final.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/resteasy-jaxb-provider-3.0.9.Final.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/resteasy-jaxrs-3.0.9.Final.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/resteasy-jettison-provider-3.0.9.Final.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/resteasy-jsapi-3.0.9.Final.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/resteasy-json-p-provider-3.0.9.Final.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/resteasy-links-3.0.9.Final.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/resteasy-multipart-provider-3.0.9.Final.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/resteasy-oauth-3.0.9.Final.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/resteasy-servlet-initializer-3.0.9.Final.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/resteasy-spring-3.0.9.Final.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/resteasy-validator-provider-11-3.0.9.Final.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/resteasy-yaml-provider-3.0.9.Final.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/rhq-pluginAnnotations-3.0.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/skeleton-key-core-3.0.9.Final.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/snakeyaml-1.8.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/spring-aop-3.0.6.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/spring-asm-3.0.6.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/spring-beans-3.0.6.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/spring-context-3.0.6.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/spring-context-support-3.0.6.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/spring-core-3.0.6.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/spring-expression-3.0.6.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/spring-web-3.0.6.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/spring-webmvc-3.0.6.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/stax2-api-3.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/validation-api-1.1.0.Final.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/weld-se-2.1.0.Final.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/woodstox-core-asl-4.1.1.jar"/>
+	<classpathentry kind="output" path="target/classes"/>
+</classpath>

@@ -1,0 +1,3 @@
+INDEX VERSION 1.134
+C:\Users\Ruben\OneDrive\Bureau\N7\2SN\S8\web\workspace-test\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2343391388.index
+\MavenWebApp\src\main\resources
