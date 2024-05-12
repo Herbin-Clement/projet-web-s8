@@ -47,27 +47,28 @@
     justify-content: center;
     border-radius: 2px;
     width: 40%;
-    min-height: 25%;
+    height: 15vh;
     margin: 10px;
     border: 2px solid #888888;
+    text-align: center;
     cursor: pointer;
     -webkit-user-select: none;
     -ms-user-select: none;
     user-select: none;
 }
 
-.quizz-check:hover {
+.quizz-selected:hover {
     background-color: #D2D180;
 }
 
-.quizz-check {
+.quizz-selected {
     background-color: #E5E483;
 }
 
-.quizz-notcheck {
+.quizz-notselected {
     background-color: #E5DDC5;
 }
 
-.quizz-notcheck:hover {
+.quizz-notselected:hover {
     background-color: #F1EEDC;
 }

@@ -2,88 +2,113 @@ import './quizz.css';
 
 import Header from '../header/Header';
 import Answer from './Answer';
+import { useState } from 'react';
 
-const quizz = {
-    "name": "Premier quizz",
-    "questions": [
-        {
-            "name": "Suis-je la question 1 ?",
-            "id": 10,
-            "answers": [
-                {
-                    "name": "Oui",
-                    "id": 50,
-                    "ok": true,
-                },
-                {
-                    "name": "Non",
-                    "id": 51,
-                    "ok": false,
-                },
-                {
-                    "name": "Peut-être",
-                    "id": 49,
-                    "ok": false,
-                }
-            ]
-        },
-        {
-            "name": "Suis-je la question 2 ?",
-            "id": 10,
-            "answers": [
-                {
-                    "name": "Non",
-                    "id": 52,
-                    "ok": false,
-                },
-                {
-                    "name": "Oui",
-                    "id": 53,
-                    "ok": true,
-                }
-            ]
-        },
-        {
-            "name": "Suis-je la question 4 ?",
-            "id": 10,
-            "answers": [
-                {
-                    "name": "Non",
-                    "id": 52,
-                    "ok": true,
-                },
-                {
-                    "name": "Oui",
-                    "id": 53,
-                    "ok": false,
-                }
-            ]
-        }
-    ]
+interface AnswerData {
+    name: string,
+    id: number,
+    ok: boolean,
 }
 
-const Quizz = () => {
+interface AnswerResponse {
+    id: number,
+    res: boolean,
+}
+
+interface QuestionData {
+    name: string,
+    id: number,
+    answers: AnswerData[],
+}
+
+interface QuestionResponse {
+    id: number,
+    answers: AnswerResponse[],
+}
+
+interface QuizzData {
+    name: string,
+    questions: QuestionData[],
+}
+
+interface QuizzProps {
+    data: QuizzData,
+}
+
+const AnswerToAnswerResponse = (ans: AnswerData): AnswerResponse => {
+    return {
+        id: ans.id,
+        res: false,
+    }
+}
+
+const Quizz = ({ data }: QuizzProps) => {
+
+    const [questionId, setQuestionId] = useState<number>(0);
+    const [answers, setAnswers] = useState<QuestionResponse[]>([]);
+    const [currentAnswers, setCurrentAnswers] = useState<AnswerResponse[]>(data.questions[questionId].answers.map(ans => AnswerToAnswerResponse(ans)));
+
+    const handleClick = () => {
+        setAnswers(prev => {
+            prev.push({
+                id: data.questions[questionId].id,
+                answers: currentAnswers,
+            });
+            return prev;
+        })
+        if (questionId + 1 === data.questions.length) {
+            console.log("Quizz finished");
+            console.log(answers);
+        } else {
+            setQuestionId(prev => {
+                const res = prev + 1;
+                setCurrentAnswers(data.questions[res].answers.map(ans => AnswerToAnswerResponse(ans)));
+                return res
+            });
+        }
+    }
+
+    const handleAnswerClick = (id: number, value: boolean) => {
+        console.log("yo");
+        setCurrentAnswers(prev => {
+            for (let i = 0; i < prev.length; i++) {
+                if (prev[i].id === id) {
+                    prev[i].res = value;
+                    break;
+                }
+            }
+            return prev;
+        })
+    }
+
     return (
         <div className="home">
             <Header />
             <div className="quizz-content">
                 <div className="quizz-question">
                     <div className="quizz-title">
-                        {quizz.name}
+                        {data.name}
                     </div>
                     <div className="quizz-question-name">
-                        {quizz.questions[0].name}
+                        {data.questions[questionId].name}
                     </div>
                     <div className="quizz-question-answers">
                         {
-                            quizz.questions[0].answers.map(answer =>
-                                <Answer key={answer.id} answer={answer} />
+                            data.questions[questionId].answers.map((answer, id) =>
+                                <Answer key={answer.id}
+                                    id={answer.id}
+                                    name={answer.name}
+                                    handleAnswerClick={handleAnswerClick}
+                                    selected={currentAnswers[id].res} />
                             )
                         }
                     </div>
                 </div>
                 <div className="quizz-next">
-                    <button className="quizz-button-add-question">Next question</button>
+                    <button className="quizz-button-add-question"
+                        onClick={() => handleClick()}>
+                        {questionId + 1 === data.questions.length ? "Finish" : "Next question"}
+                    </button>
                 </div>
             </div>
         </div>

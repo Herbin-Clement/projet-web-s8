@@ -1,27 +1,27 @@
 import { useState } from 'react';
-
 import './quizz.css';
 
 interface AnswerProps {
-    answer: {
-        name: string;
-        id: number;
-        ok: boolean;
-    }
+    id: number,
+    selected: boolean | undefined,
+    name: string,
+    handleAnswerClick: (id: number, value: boolean) => void,
 }
 
-const Answer = ({ answer }: AnswerProps) => {
+const Answer = ({ id, selected, name, handleAnswerClick }: AnswerProps) => {
 
-    const [isCheck, setIsCheck] = useState<boolean>(false);
+    const [isSelected, setIsSelected] = useState<boolean>((selected === undefined ? false : selected));
 
-    const update = () => {
-        setIsCheck(prev => !prev);
-        console.log(isCheck);
+    const handleClick = () => {
+        setIsSelected(prev => {
+            handleAnswerClick(id, !prev);
+            return !prev;
+        })
     }
 
     return (
-        <div className={isCheck ? "quizz-check" : "quizz-notcheck"} onClick={() => update()}>
-            {answer.name}
+        <div className={isSelected ? "quizz-selected" : "quizz-notselected"} onClick={() => handleClick()}>
+            {name}
         </div>
     )
 }
