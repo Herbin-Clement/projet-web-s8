@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Header from '../header/Header';
 import CreateQuestion from './CreateQuestion';
@@ -38,42 +38,30 @@ const Create = () => {
     )
 
     const addQuestion = () => {
-        setNbQuestion(prevNbQuestion => {
-            let nextNbQuestion = 0;
-            if (prevNbQuestion < 10) {
-                nextNbQuestion = prevNbQuestion + 1;
-                setQuizz(prevQuizz => {
-                    const nextQuizz = { ...prevQuizz };
-                    nextQuizz.questions.push({
-                        question: "",
-                        id: nextNbQuestion - 1,
-                        answers: newAnswer,
-                    })
-                    return nextQuizz;
-                })
-            } else {
-                nextNbQuestion = prevNbQuestion;
-            }
-            return nextNbQuestion;
-        });
+        setNbQuestion(prevNbQuestion => prevNbQuestion < 10 ? prevNbQuestion + 1 : prevNbQuestion);
     }
 
     const removeQuestion = () => {
-        setNbQuestion(prevNbQuestion => {
-            let nextNbQuestion = 0;
-            if (prevNbQuestion > 1) {
-                nextNbQuestion = prevNbQuestion - 1;
-                setQuizz(prevQuizz => {
-                    const nextQuizz = { ...prevQuizz };
-                    nextQuizz.questions.pop();
-                    return nextQuizz;
-                })
-            } else {
-                nextNbQuestion = prevNbQuestion;
-            }
-            return nextNbQuestion;
-        });
+        setNbQuestion(prevNbQuestion => prevNbQuestion > 1 ? prevNbQuestion - 1 : prevNbQuestion);
     }
+
+    useEffect(() => {
+        setQuizz(prevQuizz => {
+            const nextQuizz = { ...prevQuizz };
+            const currentNbQuestion = nextQuizz.questions.length;
+            if (currentNbQuestion < nbQuestion) {
+                nextQuizz.questions.push({
+                    question: "",
+                    id: nbQuestion - 1,
+                    answers: newAnswer,
+                })
+            } else if (currentNbQuestion > nbQuestion) {
+                nextQuizz.questions.pop();
+            }
+            return nextQuizz;
+        })
+    }, [nbQuestion]);
+
 
     const submitQuizz = () => {
         console.log(quizz);
