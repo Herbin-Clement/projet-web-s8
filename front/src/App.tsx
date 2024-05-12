@@ -16,66 +16,66 @@ import Join from './Component/join/Join';
 import Profil from './Component/profil/Profil';
 
 const quizz = {
-  "name": "Premier quizz",
+  "title": "Premier quizz",
   "questions": [
     {
-      "name": "Suis-je la question 1 ?",
+      "question": "Suis-je la question 1 ?",
       "id": 10,
       "answers": [
         {
-          "name": "Oui",
+          "text": "Oui",
           "id": 50,
           "ok": true,
         },
         {
-          "name": "Non",
+          "text": "Non",
           "id": 51,
           "ok": false,
         },
         {
-          "name": "Peut-être",
+          "text": "Peut-être",
           "id": 49,
           "ok": false,
         }
       ]
     },
     {
-      "name": "Suis-je la question 2 ?",
+      "question": "Suis-je la question 2 ?",
       "id": 11,
       "answers": [
         {
-          "name": "Non",
+          "text": "Non",
           "id": 52,
           "ok": false,
         },
         {
-          "name": "Oui",
+          "text": "Oui",
           "id": 53,
           "ok": true,
         }
       ]
     },
     {
-      "name": "Suis-je la question 4 ?",
+      "question": "Suis-je la question 4 ?",
       "id": 12,
       "answers": [
         {
-          "name": "Non",
+          "text": "Non",
           "id": 54,
           "ok": true,
         },
         {
-          "name": "Oui",
+          "text": "Oui",
           "id": 55,
           "ok": false,
         },
         {
-          "name": "Je sais pas",
+          "text": "Je sais pas",
           "id": 56,
           "ok": false,
         },
         {
-          "name": "Je ne suis point sûre. Cependant je suis une réponse assez longue !",
+          "text": "Je ne suis point sûre. Cependant je suis une réponse assez longue !",
           "id": 57,
           "ok": false,
         }

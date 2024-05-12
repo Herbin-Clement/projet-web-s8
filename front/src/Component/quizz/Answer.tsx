@@ -12,7 +12,7 @@ const Answer = ({ id, selected, name, handleAnswerClick }: AnswerProps) => {
 
     const [isSelected, setIsSelected] = useState<boolean>((selected === undefined ? false : selected));
 
-    const handleClick = () => {
+    const handleClick = (): void => {
         setIsSelected(prev => {
             handleAnswerClick(id, !prev);
             return !prev;

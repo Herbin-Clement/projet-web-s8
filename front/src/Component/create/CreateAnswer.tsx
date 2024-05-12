@@ -3,37 +3,49 @@ import React, { useState } from 'react';
 import './create.css';
 
 type CreateAnswerProps = {
-    id: number,
+    questionId: number,
+    responseId: number,
+    updateAnswer: (questionId: number, responseId: number, value: string) => void,
+    updateCheck: (questionId: number, responseId: number, value: boolean) => void,
 }
 
-const CreateAnswer = ({ id }: CreateAnswerProps) => {
+const CreateAnswer = ({ questionId, responseId, updateAnswer, updateCheck }: CreateAnswerProps) => {
 
     const [answer, setAnswer] = useState<string>("");
 
     const [checked, setChecked] = useState<boolean>(false);
 
-    const updateAnswer = (e: React.FormEvent<HTMLInputElement>): void => {
-        setAnswer(e.currentTarget.value);
+    const handleUpdateAnswer = (e: React.ChangeEvent<HTMLInputElement>): void => {
+        setAnswer(() => {
+            const res = e.target.value;
+            updateAnswer(questionId, responseId, res);
+            return res;
+        }
+        );
     }
 
-    const updateChecked = (): void => {
-        setChecked(!checked);
+    const handleUpdateCheck = (): void => {
+        setChecked(prev => {
+            const res = !prev;
+            updateCheck(questionId, responseId, res);
+            return res;
+        });
     }
 
     return (
         <div className="create-answer">
             <div className="create-input">
-                <div>Answer {id + 1}</div>
+                <div>Answer {responseId + 1}</div>
                 <input type="text"
                     placeholder="Answer"
                     value={answer}
-                    onChange={e => updateAnswer(e)} />
+                    onChange={e => handleUpdateAnswer(e)} />
             </div>
             <div className="create-input">
                 <div className="create-cb">True</div>
                 <input type="checkbox"
                     checked={checked}
-                    onChange={() => updateChecked()} />
+                    onChange={() => handleUpdateCheck()} />
             </div>
         </div>
     )

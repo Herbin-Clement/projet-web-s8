@@ -5,38 +5,132 @@ import CreateQuestion from './CreateQuestion';
 import Line from '../utils/Line';
 import './create.css';
 
-interface Question {
-    id: number,
-}
+import { QuizzData } from '../quizz/Quizz';
+
+const newAnswer = [
+    {
+        text: "",
+        id: 0,
+        ok: false,
+    },
+    {
+        text: "",
+        id: 1,
+        ok: false,
+    }
+]
 
 const Create = () => {
 
-    const [questions, setQuestions] = useState<Question[]>([
+    const [title, setTitle] = useState<string>("");
+    const [nbQuestion, setNbQuestion] = useState<number>(1);
+    const [quizz, setQuizz] = useState<QuizzData>(
         {
-            "id": 0
+            title: "",
+            questions: [
+                {
+                    question: "",
+                    id: 0,
+                    answers: newAnswer,
+                },
+            ],
         }
-    ]);
+    )
 
     const addQuestion = () => {
-        const id = questions.length;
-        setQuestions([
-            ...questions,
-            {
-                "id": id
+        setNbQuestion(prevNbQuestion => {
+            let nextNbQuestion = 0;
+            if (prevNbQuestion < 10) {
+                nextNbQuestion = prevNbQuestion + 1;
+                setQuizz(prevQuizz => {
+                    const nextQuizz = { ...prevQuizz };
+                    nextQuizz.questions.push({
+                        question: "",
+                        id: nextNbQuestion - 1,
+                        answers: newAnswer,
+                    })
+                    return nextQuizz;
+                })
+            } else {
+                nextNbQuestion = prevNbQuestion;
             }
-        ])
+            return nextNbQuestion;
+        });
     }
 
     const removeQuestion = () => {
-        if (questions.length > 1) {
-            const qs = [...questions];
-            qs.pop();
-            setQuestions(qs);
-        }
+        setNbQuestion(prevNbQuestion => {
+            let nextNbQuestion = 0;
+            if (prevNbQuestion > 1) {
+                nextNbQuestion = prevNbQuestion - 1;
+                setQuizz(prevQuizz => {
+                    const nextQuizz = { ...prevQuizz };
+                    nextQuizz.questions.pop();
+                    return nextQuizz;
+                })
+            } else {
+                nextNbQuestion = prevNbQuestion;
+            }
+            return nextNbQuestion;
+        });
     }
 
     const submitQuizz = () => {
-        console.log("Click on submit !");
+        console.log(quizz);
+    }
+
+    const updateQuestion = (questionId: number, value: string): void => {
+        setQuizz(prevQuizz => {
+            const nextQuizz = { ...prevQuizz };
+            nextQuizz.questions[questionId].question = value;
+            return nextQuizz;
+        })
+    }
+
+    const addAnswer = (questionId: number, next: number): void => {
+        setQuizz(prevQuizz => {
+            const nextQuizz = { ...prevQuizz };
+            const prev = nextQuizz.questions[questionId].answers.length;
+            if (prev > next) {
+                nextQuizz.questions[questionId].answers.pop();
+            } else if (next > prev) {
+                nextQuizz.questions[questionId].answers.push({
+                    text: "",
+                    id: next - 1,
+                    ok: false,
+                });
+            }
+            return nextQuizz;
+        })
+    }
+
+    const updateAnswer = (questionId: number, responseId: number, value: string): void => {
+        setQuizz(prevQuizz => {
+            const nextQuizz = { ...prevQuizz };
+            nextQuizz.questions[questionId].answers[responseId].text = value;
+            return nextQuizz;
+        })
+    }
+    const updateCheck = (questionId: number, responseId: number, value: boolean): void => {
+        setQuizz(prevQuizz => {
+            const nextQuizz = { ...prevQuizz };
+            nextQuizz.questions[questionId].answers[responseId].ok = value;
+            return nextQuizz;
+        })
+    }
+
+    const handleUpdateTitle = (e: React.ChangeEvent<HTMLInputElement>): void => {
+        setTitle(() => {
+            const res = e.target.value;
+            console.log(res);
+            setQuizz(prevQuizz => {
+                const nextQuizz = { ...prevQuizz };
+                nextQuizz.title = res;
+                return nextQuizz;
+            })
+            return res;
+        }
+        );
     }
 
     return (
@@ -47,13 +141,18 @@ const Create = () => {
                     <div className="create-title">
                         <div className="create-input">
                             <div>Quizz title</div>
-                            <input type="text" placeholder="Quizz" />
+                            <input type="text" placeholder="Quizz" value={title} onChange={e => handleUpdateTitle(e)} />
                         </div>
                     </div>
                     <Line />
-                    {questions.map(question => (
+                    {[...Array(nbQuestion)].map((_, id) => (
                         <>
-                            <CreateQuestion key={question.id} id={question.id} />
+                            <CreateQuestion key={id}
+                                questionId={id}
+                                updateAnswer={updateAnswer}
+                                updateQuestion={updateQuestion}
+                                updateCheck={updateCheck}
+                                addAnswer={addAnswer} />
                         </>
                     ))}
                     <div className="create-input create-button-question">

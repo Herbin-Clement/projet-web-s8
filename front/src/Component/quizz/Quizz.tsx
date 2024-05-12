@@ -4,8 +4,8 @@ import Header from '../header/Header';
 import Answer from './Answer';
 import { useState } from 'react';
 
-interface AnswerData {
-    name: string,
+export interface AnswerData {
+    text: string,
     id: number,
     ok: boolean,
 }
@@ -15,8 +15,8 @@ interface AnswerResponse {
     res: boolean,
 }
 
-interface QuestionData {
-    name: string,
+export interface QuestionData {
+    question: string,
     id: number,
     answers: AnswerData[],
 }
@@ -26,8 +26,8 @@ interface QuestionResponse {
     answers: AnswerResponse[],
 }
 
-interface QuizzData {
-    name: string,
+export interface QuizzData {
+    title: string,
     questions: QuestionData[],
 }
 
@@ -87,17 +87,17 @@ const Quizz = ({ data }: QuizzProps) => {
             <div className="quizz-content">
                 <div className="quizz-question">
                     <div className="quizz-title">
-                        {data.name}
+                        {data.title}
                     </div>
                     <div className="quizz-question-name">
-                        {data.questions[questionId].name}
+                        {data.questions[questionId].question}
                     </div>
                     <div className="quizz-question-answers">
                         {
                             data.questions[questionId].answers.map((answer, id) =>
                                 <Answer key={answer.id}
                                     id={answer.id}
-                                    name={answer.name}
+                                    name={answer.text}
                                     handleAnswerClick={handleAnswerClick}
                                     selected={currentAnswers[id].res} />
                             )
