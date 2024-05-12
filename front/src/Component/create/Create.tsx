@@ -7,6 +7,17 @@ import './create.css';
 
 import { QuizzData } from '../quizz/Quizz';
 
+const checkQuizzData = (data: QuizzData): boolean => {
+    if (data.title.trim() === "") return false;
+    for (let q = 0; q < data.questions.length; q++) {
+        if (data.questions[q].question.trim() === "") return false;
+        for (let a = 0; a < data.questions[q].answers.length; a++) {
+            if (data.questions[q].answers[a].text.trim() === "") return false;
+        }
+    }
+    return true;
+}
+
 const Create = () => {
 
     const [title, setTitle] = useState<string>("");
@@ -45,6 +56,7 @@ const Create = () => {
 
     const submitQuizz = () => {
         console.log(quizz);
+        console.log(`check: ${checkQuizzData(quizz)}`);
     }
 
     const updateQuestion = (questionId: number, value: string): void => {
@@ -77,12 +89,9 @@ const Create = () => {
     }
 
     const updateAnswer = (questionId: number, responseId: number, value: string): void => {
-        console.log(`update answer ${questionId} ${responseId}`);
         setQuizz(prevQuizz => {
-            console.log(prevQuizz);
             const nextQuizz = { ...prevQuizz };
             nextQuizz.questions[questionId].answers[responseId].text = value;
-            console.log(nextQuizz);
             return nextQuizz;
         })
     }
