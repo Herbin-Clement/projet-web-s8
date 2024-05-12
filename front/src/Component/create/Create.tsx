@@ -7,19 +7,6 @@ import './create.css';
 
 import { QuizzData } from '../quizz/Quizz';
 
-const newAnswer = [
-    {
-        text: "",
-        id: 0,
-        ok: false,
-    },
-    {
-        text: "",
-        id: 1,
-        ok: false,
-    }
-]
-
 const Create = () => {
 
     const [title, setTitle] = useState<string>("");
@@ -31,7 +18,18 @@ const Create = () => {
                 {
                     question: "",
                     id: 0,
-                    answers: newAnswer,
+                    answers: [
+                        {
+                            text: "",
+                            id: 0,
+                            ok: false,
+                        },
+                        {
+                            text: "",
+                            id: 1,
+                            ok: false,
+                        }
+                    ],
                 },
             ],
         }
@@ -45,57 +43,46 @@ const Create = () => {
         setNbQuestion(prevNbQuestion => prevNbQuestion > 1 ? prevNbQuestion - 1 : prevNbQuestion);
     }
 
-    useEffect(() => {
-        setQuizz(prevQuizz => {
-            const nextQuizz = { ...prevQuizz };
-            const currentNbQuestion = nextQuizz.questions.length;
-            if (currentNbQuestion < nbQuestion) {
-                nextQuizz.questions.push({
-                    question: "",
-                    id: nbQuestion - 1,
-                    answers: newAnswer,
-                })
-            } else if (currentNbQuestion > nbQuestion) {
-                nextQuizz.questions.pop();
-            }
-            return nextQuizz;
-        })
-    }, [nbQuestion]);
-
-
     const submitQuizz = () => {
         console.log(quizz);
     }
 
     const updateQuestion = (questionId: number, value: string): void => {
-        setQuizz(prevQuizz => {
-            const nextQuizz = { ...prevQuizz };
-            nextQuizz.questions[questionId].question = value;
-            return nextQuizz;
-        })
+        if (questionId != quizz.questions.length) {
+            setQuizz(prevQuizz => {
+                const nextQuizz = { ...prevQuizz };
+                nextQuizz.questions[questionId].question = value;
+                return nextQuizz;
+            })
+        }
     }
 
     const addAnswer = (questionId: number, next: number): void => {
-        setQuizz(prevQuizz => {
-            const nextQuizz = { ...prevQuizz };
-            const prev = nextQuizz.questions[questionId].answers.length;
-            if (prev > next) {
-                nextQuizz.questions[questionId].answers.pop();
-            } else if (next > prev) {
-                nextQuizz.questions[questionId].answers.push({
-                    text: "",
-                    id: next - 1,
-                    ok: false,
-                });
-            }
-            return nextQuizz;
-        })
+        if (questionId != quizz.questions.length) {
+            setQuizz(prevQuizz => {
+                const nextQuizz = { ...prevQuizz };
+                const prev = nextQuizz.questions[questionId].answers.length;
+                if (prev > next) {
+                    nextQuizz.questions[questionId].answers.pop();
+                } else if (next > prev) {
+                    nextQuizz.questions[questionId].answers.push({
+                        text: "",
+                        id: next - 1,
+                        ok: false,
+                    });
+                }
+                return nextQuizz;
+            })
+        }
     }
 
     const updateAnswer = (questionId: number, responseId: number, value: string): void => {
+        console.log(`update answer ${questionId} ${responseId}`);
         setQuizz(prevQuizz => {
+            console.log(prevQuizz);
             const nextQuizz = { ...prevQuizz };
             nextQuizz.questions[questionId].answers[responseId].text = value;
+            console.log(nextQuizz);
             return nextQuizz;
         })
     }
@@ -108,18 +95,44 @@ const Create = () => {
     }
 
     const handleUpdateTitle = (e: React.ChangeEvent<HTMLInputElement>): void => {
-        setTitle(() => {
-            const res = e.target.value;
-            console.log(res);
-            setQuizz(prevQuizz => {
-                const nextQuizz = { ...prevQuizz };
-                nextQuizz.title = res;
-                return nextQuizz;
-            })
-            return res;
-        }
-        );
+        setTitle(e.target.value);
     }
+
+    useEffect(() => {
+        setQuizz(prevQuizz => {
+            const nextQuizz = { ...prevQuizz };
+            const currentNbQuestion = nextQuizz.questions.length;
+            if (currentNbQuestion < nbQuestion) {
+                nextQuizz.questions.push({
+                    question: "",
+                    id: nbQuestion - 1,
+                    answers: [
+                        {
+                            text: "",
+                            id: 0,
+                            ok: false,
+                        },
+                        {
+                            text: "",
+                            id: 1,
+                            ok: false,
+                        }
+                    ],
+                })
+            } else if (currentNbQuestion > nbQuestion) {
+                nextQuizz.questions.pop();
+            }
+            return nextQuizz;
+        })
+    }, [nbQuestion]);
+
+    useEffect(() => {
+        setQuizz(prevQuizz => {
+            const nextQuizz = { ...prevQuizz };
+            nextQuizz.title = title;
+            return nextQuizz;
+        })
+    }, [title]);
 
     return (
         <div className="home">
@@ -134,14 +147,12 @@ const Create = () => {
                     </div>
                     <Line />
                     {[...Array(nbQuestion)].map((_, id) => (
-                        <>
-                            <CreateQuestion key={id}
-                                questionId={id}
-                                updateAnswer={updateAnswer}
-                                updateQuestion={updateQuestion}
-                                updateCheck={updateCheck}
-                                addAnswer={addAnswer} />
-                        </>
+                        <CreateQuestion key={id}
+                            questionId={id}
+                            updateAnswer={updateAnswer}
+                            updateQuestion={updateQuestion}
+                            updateCheck={updateCheck}
+                            addAnswer={addAnswer} />
                     ))}
                     <div className="create-input create-button-question">
                         <button className="quizz-button-add-question" onClick={() => addQuestion()}>Add question</button>

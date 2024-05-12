@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './create.css';
 
 import CreateAnswer from './CreateAnswer';
@@ -19,39 +19,24 @@ const CreateQuestion = ({ questionId, updateQuestion, updateAnswer, updateCheck,
     const [nbAnswer, setNbAnswer] = useState<number>(2);
 
     const handleUpdateQuestion = (e: React.ChangeEvent<HTMLInputElement>): void => {
-        setQuestion(() => {
-            const res = e.target.value;
-            updateQuestion(questionId, res, nbAnswer);
-            return res;
-        }
-        );
+        setQuestion(e.target.value);
     }
 
     const handleAddAnswer = () => {
-        setNbAnswer(prev => {
-            let next = 0;
-            if (prev < 4) {
-                next = prev + 1;
-                addAnswer(questionId, next);
-            } else {
-                next = prev;
-            }
-            return next;
-        })
+        setNbAnswer(prev => prev < 4 ? prev + 1 : prev);
     }
 
     const handleRemoveAnswer = () => {
-        setNbAnswer(prev => {
-            let next = 0;
-            if (prev > 2) {
-                next = prev - 1;
-                addAnswer(questionId, next);
-            } else {
-                next = prev;
-            }
-            return next;
-        })
+        setNbAnswer(prev => prev > 2 ? prev - 1 : prev);
     }
+
+    useEffect(() => {
+        addAnswer(questionId, nbAnswer);
+    }, [nbAnswer])
+
+    useEffect(() => {
+        updateQuestion(questionId, question, nbAnswer);
+    }, [question])
 
     return (
         <div className="create-question">
