@@ -5,6 +5,8 @@ import './join.css';
 import Header from '../header/Header';
 import QuizzList from './QuizzList';
 
+const mockNames = ["Quizz 1", "Quizz 2", "Quizz 3"];
+
 const Join = () => {
 
     const [link, setLink] = useState<string>("");
@@ -31,7 +33,7 @@ const Join = () => {
                     <button type="button" onClick={() => handleClick()}>Go !</button>
                 </div>
                 <div className="join-right">
-                    <QuizzList />
+                    <QuizzList names={mockNames} title="Quizz List" />
                 </div>
             </div>
         </div>

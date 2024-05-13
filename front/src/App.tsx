@@ -14,6 +14,7 @@ import Quizz from './Component/quizz/Quizz';
 import Invite from './Component/invite/Invite';
 import Join from './Component/join/Join';
 import Profil from './Component/profil/Profil';
+import MyQuizz from './Component/review/MyQuizz';
 
 const quizz = {
   "title": "Premier quizz",
@@ -98,6 +99,7 @@ function App() {
           <Route path="/create" element={<Create />} />
           <Route path="/quizz" element={<Quizz data={quizz} />} />
           <Route path="/invite" element={<Invite />} />
+          <Route path="/myquizz" element={<MyQuizz />} />
           <Route path="/profil" element={<Profil />} />
           <Route path="*" element={<Home />} />
         </Routes>

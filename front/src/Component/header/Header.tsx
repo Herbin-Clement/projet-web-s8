@@ -19,7 +19,9 @@ const Header = () => {
                 <Link to="/create">
                     <div className="header-text">Create quizz</div>
                 </Link>
-                <div className="header-text">My quizz</div>
+                <Link to="/myquizz">
+                    <div className="header-text">My quizz</div>
+                </Link>
                 <Link to="/profil">
                     <div className="header-text">Profil</div>
                 </Link>
