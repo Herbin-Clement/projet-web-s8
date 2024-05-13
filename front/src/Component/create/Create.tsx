@@ -5,7 +5,8 @@ import CreateQuestion from './CreateQuestion';
 import Line from '../utils/Line';
 import './create.css';
 
-import { QuizzData } from '../quizz/Quizz';
+import { QuizzData } from '../../Type/interface';
+
 
 const checkQuizzData = (data: QuizzData): boolean => {
     if (data.title.trim() === "") return false;
@@ -60,7 +61,7 @@ const Create = () => {
     }
 
     const updateQuestion = (questionId: number, value: string): void => {
-        if (questionId != quizz.questions.length) {
+        if (questionId !== quizz.questions.length) {
             setQuizz(prevQuizz => {
                 const nextQuizz = { ...prevQuizz };
                 nextQuizz.questions[questionId].question = value;
@@ -70,7 +71,7 @@ const Create = () => {
     }
 
     const addAnswer = (questionId: number, next: number): void => {
-        if (questionId != quizz.questions.length) {
+        if (questionId !== quizz.questions.length) {
             setQuizz(prevQuizz => {
                 const nextQuizz = { ...prevQuizz };
                 const prev = nextQuizz.questions[questionId].answers.length;

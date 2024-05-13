@@ -4,32 +4,7 @@ import Header from '../header/Header';
 import Answer from './Answer';
 import { useState } from 'react';
 
-export interface AnswerData {
-    text: string,
-    id: number,
-    ok: boolean,
-}
-
-interface AnswerResponse {
-    id: number,
-    res: boolean,
-}
-
-export interface QuestionData {
-    question: string,
-    id: number,
-    answers: AnswerData[],
-}
-
-interface QuestionResponse {
-    id: number,
-    answers: AnswerResponse[],
-}
-
-export interface QuizzData {
-    title: string,
-    questions: QuestionData[],
-}
+import { QuizzData, AnswerData, AnswerResponse, QuestionResponse } from '../../Type/interface';
 
 interface QuizzProps {
     data: QuizzData,

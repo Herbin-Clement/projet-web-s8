@@ -1,6 +1,8 @@
-
-import Header from "../header/Header";
 import QuizzList from "../join/QuizzList";
+import { quizz, quizzreview } from "../../App";
+import Header from "../header/Header";
+import ReviewCreated from "./created/ReviewCreated";
+import ReviewAnswered from "./answered/ReviewAnswered";
 
 import './myquizz.css';
 
@@ -21,6 +23,8 @@ const MyQuizz = () => {
                     <QuizzList names={mockAnswered} title="Quizz Answered" />
                 </div>
             </div>
+            {/* <ReviewCreated data={quizz} /> */}
+            {/* <ReviewAnswered data={quizzreview} /> */}
         </div>
     )
 };

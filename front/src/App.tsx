@@ -16,7 +16,7 @@ import Join from './Component/join/Join';
 import Profil from './Component/profil/Profil';
 import MyQuizz from './Component/review/MyQuizz';
 
-const quizz = {
+export const quizz = {
   "title": "Premier quizz",
   "questions": [
     {
@@ -79,6 +79,84 @@ const quizz = {
           "text": "Je ne suis point sûre. Cependant je suis une réponse assez longue !",
           "id": 57,
           "ok": false,
+        }
+      ]
+    }
+  ]
+}
+
+export const quizzreview = {
+  "title": "Premier quizz",
+  "questions": [
+    {
+      "question": "Suis-je la question 1 ?",
+      "id": 10,
+      "answers": [
+        {
+          "text": "Oui",
+          "id": 50,
+          "ok": true,
+          "res": false,
+        },
+        {
+          "text": "Non",
+          "id": 51,
+          "ok": false,
+          "res": false,
+        },
+        {
+          "text": "Peut-être",
+          "id": 49,
+          "ok": false,
+          "res": false,
+        }
+      ]
+    },
+    {
+      "question": "Suis-je la question 2 ?",
+      "id": 11,
+      "answers": [
+        {
+          "text": "Non",
+          "id": 52,
+          "ok": false,
+          "res": true,
+        },
+        {
+          "text": "Oui",
+          "id": 53,
+          "ok": true,
+          "res": false,
+        }
+      ]
+    },
+    {
+      "question": "Suis-je la question 4 ?",
+      "id": 12,
+      "answers": [
+        {
+          "text": "Non",
+          "id": 54,
+          "ok": true,
+          "res": true,
+        },
+        {
+          "text": "Oui",
+          "id": 55,
+          "ok": false,
+          "res": false,
+        },
+        {
+          "text": "Je sais pas",
+          "id": 56,
+          "ok": false,
+          "res": true,
+        },
+        {
+          "text": "Je ne suis point sûre. Cependant je suis une réponse assez longue !",
+          "id": 57,
+          "ok": false,
+          "res": false,
         }
       ]
     }
