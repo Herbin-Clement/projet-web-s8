@@ -21,6 +21,10 @@ const Join = () => {
         }
     }
 
+    const handleListClick = (id: number): void => {
+        console.log(id);
+    }
+
     return (
         <div className="home">
             <Header />
@@ -33,7 +37,7 @@ const Join = () => {
                     <button type="button" onClick={() => handleClick()}>Go !</button>
                 </div>
                 <div className="join-right">
-                    <QuizzList names={mockNames} title="Quizz List" />
+                    <QuizzList names={mockNames} title="Quizz List" method="" callback={handleListClick} />
                 </div>
             </div>
         </div>
