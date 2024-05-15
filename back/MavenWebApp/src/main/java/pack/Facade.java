@@ -42,13 +42,11 @@ public class Facade {
 	 
 	 @POST
 	 @Path("/user")
-	 @Consumes("application/json") 
-	 public Response addUser(User user) {
-		 
-		 String username = user.getUsername();
+	 @Consumes(MediaType.APPLICATION_JSON) 
+	 public Response addUser(String username, String password) {
 		 if (UsernameNotUsed(username)) {
-			 
-			 em.persist(user); 
+			 User user = new User(username, password);
+			 em.persist(user);
 			 return Response.status(Response.Status.CREATED).build();
 		 } else {
 			 return Response.status(Response.Status.BAD_REQUEST).entity("Username already used.").build();
@@ -68,9 +66,9 @@ public class Facade {
 		 }
 	 }
 	 
-	 /*{
+	 
 	 @GET
-	 @Path("/user")
+	 @Path("/getCreatedQuizzes")
 	 @Produces(MediaType.APPLICATION_JSON)
 	 public Collection<Quizz> getCreatedQuizzes(String username) {
 		 User u = em.createQuery("SELECT u FROM User u WHERE u.username = :" + username, User.class).setParameter("username", username).getSingleResult();
@@ -78,13 +76,13 @@ public class Facade {
 	 }
 	 
 	 @GET
-	 @Path("/user")
+	 @Path("/getCreatedQuizzes")
 	 @Produces(MediaType.APPLICATION_JSON)
 	 public Collection<Quizz> getAnsweredQuizzes(String username) {
 		 User u = em.createQuery("SELECT u FROM User WHERE u.username = :" + username, User.class).setParameter("username", username).getSingleResult();
 		return u.getAnsweredQuizzes();
 	 }
-}	}*/
+	 
 	 
 	 
 	 /* Interactions with class Quizz */
