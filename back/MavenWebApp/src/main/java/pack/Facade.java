@@ -47,6 +47,7 @@ public class Facade {
 		 if (UsernameNotUsed(username)) {
 			 User user = new User(username, password);
 			 em.persist(user);
+			 em.flush();  // Ensure ID is generated
 			 return Response.status(Response.Status.CREATED).build();
 		 } else {
 			 return Response.status(Response.Status.BAD_REQUEST).entity("Username already used.").build();
