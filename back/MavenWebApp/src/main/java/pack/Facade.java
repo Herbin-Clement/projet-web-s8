@@ -13,6 +13,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -87,42 +88,56 @@ public class Facade {
 	 
 	 
 	 /* Interactions with class Quizz */
+	@POST
+	@Path("/addQuizz")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response addQuizz(Quizz quizz) {
+        try {
+            em.persist(quizz);
+            em.flush();  // Ensure ID is generated
+            return Response.status(Response.Status.CREATED).entity(quizz).build();
+        } catch (Exception e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Error adding quiz: " + e.getMessage()).build();
+        }
+    }
 	 
-	 @POST
-	 @Path("/quizz")
-	 @Consumes(MediaType.APPLICATION_JSON) 
-	 public Response addQuizz(@PathParam("username_creator") String username_creator, String link, Collection<Mcq> Mcqs) {
-		 User creator = em.createQuery("SELECT u FROM User u WHERE u.username = :username_creator", User.class).setParameter("username", username_creator).getSingleResult();
-		 Quizz quizz = new Quizz(creator, link, Mcqs);
-		 em.persist(quizz);
-		 return Response.status(Response.Status.CREATED).build();
-	 }
-	 
-	 /*{
-	 @GET
-	 @Path("/quizz")
-	 // TODO : annotations
-	 public Collection<Quizz> getQuizzs() {
-		 // TODO
-		 return null;
-	 }
 	 
 	 @GET
-	 @Path("/user")
-	 // TODO : annotations
-	 public Collection<User> getUsers() {
-		 // TODO
-		 return null;
+	 @Path("/getQuizzes")
+	 @Produces(MediaType.APPLICATION_JSON)
+	 public Response getQuizzes() {
+	     try {
+	         Collection<Quizz> quizzes = em.createQuery("SELECT q FROM Quizz q", Quizz.class).getResultList();
+	         return Response.ok(quizzes).build();
+	     } catch (Exception e) {
+	         return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Error retrieving quizzes: " + e.getMessage()).build();
+	     }
+	 }
+	 
+	 @GET
+	 @Path("/getUsers")
+	 @Produces(MediaType.APPLICATION_JSON)
+	 public Response getUsers() {
+	     try {
+	         Collection<User> users = em.createQuery("SELECT u FROM User u", User.class).getResultList();
+	         return Response.ok(users).build();  // Successfully return the list of users
+	     } catch (Exception e) {
+	         return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Error retrieving users: " + e.getMessage()).build();
+	     }
 	 }
 	
 	 @GET
-	 @Path("/stats")
-	 // TODO : annotations
-	 public Stats getStatsQuizz(int id_sondage) {
-		 // TODO
-		return null;
-	 }
-	}*/	 
+	 @Path("/stats/{quizId}")
+	 @Produces(MediaType.APPLICATION_JSON)
+	 public Stats getStatsQuizz(@PathParam("quizId") int quizId) {
+         Stats stats = em.find(Stats.class, quizId);
+         if (stats == null) {
+             throw new WebApplicationException("Stats with ID " + quizId + " not found", Response.Status.NOT_FOUND);
+         }
+         return stats;
+     }
+
 	 
 	 /*{
 	 majStats(int id_quizz)
@@ -177,6 +192,8 @@ public class Facade {
 	         return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Server error").build();
 	     }
 	 }
+	 
+	 
 
 
 }
