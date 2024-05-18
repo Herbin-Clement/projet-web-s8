@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;MavenWebApp/src/main/java/pack/Facade.java&apos; to &apos;FacadeOld.java&apos;" description="Rename resource &apos;Facade.java&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/main/java/pack/Facade.java" name="FacadeOld.java" stamp="1716053505102" updateReferences="true"/>
+</session>

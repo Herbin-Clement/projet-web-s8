@@ -1,0 +1,6 @@
+package pack;
+
+@Singleton
+public class Facade {
+
+}

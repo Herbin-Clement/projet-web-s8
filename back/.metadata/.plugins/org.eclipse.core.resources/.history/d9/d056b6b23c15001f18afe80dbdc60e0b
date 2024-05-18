@@ -1,0 +1,12 @@
+package pack;
+
+import javax.ejb.Singleton;
+import javax.persistence.PersistenceContext;
+
+@Singleton
+public class Facade {
+
+	@PersistenceContext
+	EntityManager em;
+	
+}

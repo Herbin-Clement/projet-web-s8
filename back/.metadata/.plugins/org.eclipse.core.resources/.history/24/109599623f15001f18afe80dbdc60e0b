@@ -1,0 +1,58 @@
+package pack;
+
+import java.io.IOException;
+
+import javax.ejb.EJB;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+
+@WebServlet("/servlet")
+public class Servlet extends HttpServlet {
+	
+	@EJB
+	Facade facade;
+	
+	private static final long serialVersionUID = 1L;
+       
+	private ObjectMapper objectMapper = new ObjectMapper();
+	 
+    public Servlet() {
+        super();
+    }
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String op = request.getParameter("op");
+		// classe User
+		if (op.equals("addUser")) {
+			String jsonUser = request.getParameter("json"); 
+			User user = 
+			facade.ajoutPersonne(nom,prenom);
+			request.getRequestDispatcher("menuPrincipal.html").forward(request, response);
+		} else if (op.equals("listUsers")) {
+			// TODO
+		} else if (op.equals("getCreatedQuizzes")) {
+			// TODO
+		} else if (op.equals("getAnsweredQuizzes")) {
+			// TODO
+		}
+		// classe Quizz
+		else if (op.equals("addQuizz")) {
+			// TODO
+		} else if (op.equals("listQuizzes")) {
+			// TODO
+		} else if (op.equals("getStatsQuizz")) {
+			// TODO
+		} else {
+			// nothing
+		}
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
+	}
+
+}
