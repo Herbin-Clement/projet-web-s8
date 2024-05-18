@@ -41,8 +41,6 @@ public class Facade {
 	 
 	 public Collection<User> listUsers() {
 		 Collection<User> listUsers = em.createQuery("SELECT u FROM User u", User.class).getResultList();
-		 User user = new User("rcrico","1234");
-		 listUsers.add(user);
 		 return listUsers;
 	 }
 	 
