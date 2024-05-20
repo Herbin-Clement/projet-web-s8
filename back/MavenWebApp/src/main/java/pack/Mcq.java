@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Mcq {
+public class Mcq  extends Entite<Mcq> {
 
 	@Id
     @GeneratedValue(strategy=GenerationType.AUTO)

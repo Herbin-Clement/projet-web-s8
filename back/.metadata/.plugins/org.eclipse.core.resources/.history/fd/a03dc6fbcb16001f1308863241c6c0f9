@@ -1,0 +1,51 @@
+package pack;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.ParameterizedType;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+public abstract class Entite<T extends Entite<T>> {
+    
+    public T copyExcluding() {
+        T copy = null;
+        try {
+            // Créer une nouvelle instance de l'entité
+            copy = (T) this.getClass().newInstance();
+
+            // Obtenir tous les champs de la classe
+            Field[] fields = this.getClass().getDeclaredFields();
+            
+            for (Field field : fields) {
+                field.setAccessible(true); // Rendre le champ accessible
+
+                // Ignorer le champ à exclure
+                if (!field.getName().equals("id")) {
+                    Object value = field.get(this);
+
+                    // Si le champ est une collection
+                    if (value instanceof Collection) {
+                        Collection<?> originalCollection = (Collection<?>) value;
+                        Collection<Object> copiedCollection = new ArrayList<>();
+                        
+                        for (Object item : originalCollection) {
+                            if (item instanceof Entite) {
+                                copiedCollection.add(((Entite<?>) item).copyExcluding());
+                            } else {
+                                copiedCollection.add(item);
+                            }
+                        }
+                        field.set(copy, copiedCollection);
+                    } else {
+                        // Copier la valeur du champ à la nouvelle instance
+                        field.set(copy, value);
+                    }
+                }
+            }
+        } catch (InstantiationException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        return copy;
+    }
+}

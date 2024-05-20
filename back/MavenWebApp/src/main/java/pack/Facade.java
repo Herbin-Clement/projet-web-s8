@@ -2,22 +2,16 @@ package pack;
 
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.List;
 
 import javax.ejb.Singleton;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 
 @Singleton
 public class Facade {
 
-	@PersistenceContext
+	@PersistenceContext(name="MaPU")
 	EntityManager em;
 	
 	 /* Interactions with class User */
@@ -29,6 +23,7 @@ public class Facade {
 		    return count == 0;
 	}
 	 
+	// FONCTIONNE
 	 public boolean addUser(User user) {
 		 boolean usernameNotUsed = UsernameNotUsed(user.getUsername());
 		 if (usernameNotUsed) {
@@ -39,9 +34,21 @@ public class Facade {
 		 return usernameNotUsed;
 	 }
 	 
+	 // FONCTIONNE
 	 public Collection<User> listUsers() {
-		 Collection<User> listUsers = em.createQuery("SELECT u FROM User u", User.class).getResultList();
+		 Collection<User> listUsersAux = em.createQuery("select u from User u", User.class).getResultList();
+		 Collection<User> listUsers = new LinkedList<User>();
+		 for (User u : listUsersAux) {
+			 listUsers.add(u.copyExcludingID());
+		 }
 		 return listUsers;
+	 }
+	 
+	 // FONCTIONNE
+	 public User getUserByUsername(String username) {
+		 System.out.println(username);
+		 User u = em.createQuery("SELECT u FROM User u WHERE u.username = '" + username +"'", User.class).getSingleResult();
+		 return u.copyExcludingID();
 	 }
 	 
 	 public Collection<Quizz> getCreatedQuizzes(String username) {

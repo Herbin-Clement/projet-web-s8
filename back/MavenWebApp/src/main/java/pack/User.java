@@ -7,7 +7,7 @@ import java.util.LinkedList;
 import javax.persistence.*;
 
 @Entity
-public class User {
+public class User extends Entite<User> {
 
 	@Id
     @GeneratedValue(strategy=GenerationType.AUTO)

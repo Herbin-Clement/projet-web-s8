@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
 @Entity
-public class Stats {
+public class Stats extends Entite<Stats> {
 
 	@Id
     @GeneratedValue(strategy=GenerationType.AUTO)

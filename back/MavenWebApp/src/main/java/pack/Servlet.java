@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-
+import com.google.gson.*;
 
 @WebServlet("/servlet")
 public class Servlet extends HttpServlet {
@@ -24,7 +24,7 @@ public class Servlet extends HttpServlet {
       
 	/* Va servir à convertir les données Json en objets Java */
 	private ObjectMapper objectMapper = new ObjectMapper();
-	 
+	
     public Servlet() {
         super();
     }
@@ -35,25 +35,22 @@ public class Servlet extends HttpServlet {
 		String op = request.getParameter("op");
 		// classe User
 		if (op.equals("addUser")) {
-			String jsonParam = request.getParameter("json"); 
-			User user = objectMapper.readValue(jsonParam, User.class);
+			User user = new Gson().fromJson(request.getReader(), User.class);
 			boolean usernameNotUsed = facade.addUser(user);
 			if (!usernameNotUsed) {
-				response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Username already used.");
+		        response.getWriter().write("{\"status\":\"ko\",\"message\":\"Username already used.\"}");
 			} else {
-				response.setStatus(HttpServletResponse.SC_OK);
-                response.getWriter().write("{\"message\":\"User added successfully.\"}");
+                response.getWriter().write("{\"status\":\"ok\",\"message\":\"User added successfully.\"}");
 			}
 		} else if (op.equals("listUsers")) {
-			// Test 
-			Collection<User> listUsers = new LinkedList<User>();
-			User u = new User("Julien","1234");
-			listUsers.add(u);
-			
+			Collection<User> listUsers = facade.listUsers();
 			String jsonResponse = objectMapper.writeValueAsString(listUsers);
 	        response.getWriter().write(jsonResponse);
-			
-			
+		} else if (op.equals("getUserByName")) {
+			String username = request.getParameter("username");
+			User user = facade.getUserByUsername(username);
+			String jsonResponse = objectMapper.writeValueAsString(user);
+	        response.getWriter().write(jsonResponse);
 		} else if (op.equals("getCreatedQuizzes")) {
 			// TODO
 		} else if (op.equals("getAnsweredQuizzes")) {

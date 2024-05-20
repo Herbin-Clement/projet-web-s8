@@ -7,7 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Input {
+public class Input extends Entite<Input> {
 
 	@Id
     @GeneratedValue(strategy=GenerationType.AUTO)
