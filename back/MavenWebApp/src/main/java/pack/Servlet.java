@@ -42,27 +42,59 @@ public class Servlet extends HttpServlet {
 			} else {
                 response.getWriter().write("{\"status\":\"ok\",\"message\":\"User added successfully.\"}");
 			}
+			
+			
+			
 		} else if (op.equals("listUsers")) {
 			Collection<User> listUsers = facade.listUsers();
 			String jsonResponse = objectMapper.writeValueAsString(listUsers);
 	        response.getWriter().write(jsonResponse);
+	        
+	        
 		} else if (op.equals("getUserByName")) {
 			String username = request.getParameter("username");
 			User user = facade.getUserByUsername(username);
 			String jsonResponse = objectMapper.writeValueAsString(user);
 	        response.getWriter().write(jsonResponse);
+	        
+	    // Vérifie si l'username et le password est valide    
+		} else if (op.equals("verifConnexion")) {
+			
+			
 		} else if (op.equals("getCreatedQuizzes")) {
 			// TODO
 		} else if (op.equals("getAnsweredQuizzes")) {
 			// TODO
 		}
 		// classe Quizz
-		else if (op.equals("addQuizz")) {
+		
+		// Rejoint un quizz avec le lien 
+		else if (op.equals("joinQuizzLink")) {
+			
+			
+		} else if (op.equals("addQuizz")) {
+			
+		
+		// Rejoint un quizz en cliquant sur un quizz qu'on a crée ou deja ajouté
+		} else if (op.equals("joinQuizzID")) {
+			
 			// TODO
-		} else if (op.equals("listQuizzes")) {
+		// List de tous les quizz disponible
+		} else if (op.equals("listQuizzesLibre")) {
+			
+		} else if (op.equals("getMyQuizzes")) {
 			// TODO
 		} else if (op.equals("getStatsQuizz")) {
 			// TODO
+			
+		} else if (op.equals("getMyStats")) {
+			
+		// Lorsque l'on a fini de répondre a un quizz
+		} else if (op.equals("addAnsQuizz")) {
+			
+		
+		} else if (op.equals("getCorrectionQuizz")) {
+			
 		} else {
 			// nothing
 		}
