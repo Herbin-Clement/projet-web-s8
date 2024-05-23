@@ -59,47 +59,51 @@ public class Servlet extends HttpServlet {
 	        response.getWriter().write(jsonResponse);
 	        
 	    // Vérifie si l'username et le password est valide    
-		} else if (op.equals("login")) { // Julien
+		} else if (op.equals("login")) {
 			// in : username, password en JSON (faut créer une classe avec tous les attributs qu'on peut recevoir en JSON quand on ne lit pas directement un objet)
 			// out : ok ou ko
+		} else if (op.equals("getCreatedQuizzes")) {
+			// in : 
+			// out :
+		} else if (op.equals("getAnsweredQuizzes")) {
+			// TODO
 		}
 		// classe Quizz
-		// TODO : si besoin, regarder UID
+		
 		// Rejoint un quizz avec le lien 
-		else if (op.equals("joinQuizzLink")) { // Anishan
+		else if (op.equals("joinQuizzLink")) {
 			// in : l'ID généré par jpa (ou lien du Quizz dans un Json si l'ID marche pas)		
 			// out : Quizz vierge, sans correction
-		} else if (op.equals("addQuizz")) { // Julien
-			// in : regarder interface.tsx => on reçoit le Json QuizzData (pour l'instant on gère pas les stats)
-			// out : ok ou ko
+		} else if (op.equals("addQuizz")) {
+			
+		
 		// Rejoint un quizz en cliquant sur un quizz qu'on a crée ou deja ajouté
-		} else if (op.equals("joinQuizzID")) { // Anishan
-			// in : ID du quizz
-			// out : Quizz vierge, sans correction
+		} else if (op.equals("joinQuizzID")) {
+			
+			// TODO
 		// List de tous les quizz disponible
-		} else if (op.equals("listQuizzes")) { // Ruben
+		} else if (op.equals("listQuizzes")) {
 			// in : username de la personne connectée
 			// out : la liste des Quizz de la base, sauf sauf crées par le user courant
-		} else if (op.equals("getCreatedQuizzes")) { // Ruben
+		} else if (op.equals("getCreatedQuizzes")) {
 			// in : username
-			// out : quizzes crées par le user vierges
-		} else if (op.equals("getAnsweredQuizzes")) { // Ruben
+			// out : quizzes crées par le user
+		} else if (op.equals("getAnsweredQuizzes")) {
 			// in : username
-			// out : quizzes répondus  par le user avec les réponses du user
-		} else if (op.equals("getStatsQuizz")) { 
-			// TODO : on le fait pas pour l'instant
-		} else if (op.equals("getProfile")) { // Anishan
-			// in : username
-			// out : username, nombre de quizzes crées et répondus, pourcentage de bonnes réponses
+			// out : quzzes répondus  par le user
+		} else if (op.equals("getStatsQuizz")) {
+			// TODO
+			
+		} else if (op.equals("getMyStats")) {
+			
 		// Lorsque l'on a fini de répondre a un quizz
-		} else if (op.equals("addAnsQuizz")) { // Julien
-			// in : liste d'ID (unique dans la base) des réponses, et les réponses associées
-			// out : ok ou ko
-		} else if (op.equals("getCorrectionQuizz")) { // Ruben
-			// in : l'ID du quizz
-			// out : le JSon représentant les corrections des réponses dans l'ordre du quizz, sous la forme interface.tsx => QuizzDataReview
+		} else if (op.equals("addAnsQuizz")) {
+			
+		
+		} else if (op.equals("getCorrectionQuizz")) {
+			
 		} else {
-	        response.getWriter().write("{\"status\":\"ko\",\"message\":\"No matching operation in the server.\"}");
+			// nothing
 		}
 	}
 
