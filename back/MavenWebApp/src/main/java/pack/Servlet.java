@@ -79,8 +79,6 @@ public class Servlet extends HttpServlet {
 			
 			
 			User user = new Gson().fromJson(request.getReader(), User.class);
-			System.out.println(user.getUsername());
-			System.out.println(user.getPassword());
 		
 			//boolean loginSuccessful = false;
 			if (facade.verfiLogin(user.getUsername(),user.getPassword())) {
@@ -141,6 +139,21 @@ public class Servlet extends HttpServlet {
 		} else if (op.equals("addAnsQuizz")) { // Julien
 			// in : liste d'ID (unique dans la base) des réponses, et les réponses associées
 			// out : ok ou ko
+
+			QuizzDataReview quizzData = new Gson().fromJson(request.getReader(), QuizzDataReview.class);
+			
+			boolean addSuccessful = facade.processQuizzAnswers(quizzData);
+
+			if (addSuccessful) {
+		           
+                response.getWriter().write("{\"status\":\"ok\",\"message\":\"Ajout du quizz réussi\"}");
+   
+            } else {
+           
+                response.getWriter().write("{\"status\":\"ko\",\"message\":\"Il y a eu un problème lors de l'ajout du quizz\"}");;
+            }
+            
+            
 		} else if (op.equals("getCorrectionQuizz")) { // Ruben
 			// in : l'ID du quizz
 			// out : le JSon représentant les corrections des réponses dans l'ordre du quizz, sous la forme interface.tsx => QuizzDataReview

@@ -24,10 +24,13 @@ public class Mcq  extends Entite<Mcq> {
 	
 	@OneToMany 
 	private Collection<ResponseClient> responses;
+	
+	@OneToMany
+	private Collection<Input> inputs;
 
 	public Mcq() {};
 	
-	public Mcq(String question, int rank, Quizz quizz, Collection<ResponseClient> response) {
+	public Mcq(String question, int rank, Quizz quizz, Collection<ResponseClient> response, Collection<Input> inputs) {
 		setQuestion(question);
 		setRank(rank);
 		setQuizz(quizz);
@@ -64,6 +67,14 @@ public class Mcq  extends Entite<Mcq> {
 	
 	public void setResponses(Collection<ResponseClient> responses) {
 		this.responses = responses;
+	}	
+	
+	public Collection<Input> getInputs() {
+		return this.inputs; 
+	}
+	
+	public void setInputs(Collection<Input> inputs) {
+		this.inputs = inputs;
 	}	
 	
 }

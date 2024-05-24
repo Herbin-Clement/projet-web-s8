@@ -29,6 +29,8 @@ public class ResponseClient extends Entite<ResponseClient> {
 		
 	}
 	
+
+	
 	
 
 	public String getResponse() {
@@ -66,6 +68,14 @@ public class ResponseClient extends Entite<ResponseClient> {
 	public Mcq getQcm() {
 		return this.qcm;
 	}
+	
+	public Collection<Input> getInputs() {
+		return this.inputs; 
+	}
+	
+	public void setInputs(Collection<Input> inputs) {
+		this.inputs = inputs;
+	}	
 	
 	
 }

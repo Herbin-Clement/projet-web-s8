@@ -71,10 +71,6 @@ public class Facade {
 	 
 	 /* Interactions with class Quizz */
 	 
-    public void addQuizz(Quizz quizz) {
-            em.persist(quizz);
-            // em.flush();  // Ensure ID is generated
-    }
     
 	 public Collection<Quizz> listQuizzes() {
 		 Collection<Quizz> listQuizzesAux = em.createQuery("SELECT q FROM Quizz q", Quizz.class).getResultList();
@@ -123,6 +119,7 @@ public class Facade {
 	                mcq.setRank(questionData.getId());
 	                mcq.setQuizz(quizz);
 	                mcq.setResponses(new ArrayList<>());
+	                mcq.setInputs(new ArrayList<>());
 	                quizz.getMcqs().add(mcq);
 	                em.persist(mcq);
 
@@ -133,14 +130,55 @@ public class Facade {
 	                    responseClient.setRank(answerData.getId());
 	                    responseClient.setValue(answerData.isOk());
 	                    responseClient.setQcm(mcq);
+	                    responseClient.setInputs(new ArrayList<>());
+	                    
 	                    mcq.getResponses().add(responseClient);
+	                    
 	                    em.persist(responseClient);
 	                }
 	            }
 
-	            // Persister le quizz
+	            // Persister le quizzC
 	            em.persist(quizz);
 
+	            return true;
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	            return false;
+	        }
+	    }
+	 
+	 
+	 public boolean processQuizzAnswers(QuizzDataReview quizzData) {
+		 
+		 try {
+	            for (QuestionReview questionData : quizzData.getQuestions()) {
+	                Mcq mcq = em.find(Mcq.class, questionData.getId());
+	                if (mcq == null) {
+	                    return false; // Mcq not found
+	                }
+
+	                for (AnswerReview ans : questionData.getAnswers()) {
+	                    ResponseClient responseClient = em.find(ResponseClient.class, ans.getId());
+	                    if (responseClient == null) {
+	                        return false; // ResponseClient not found
+	                    }
+
+	                    Input input = new Input();
+	                    input.setQcm(mcq);
+	                    input.setReponse(responseClient);
+	                    input.setSaisie(ans.isRes());
+
+	                    em.persist(input);
+
+	                    // Add the input to the corresponding collections
+	                    mcq.getInputs().add(input);
+	                    responseClient.getInputs().add(input);
+
+	                    em.merge(mcq);
+	                    em.merge(responseClient);
+	                }
+	            }
 	            return true;
 	        } catch (Exception e) {
 	            e.printStackTrace();

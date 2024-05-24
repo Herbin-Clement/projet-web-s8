@@ -38,13 +38,6 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/gson-2.10.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/hibernate-jpa-2.0-api-1.0.1.Final.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/jackson-annotations-2.4.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/jackson-core-2.4.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/jackson-databind-2.4.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/javax.ejb-api-3.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Ruben/OneDrive/Bureau/N7/2SN/S8/web/projet-web-s8/back/lib/javax.servlet-api-3.0.1.jar"/>
 	<classpathentry kind="lib" path="/Users/julienhuang/Documents/SN/2A/Web/projet-web-s8/back/lib/hibernate-jpa-2.0-api-1.0.1.Final.jar"/>
 	<classpathentry kind="lib" path="/Users/julienhuang/Documents/SN/2A/Web/projet-web-s8/back/lib/jackson-annotations-2.4.1.jar"/>
 	<classpathentry kind="lib" path="/Users/julienhuang/Documents/SN/2A/Web/projet-web-s8/back/lib/jackson-core-2.4.1.jar"/>
