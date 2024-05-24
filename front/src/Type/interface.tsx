@@ -25,6 +25,11 @@ export interface QuestionResponse {
     answers: AnswerResponse[],
 }
 
+export interface QuizzResponse {
+    title: string,
+    questions: QuestionResponse[],
+}
+
 export interface AnswerReview {
     text: string,
     id: number,

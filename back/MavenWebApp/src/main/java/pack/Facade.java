@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.ejb.Singleton;
 import javax.persistence.EntityManager;
+import javax.persistence.ManyToMany;
 import javax.persistence.PersistenceContext;
 
 @Singleton
@@ -69,6 +70,21 @@ public class Facade {
 		 return u.getAnsweredQuizzes();
 	 }
 	 
+	 
+	 
+	 public static <T extends Entite<T>> Collection<T> copyCollection(Collection<? extends Entite<?>> collection, Class<T> clazz) {
+	        Collection<T> resultat = new ArrayList<>();
+	        for (Entite<?> entite : collection) {
+	            if (clazz.isInstance(entite)) {
+	                resultat.add(clazz.cast(entite.copyExcludingID()));
+	            } else {
+	                throw new IllegalArgumentException("Tous les éléments de la collection ne sont pas du type " + clazz.getName());
+	            }
+	        }
+	        return resultat;
+	     }
+	 
+	 
 	 /* Interactions with class Quizz */
 	 
     
@@ -76,7 +92,10 @@ public class Facade {
 		 Collection<Quizz> listQuizzesAux = em.createQuery("SELECT q FROM Quizz q", Quizz.class).getResultList();
 		 Collection<Quizz> listQuizzes = new LinkedList<Quizz>();
 		 for (Quizz q : listQuizzesAux) {
-			 listQuizzes.add(q.copyExcludingID());
+			 
+			 
+			 
+			 
 		 }
 		 return listQuizzes;
 	 }
@@ -149,16 +168,16 @@ public class Facade {
 	    }
 	 
 	 
-	 public boolean processQuizzAnswers(QuizzDataReview quizzData) {
+	 public boolean processQuizzAnswers(QuizzResponse quizzData) {
 		 
 		 try {
-	            for (QuestionReview questionData : quizzData.getQuestions()) {
+	            for (QuestionResponse questionData : quizzData.getQuestions()) {
 	                Mcq mcq = em.find(Mcq.class, questionData.getId());
 	                if (mcq == null) {
 	                    return false; // Mcq not found
 	                }
 
-	                for (AnswerReview ans : questionData.getAnswers()) {
+	                for (AnswerResponse ans : questionData.getAnswers()) {
 	                    ResponseClient responseClient = em.find(ResponseClient.class, ans.getId());
 	                    if (responseClient == null) {
 	                        return false; // ResponseClient not found

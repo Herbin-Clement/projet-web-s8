@@ -69,4 +69,15 @@ public class Quizz  extends Entite<Quizz> {
 	public Collection<Mcq> getMcqs() {
 		return this.Mcqs;
 	}
+	
+	public void setParticipants(Collection<User> p) {
+		this.participants = p;
+		
+		
+	}
+	
+	public Collection<User> getParticipants() {
+		return this.participants;
+		
+	}
 }

@@ -140,7 +140,7 @@ public class Servlet extends HttpServlet {
 			// in : liste d'ID (unique dans la base) des réponses, et les réponses associées
 			// out : ok ou ko
 
-			QuizzDataReview quizzData = new Gson().fromJson(request.getReader(), QuizzDataReview.class);
+			QuizzResponse quizzData = new Gson().fromJson(request.getReader(), QuizzResponse.class);
 			
 			boolean addSuccessful = facade.processQuizzAnswers(quizzData);
 
