@@ -12,4 +12,13 @@ public class Input extends Entite<Input> {
 	@Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private int id;
+	
+	
+	public Input() {
+		
+	}
+	
+	public void setId(int id) {
+		this.id = id;
+	}
 }

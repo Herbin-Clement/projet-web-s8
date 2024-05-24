@@ -51,6 +51,11 @@ public class Servlet extends HttpServlet {
 			String jsonResponse = objectMapper.writeValueAsString(listUsers);
 	        response.getWriter().write(jsonResponse);
 	        
+	    
+		} else if (op.equals("listQuizzes")) {
+			Collection<Quizz> listQuizzes = facade.listQuizzes();
+			String jsonResponse = objectMapper.writeValueAsString(listQuizzes);
+	        response.getWriter().write(jsonResponse);
 	        
 		} else if (op.equals("getUserByName")) {
 			String username = request.getParameter("username");
@@ -58,10 +63,34 @@ public class Servlet extends HttpServlet {
 			String jsonResponse = objectMapper.writeValueAsString(user);
 	        response.getWriter().write(jsonResponse);
 	        
+		} else if (op.equals("getQuizzByTitle")) {
+			String title = request.getParameter("title");
+			Quizz quizz = facade.getQuizzByTitle(title);
+			String jsonResponse = objectMapper.writeValueAsString(quizz);
+	        response.getWriter().write(jsonResponse);
+	        
 	    // Vérifie si l'username et le password est valide    
 		} else if (op.equals("login")) { // Julien
 			// in : username, password en JSON (faut créer une classe avec tous les attributs qu'on peut recevoir en JSON quand on ne lit pas directement un objet)
 			// out : ok ou ko
+			
+			//User loginRequest = objectMapper.readValue(request.getReader(), User.class);
+			//response.getWriter().write("{\"status\":\"ok\",\"message\":\"test1\"}");
+			
+			
+			User user = new Gson().fromJson(request.getReader(), User.class);
+			System.out.println(user.getUsername());
+			System.out.println(user.getPassword());
+		
+			//boolean loginSuccessful = false;
+			if (facade.verfiLogin(user.getUsername(),user.getPassword())) {
+				response.getWriter().write("{\"status\":\"ok\",\"message\":\"Connection reussi\"}");
+          
+            } else {
+            	response.getWriter().write("{\"status\":\"ko\",\"message\":\"Wrong username or password.\"}");
+               
+            }
+			
 		}
 		// classe Quizz
 		// TODO : si besoin, regarder UID
@@ -69,9 +98,26 @@ public class Servlet extends HttpServlet {
 		else if (op.equals("joinQuizzLink")) { // Anishan
 			// in : l'ID généré par jpa (ou lien du Quizz dans un Json si l'ID marche pas)		
 			// out : Quizz vierge, sans correction
+			
+			
 		} else if (op.equals("addQuizz")) { // Julien
 			// in : regarder interface.tsx => on reçoit le Json QuizzData (pour l'instant on gère pas les stats)
 			// out : ok ou ko
+			
+			QuizzData quizzData = new Gson().fromJson(request.getReader(), QuizzData.class);
+			
+			// Ajouter le quizz via la facade
+            boolean addSuccessful = facade.addQuizz(quizzData);
+
+            // Répondre en fonction du résultat de l'ajout
+            if (addSuccessful) {
+           
+                response.getWriter().write("{\"status\":\"ok\",\"message\":\"Ajout du quizz réussi\"}");
+   
+            } else {
+           
+                response.getWriter().write("{\"status\":\"ko\",\"message\":\"Il y a eu un problème lors de l'ajout du quizz\"}");;
+            }
 		// Rejoint un quizz en cliquant sur un quizz qu'on a crée ou deja ajouté
 		} else if (op.equals("joinQuizzID")) { // Anishan
 			// in : ID du quizz

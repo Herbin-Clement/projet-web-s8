@@ -1,11 +1,14 @@
 package pack;
 
 
+import java.util.Collection;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Mcq  extends Entite<Mcq> {
@@ -18,13 +21,17 @@ public class Mcq  extends Entite<Mcq> {
 	
 	@ManyToOne
 	private Quizz quizzOfTheMcq;
+	
+	@OneToMany 
+	private Collection<ResponseClient> responses;
 
 	public Mcq() {};
 	
-	public Mcq(String question, int rank, Quizz quizz) {
+	public Mcq(String question, int rank, Quizz quizz, Collection<ResponseClient> response) {
 		setQuestion(question);
 		setRank(rank);
 		setQuizz(quizz);
+		setResponses(response);
 	}
 	
 	public String getQuestion() {
@@ -50,5 +57,13 @@ public class Mcq  extends Entite<Mcq> {
 	public Quizz getQuizz() {
 		return this.quizzOfTheMcq;
 	}
+	
+	public Collection<ResponseClient> getResponses() {
+		return this.responses; 
+	}
+	
+	public void setResponses(Collection<ResponseClient> responses) {
+		this.responses = responses;
+	}	
 	
 }
