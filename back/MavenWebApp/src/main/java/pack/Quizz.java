@@ -58,7 +58,7 @@ public class Quizz  extends Entite<Quizz> {
 		this.creator = creator;
 	}
 	
-	public User getCreator(User creator) {
+	public User getCreator() {
 		return this.creator;
 	}
 	

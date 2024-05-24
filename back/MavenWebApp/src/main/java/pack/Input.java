@@ -23,6 +23,10 @@ public class Input extends Entite<Input> {
 	private Mcq qcm;
 	
 	
+	@ManyToOne
+	private User user; 
+	
+	
 	
 	public Input() {
 		
@@ -62,5 +66,12 @@ public class Input extends Entite<Input> {
 		return this.qcm;
 	}
 	
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
+	public User getUser() {
+		return this.user;
+	}
 	
 }

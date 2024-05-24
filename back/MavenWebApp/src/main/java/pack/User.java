@@ -21,6 +21,9 @@ public class User extends Entite<User> {
 	@ManyToMany 
 	private Collection<Quizz> answeredQuizzes;
 	
+	@OneToMany
+	private Collection<Input> inputs; 
+	
 	public User() {};
 	
 	public User(String username, String password) {
@@ -53,5 +56,13 @@ public class User extends Entite<User> {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
+	public Collection<Input> getInputs() {
+		return this.inputs; 
+	}
+	
+	public void setInputs(Collection<Input> inputs) {
+		this.inputs = inputs;
+	}	
 	
 }
