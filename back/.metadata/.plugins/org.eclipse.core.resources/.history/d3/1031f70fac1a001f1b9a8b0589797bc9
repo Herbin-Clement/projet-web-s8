@@ -1,6 +1,6 @@
 package pack;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
@@ -73,7 +73,7 @@ public class Facade {
 	 
 	 
 	 public static <T extends Entite<T>> Collection<T> copyCollection(Collection<? extends Entite<?>> collection, Class<T> clazz) {
-	        Collection<T> resultat = new LinkedList<>();
+	        Collection<T> resultat = new ArrayList<>();
 	        for (Entite<?> entite : collection) {
 	            if (clazz.isInstance(entite)) {
 	                resultat.add(clazz.cast(entite.copyExcludingID()));
@@ -89,8 +89,15 @@ public class Facade {
 	 
     
 	 public Collection<Quizz> listQuizzes() {
-		 Collection<Quizz> listQuizzes = em.createQuery("SELECT q FROM Quizz q", Quizz.class).getResultList();
-		 return copyCollection(listQuizzes, Quizz.class);
+		 Collection<Quizz> listQuizzesAux = em.createQuery("SELECT q FROM Quizz q", Quizz.class).getResultList();
+		 Collection<Quizz> listQuizzes = new LinkedList<Quizz>();
+		 for (Quizz q : listQuizzesAux) {
+			 
+			 
+			 
+			 
+		 }
+		 return listQuizzes;
 	 }
     
 	 public Stats getStatsQuizz(int quizzId) {
@@ -122,7 +129,7 @@ public class Facade {
 	            // Créer un nouvel objet Quizz
 	            Quizz quizz = new Quizz();
 	            quizz.setLink(quizzData.getTitle()); // Utiliser le titre comme lien pour cet exemple
-	            quizz.setMcqs(new LinkedList<>());
+	            quizz.setMcqs(new ArrayList<>());
 
 	            // Parcourir les questions et les ajouter au quizz
 	            for (QuestionData questionData : quizzData.getQuestions()) {
@@ -130,8 +137,9 @@ public class Facade {
 	                mcq.setQuestion(questionData.getQuestion());
 	                mcq.setRank(questionData.getId());
 	                mcq.setQuizz(quizz);
-	                mcq.setResponses(new LinkedList<>());
-	                mcq.setInputs(new LinkedList<>());
+	                mcq.setResponses(new ArrayList<>());
+	                mcq.setInputs(new ArrayList<>());
+	                quizz.getMcqs().add(mcq);
 	                quizz.addMcq(mcq);
 	                em.persist(mcq);
 
@@ -142,7 +150,7 @@ public class Facade {
 	                    responseClient.setRank(answerData.getId());
 	                    responseClient.setValue(answerData.isOk());
 	                    responseClient.setQcm(mcq);
-	                    responseClient.setInputs(new LinkedList<>());
+	                    responseClient.setInputs(new ArrayList<>());
 	                    
 	                    mcq.addResponse(responseClient);
 	                    

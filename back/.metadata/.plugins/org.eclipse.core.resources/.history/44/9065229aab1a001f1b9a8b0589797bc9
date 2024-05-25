@@ -37,10 +37,6 @@ public class Mcq  extends Entite<Mcq> {
 		setResponses(response);
 	}
 	
-	public void addResponse(ResponseClient response) {
-		this.responses.add(response);
-	}
-	
 	public String getQuestion() {
 		return question;
 	}

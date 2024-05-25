@@ -46,11 +46,6 @@ public class Quizz  extends Entite<Quizz> {
 		this.stats = new Stats();
 	}
 
-	
-	public void addMcq(Mcq mcq) {
-		this.Mcqs.add(mcq);
-	}
-	
 	public String getLink() {
 		return link;
 	}
