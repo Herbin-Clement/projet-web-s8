@@ -98,7 +98,9 @@ public class Servlet extends HttpServlet {
 			// out : Quizz vierge, sans correction
 			
 			
-			String title = request.getParameter("title");
+			InfoTitle info = new Gson().fromJson(request.getReader(), InfoTitle.class);
+			
+			String title = info.getInfo();
 			
 			// Ajouter le quizz via la facade
             QuizzData quizzData = facade.getQuizzByIdOrLink(null,title);
@@ -158,7 +160,10 @@ public class Servlet extends HttpServlet {
 			// out : username, nombre de quizzes crées et répondus, pourcentage de bonnes réponses
 			
 			
-			String username = request.getParameter("username");
+			InfoUsername info = new Gson().fromJson(request.getReader(), InfoUsername.class);
+			
+			String username = info.getInfo();
+			
             if (username != null && !username.isEmpty()) {
                 StatusProfil profile = facade.getProfile(username);
                 String jsonResponse = objectMapper.writeValueAsString(profile);
