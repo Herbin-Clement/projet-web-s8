@@ -151,7 +151,7 @@ const Create = () => {
                 <div className="create-content">
                     <div className="create-title">
                         <div className="create-input">
-                            <div>Quizz title</div>
+                            <div>Titre du Quizz</div>
                             <input type="text" placeholder="Quizz" value={title} onChange={e => handleUpdateTitle(e)} />
                         </div>
                     </div>
@@ -165,9 +165,9 @@ const Create = () => {
                             addAnswer={addAnswer} />
                     ))}
                     <div className="create-input create-button-question">
-                        <button className="quizz-button-add-question" onClick={() => addQuestion()}>Add question</button>
-                        <button className="quizz-button-remove-question" onClick={() => removeQuestion()}>Remove question</button>
-                        <button className="quizz-button-submit" onClick={() => submitQuizz()}>Submit quizz</button>
+                        <button className="quizz-button-add-question" onClick={() => addQuestion()}>Ajouter</button>
+                        <button className="quizz-button-remove-question" onClick={() => removeQuestion()}>Retirer</button>
+                        <button className="quizz-button-submit" onClick={() => submitQuizz()}>Envoyer</button>
                     </div>
                 </div>
             </div>

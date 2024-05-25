@@ -13,7 +13,7 @@ const ReviewCreated = ({ data }: ReviewCreatedProps) => {
             <div className="create-content">
                 <div className="create-title">
                     <div className="create-input">
-                        <div>Quizz title</div>
+                        <div>Titre du Quizz</div>
                         <input type="text" placeholder="Quizz" value={data.title} disabled />
                     </div>
                 </div>

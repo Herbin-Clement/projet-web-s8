@@ -56,8 +56,8 @@ const CreateQuestion = ({ questionId, updateQuestion, updateAnswer, updateCheck,
                     updateCheck={updateCheck} />
             ))}
             <div className="create-input create-button-answer">
-                {nbAnswer < 4 && <button className="quizz-button-add-question" onClick={() => handleAddAnswer()}>Add answer</button>}
-                {nbAnswer > 2 && <button className="quizz-button-remove-question" onClick={() => handleRemoveAnswer()}>Remove answer</button>}
+                {nbAnswer < 4 && <button className="quizz-button-add-question" onClick={() => handleAddAnswer()}>Ajouter</button>}
+                {nbAnswer > 2 && <button className="quizz-button-remove-question" onClick={() => handleRemoveAnswer()}>Retirer</button>}
             </div>
             <Line />
         </div>

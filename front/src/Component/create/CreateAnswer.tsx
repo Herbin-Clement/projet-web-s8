@@ -35,14 +35,14 @@ const CreateAnswer = ({ questionId, responseId, updateAnswer, updateCheck }: Cre
     return (
         <div className="create-answer">
             <div className="create-input">
-                <div>Answer {responseId + 1}</div>
+                <div>Réponse {responseId + 1}</div>
                 <input type="text"
                     placeholder="Answer"
                     value={answer}
                     onChange={e => handleUpdateAnswer(e)} />
             </div>
             <div className="create-input">
-                <div className="create-cb">True</div>
+                <div className="create-cb">Vrai</div>
                 <input type="checkbox"
                     checked={checked}
                     onChange={() => handleUpdateCheck()} />

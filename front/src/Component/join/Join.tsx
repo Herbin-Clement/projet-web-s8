@@ -31,7 +31,7 @@ const Join = () => {
             <div className="join-content">
                 <div className="join-left">
                     <div className="join-entry">
-                        <div className="name">Invitation link</div>
+                        <div className="name">Lien d'invitation</div>
                         <input type="text" placeholder="Link" value={link} onChange={e => updateLink(e)} />
                     </div>
                     <button type="button" onClick={() => handleClick()}>Go !</button>

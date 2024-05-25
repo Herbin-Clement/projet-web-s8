@@ -14,16 +14,16 @@ const Header = () => {
             </div>
             <div className="header-profil">
                 <Link to="/join">
-                    <div className="header-text">Join quizz</div>
+                    <div className="header-text">Rejoindre</div>
                 </Link>
                 <Link to="/create">
-                    <div className="header-text">Create quizz</div>
+                    <div className="header-text">Créer</div>
                 </Link>
                 <Link to="/myquizz">
-                    <div className="header-text">My quizz</div>
+                    <div className="header-text">Mes Quizz</div>
                 </Link>
                 <Link to="/profil">
-                    <div className="header-text">Profil</div>
+                    <div className="header-text">Profile</div>
                 </Link>
                 <div className="header-profil-logo"></div>
             </div>

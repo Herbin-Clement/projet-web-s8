@@ -5,10 +5,9 @@
 }
 
 .profil-stat {
-    width: 25%;
-    height: 25%;
-    padding: 10px;
-    border: 2px solid #888888;
-    border-radius: 3px;
-    background-color: #E5DDC5;
+    padding: 20px 10px 20px 10px;
+}
+
+.profil-stat>div {
+    font-size: x-large;
 }
