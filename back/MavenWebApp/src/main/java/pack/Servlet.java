@@ -106,7 +106,7 @@ public class Servlet extends HttpServlet {
             // Répondre en fonction du résultat de l'ajout
             if (quizzData != null) {
            
-                response.getWriter().write("{\"status\":\"ok\",\"message\":\"Voici le quizz vierge\"}");
+       
                 String jsonResponse = objectMapper.writeValueAsString(quizzData);
                 response.getWriter().write(jsonResponse);
    
