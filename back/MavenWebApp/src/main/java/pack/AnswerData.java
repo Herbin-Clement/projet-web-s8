@@ -1,13 +1,21 @@
 package pack;
 
-import java.util.List;
-
 public class AnswerData {
     private String text;
     private int id;
     private boolean ok;
 
-    // Getters and setters
+    // Default constructor
+    public AnswerData() {}
+
+    // Parameterized constructor
+    public AnswerData(String text, int id, boolean ok) {
+        this.text = text;
+        this.id = id;
+        this.ok = ok;
+    }
+
+    // Getters and Setters
     public String getText() {
         return text;
     }

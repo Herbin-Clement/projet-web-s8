@@ -6,7 +6,16 @@ public class QuizzData {
     private String title;
     private List<QuestionData> questions;
 
-    // Getters and setters
+    // Default constructor
+    public QuizzData() {}
+
+    // Parameterized constructor
+    public QuizzData(String title, List<QuestionData> questions) {
+        this.title = title;
+        this.questions = questions;
+    }
+
+    // Getters and Setters
     public String getTitle() {
         return title;
     }

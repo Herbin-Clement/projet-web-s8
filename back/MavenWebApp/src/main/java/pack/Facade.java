@@ -1,6 +1,7 @@
 package pack;
 
 import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
@@ -9,6 +10,7 @@ import javax.ejb.Singleton;
 import javax.persistence.EntityManager;
 import javax.persistence.ManyToMany;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 @Singleton
 public class Facade {
@@ -196,6 +198,34 @@ public class Facade {
 	            e.printStackTrace();
 	            return false;
 	        }
+	    }
+	 
+	 
+	 public QuizzData getQuizzByIdOrLink(Integer id, String link) {
+	        Quizz quizz = null;
+
+	        if (id != null) {
+	            quizz = em.find(Quizz.class, id);
+	        } else if (link != null) {
+	            TypedQuery<Quizz> query = em.createQuery("SELECT q FROM Quizz q WHERE q.link = :link", Quizz.class);
+	            query.setParameter("link", link);
+	            quizz = query.getSingleResult();
+	        }
+
+	        if (quizz == null) {
+	            return null;
+	        }
+
+	        List<QuestionData> questionDataList = new ArrayList<>();
+	        for (Mcq mcq : quizz.getMcqs()) {
+	            List<AnswerData> answerDataList = new ArrayList<>();
+	            for (ResponseClient response : mcq.getResponses()) {
+	                answerDataList.add(new AnswerData(response.getResponse(), response.getId(), false)); // Don't include 'ok' value
+	            }
+	            questionDataList.add(new QuestionData(mcq.getQuestion(), mcq.getId(), answerDataList));
+	        }
+
+	        return new QuizzData(quizz.getLink(), questionDataList);
 	    }
 	 
 	 

@@ -7,7 +7,17 @@ public class QuestionData {
     private int id;
     private List<AnswerData> answers;
 
-    // Getters and setters
+    // Default constructor
+    public QuestionData() {}
+
+    // Parameterized constructor
+    public QuestionData(String question, int id, List<AnswerData> answers) {
+        this.question = question;
+        this.id = id;
+        this.answers = answers;
+    }
+
+    // Getters and Setters
     public String getQuestion() {
         return question;
     }

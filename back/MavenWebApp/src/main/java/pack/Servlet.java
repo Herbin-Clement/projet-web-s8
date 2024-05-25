@@ -98,6 +98,26 @@ public class Servlet extends HttpServlet {
 			// out : Quizz vierge, sans correction
 			
 			
+			String title = request.getParameter("title");
+			
+			// Ajouter le quizz via la facade
+            QuizzData quizzData = facade.getQuizzByIdOrLink(null,title);
+
+            // Répondre en fonction du résultat de l'ajout
+            if (quizzData != null) {
+           
+                response.getWriter().write("{\"status\":\"ok\",\"message\":\"Voici le quizz vierge\"}");
+                String jsonResponse = objectMapper.writeValueAsString(quizzData);
+                response.getWriter().write(jsonResponse);
+   
+            } else {
+           
+                response.getWriter().write("{\"status\":\"ko\",\"message\":\"Il y a eu un problème lors de la récupération du quizz\"}");;
+            }
+			
+			
+			
+			
 		} else if (op.equals("addQuizz")) { // Julien
 			// in : regarder interface.tsx => on reçoit le Json QuizzData (pour l'instant on gère pas les stats)
 			// out : ok ou ko

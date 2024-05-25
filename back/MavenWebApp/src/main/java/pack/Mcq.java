@@ -79,6 +79,11 @@ public class Mcq  extends Entite<Mcq> {
 	
 	public void setInputs(Collection<Input> inputs) {
 		this.inputs = inputs;
+	}
+
+	public int getId() {
+	
+		return this.id;
 	}	
 	
 }

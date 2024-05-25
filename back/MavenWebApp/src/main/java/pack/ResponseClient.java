@@ -77,5 +77,8 @@ public class ResponseClient extends Entite<ResponseClient> {
 		this.inputs = inputs;
 	}	
 	
+	public int getId() {
+		return this.id;
+	}
 	
 }
