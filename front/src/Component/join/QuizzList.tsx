@@ -5,12 +5,12 @@ interface QuizzListProps {
     names: string[],
     title: string,
     method: string,
-    callback: (id: number, method: string) => void;
+    callback: (title: string, method: string) => void;
 }
 
-const QuizzListItem = (id: number, quizzName: string, callback: (id: number) => void): React.JSX.Element => {
+const QuizzListItem = (id: number, quizzName: string, callback: (title: string) => void): React.JSX.Element => {
     return (
-        <li key={id} onClick={() => callback(id)}>
+        <li key={id} onClick={() => callback(quizzName)}>
             {quizzName}
         </li>
     )
@@ -18,9 +18,9 @@ const QuizzListItem = (id: number, quizzName: string, callback: (id: number) => 
 
 const QuizzList = ({ names, title, method, callback }: QuizzListProps) => {
 
-    const handleClick = (id: number): void => {
+    const handleClick = (title: string): void => {
 
-        callback(id, method);
+        callback(title, method);
     }
 
     return (

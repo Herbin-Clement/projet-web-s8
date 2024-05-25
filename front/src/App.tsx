@@ -11,7 +11,6 @@ import Login from './Component/login/Login';
 import Home from './Component/home/Home';
 import Create from './Component/create/Create';
 import Quizz from './Component/quizz/Quizz';
-import Invite from './Component/invite/Invite';
 import Join from './Component/join/Join';
 import Profil from './Component/profil/Profil';
 import MyQuizz from './Component/review/MyQuizz';
@@ -212,12 +211,6 @@ const App = () => {
             <Route path="/quizz" element={
               <ProtectedRoute>
                 <Quizz data={quizz} />
-              </ProtectedRoute>
-            } />
-
-            <Route path="/invite" element={
-              <ProtectedRoute>
-                <Invite />
               </ProtectedRoute>
             } />
 

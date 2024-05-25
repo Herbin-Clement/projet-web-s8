@@ -44,7 +44,6 @@ const Quizz = ({ data }: QuizzProps) => {
     }
 
     const handleAnswerClick = (id: number, value: boolean) => {
-        console.log("yo");
         setCurrentAnswers(prev => {
             for (let i = 0; i < prev.length; i++) {
                 if (prev[i].id === id) {

@@ -7,16 +7,13 @@ import Header from '../header/Header';
 const Home = () => {
     return (
         <div className="home">
-            <Header/>
+            <Header />
             <div className="home-content">
                 <Link to="/join">
-                    <div className="home-button">Join</div>
+                    <div className="home-button">Rejoindre</div>
                 </Link>
                 <Link to="/create">
-                    <div className="home-button">Create</div>
-                </Link>
-                <Link to="/invite">
-                    <div className="home-button">Invite</div>
+                    <div className="home-button">Créer</div>
                 </Link>
             </div>
         </div>

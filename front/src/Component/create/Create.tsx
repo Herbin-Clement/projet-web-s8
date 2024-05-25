@@ -47,17 +47,48 @@ const Create = () => {
         }
     )
 
+    useEffect(() => {
+        setQuizz(prevQuizz => {
+            const nextQuizz = { ...prevQuizz };
+            const currentNbQuestion = nextQuizz.questions.length;
+            if (currentNbQuestion < nbQuestion) {
+                nextQuizz.questions.push({
+                    question: "",
+                    id: nbQuestion - 1,
+                    answers: [
+                        {
+                            text: "",
+                            id: 0,
+                            ok: false,
+                        },
+                        {
+                            text: "",
+                            id: 1,
+                            ok: false,
+                        }
+                    ],
+                })
+            } else if (currentNbQuestion > nbQuestion) {
+                nextQuizz.questions.pop();
+            }
+            return nextQuizz;
+        })
+    }, [nbQuestion]);
+
+    useEffect(() => {
+        setQuizz(prevQuizz => {
+            const nextQuizz = { ...prevQuizz };
+            nextQuizz.title = title;
+            return nextQuizz;
+        })
+    }, [title]);
+
     const addQuestion = () => {
         setNbQuestion(prevNbQuestion => prevNbQuestion < 10 ? prevNbQuestion + 1 : prevNbQuestion);
     }
 
     const removeQuestion = () => {
         setNbQuestion(prevNbQuestion => prevNbQuestion > 1 ? prevNbQuestion - 1 : prevNbQuestion);
-    }
-
-    const submitQuizz = () => {
-        console.log(quizz);
-        console.log(`check: ${checkQuizzData(quizz)}`);
     }
 
     const updateQuestion = (questionId: number, value: string): void => {
@@ -108,41 +139,14 @@ const Create = () => {
         setTitle(e.target.value);
     }
 
-    useEffect(() => {
-        setQuizz(prevQuizz => {
-            const nextQuizz = { ...prevQuizz };
-            const currentNbQuestion = nextQuizz.questions.length;
-            if (currentNbQuestion < nbQuestion) {
-                nextQuizz.questions.push({
-                    question: "",
-                    id: nbQuestion - 1,
-                    answers: [
-                        {
-                            text: "",
-                            id: 0,
-                            ok: false,
-                        },
-                        {
-                            text: "",
-                            id: 1,
-                            ok: false,
-                        }
-                    ],
-                })
-            } else if (currentNbQuestion > nbQuestion) {
-                nextQuizz.questions.pop();
-            }
-            return nextQuizz;
-        })
-    }, [nbQuestion]);
-
-    useEffect(() => {
-        setQuizz(prevQuizz => {
-            const nextQuizz = { ...prevQuizz };
-            nextQuizz.title = title;
-            return nextQuizz;
-        })
-    }, [title]);
+    const submitQuizz = async () => {
+        const response = await fetch("http://localhost:8080/server/servlet/?op=", {
+            method: "POST",
+            body: JSON.stringify(quizz),
+        });
+        const data = await response.json();
+        console.log(data);
+    }
 
     return (
         <div className="home">
