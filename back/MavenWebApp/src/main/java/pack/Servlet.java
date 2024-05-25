@@ -156,6 +156,16 @@ public class Servlet extends HttpServlet {
 		} else if (op.equals("getProfile")) { // Anishan
 			// in : username
 			// out : username, nombre de quizzes crées et répondus, pourcentage de bonnes réponses
+			
+			
+			String username = request.getParameter("username");
+            if (username != null && !username.isEmpty()) {
+                StatusProfil profile = facade.getProfile(username);
+                String jsonResponse = objectMapper.writeValueAsString(profile);
+                response.getWriter().write(jsonResponse);
+            } else {
+                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Username is missing.");
+            }
 		// Lorsque l'on a fini de répondre a un quizz
 		} else if (op.equals("addAnsQuizz")) { // Julien
 			// in : liste d'ID (unique dans la base) des réponses, et les réponses associées

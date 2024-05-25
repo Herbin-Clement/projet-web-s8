@@ -230,4 +230,28 @@ public class Facade {
 	 
 	 
 	 
+	 public StatusProfil getProfile(String username) {
+	        TypedQuery<User> query = em.createQuery("SELECT u FROM User u WHERE u.username = :username", User.class);
+	        query.setParameter("username", username);
+	        User user = query.getSingleResult();
+
+	        if (user == null) {
+	            return new StatusProfil("error", "User not found", 0, 0, 0);
+	        }
+
+	        int createdQuizzesCount = user.getCreatedQuizzes().size();
+	        int answeredQuizzesCount = user.getAnsweredQuizzes().size();
+
+	        long correctAnswersCount = user.getInputs().stream()
+	                .filter(input -> input.isSaisie() && input.getReponse().isValue())
+	                .count();
+	        long totalAnswersCount = user.getInputs().size();
+
+	        int correctAnswerPercentage = totalAnswersCount == 0 ? 0 : (int) ((double) correctAnswersCount / totalAnswersCount * 100);
+
+	        return new StatusProfil("ok", user.getUsername(), createdQuizzesCount, answeredQuizzesCount, correctAnswerPercentage);
+	    }
+	 
+	 
+	 
 }
