@@ -21,16 +21,16 @@ const MyQuizz = () => {
     return (
         <div className="home">
             <Header />
-            <div className="myquizz-content">
+            {/* <div className="myquizz-content">
                 <div className="myquizz-created">
                     <QuizzList names={mockCreated} method="created" title="Quizz Created" callback={handleListClick} />
                 </div>
                 <div className="myquizz-answered">
                     <QuizzList names={mockAnswered} method="answered" title="Quizz Answered" callback={handleListClick} />
                 </div>
-            </div>
+            </div> */}
             {/* <ReviewCreated data={quizz} /> */}
-            {/* <ReviewAnswered data={quizzreview} /> */}
+            <ReviewAnswered data={quizzreview} />
         </div>
     )
 };

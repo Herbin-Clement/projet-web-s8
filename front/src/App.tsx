@@ -15,6 +15,9 @@ import Invite from './Component/invite/Invite';
 import Join from './Component/join/Join';
 import Profil from './Component/profil/Profil';
 import MyQuizz from './Component/review/MyQuizz';
+import { AuthProvider } from './Hooks/useAuth';
+import { ProtectedRoute } from './Component/utils/ProtectedRoute';
+import { NotProtectedRoute } from './Component/utils/NotProtectedRoute';
 
 export const quizz = {
   "title": "Premier quizz",
@@ -163,24 +166,80 @@ export const quizzreview = {
   ]
 }
 
-function App() {
+const App = () => {
 
   return (
     <div className="App">
       <Router>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/join" element={<Join />} />
-          <Route path="/create" element={<Create />} />
-          <Route path="/quizz" element={<Quizz data={quizz} />} />
-          <Route path="/invite" element={<Invite />} />
-          <Route path="/myquizz" element={<MyQuizz />} />
-          <Route path="/profil" element={<Profil />} />
-          <Route path="*" element={<Home />} />
-        </Routes>
+        <AuthProvider>
+          <Routes>
+            <Route path="/" element={
+              <ProtectedRoute>
+                <Home />
+              </ProtectedRoute>
+            } />
+
+            <Route path="/login" element={
+              <NotProtectedRoute>
+                <Login />
+              </NotProtectedRoute>
+            } />
+
+            <Route path="/register" element={
+              <NotProtectedRoute>
+                <Register />
+              </NotProtectedRoute>
+            } />
+
+            <Route path="/home" element={
+              <ProtectedRoute>
+                <Home />
+              </ProtectedRoute>
+            } />
+
+            <Route path="/join" element={
+              <ProtectedRoute>
+                <Join />
+              </ProtectedRoute>
+            } />
+
+            <Route path="/create" element={
+              <ProtectedRoute>
+                <Create />
+              </ProtectedRoute>
+            } />
+
+            <Route path="/quizz" element={
+              <ProtectedRoute>
+                <Quizz data={quizz} />
+              </ProtectedRoute>
+            } />
+
+            <Route path="/invite" element={
+              <ProtectedRoute>
+                <Invite />
+              </ProtectedRoute>
+            } />
+
+            <Route path="/myquizz" element={
+              <ProtectedRoute>
+                <MyQuizz />
+              </ProtectedRoute>
+            } />
+
+            <Route path="/profil" element={
+              <ProtectedRoute>
+                <Profil />
+              </ProtectedRoute>
+            } />
+
+            <Route path="*" element={
+              <ProtectedRoute>
+                <Home />
+              </ProtectedRoute>
+            } />
+          </Routes>
+        </AuthProvider>
       </Router>
     </div>
   );

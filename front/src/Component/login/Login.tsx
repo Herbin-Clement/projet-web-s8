@@ -2,11 +2,14 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import './login.css';
+import { useAuth } from '../../Hooks/useAuth';
 
 const Login = () => {
 
     const [username, setUsername] = useState<string>("");
     const [pwd, setPwd] = useState<string>("");
+    const [message, setMessage] = useState<string>("");
+    const { login } = useAuth();
 
     const updateUsername = (e: React.FormEvent<HTMLInputElement>): void => {
         setUsername(e.currentTarget.value);
@@ -16,9 +19,10 @@ const Login = () => {
         setPwd(e.currentTarget.value);
     }
 
-    const handleClick = (): void => {
+    const handleClick = async () => {
         if (username !== "" && pwd !== "") {
-            console.log("Click !");
+            const res = await login(username, pwd);
+            setMessage(res);
         }
     }
 
@@ -31,6 +35,7 @@ const Login = () => {
                 <div className="login-form">
                     <div className="login-form-title">Login</div>
                     <div className="login-form-entry">
+                        <div className="message">{message}</div>
                         <div className="name">Username</div>
                         <input type="text"
                             placeholder="Username"

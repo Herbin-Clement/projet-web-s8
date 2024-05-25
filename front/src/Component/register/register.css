@@ -12,7 +12,8 @@
     flex-direction: column;
     align-items: center;
     width: 40vh;
-    height: 40vh;
+    min-height: 40vh;
+    padding-bottom: 10px;
     background-color: #E5DDC5;
     border-radius: 7px;
 }
@@ -64,4 +65,8 @@
 .toLogin {
     margin-top: 5px;
     color: #888888;
+}
+
+.message {
+    color: #DD0000;
 }

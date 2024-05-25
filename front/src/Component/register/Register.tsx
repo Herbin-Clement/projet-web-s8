@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import './register.css';
-
+import { useAuth } from '../../Hooks/useAuth';
 
 const Register = () => {
 
   const [username, setUsername] = useState<string>("");
   const [pwd, setPwd] = useState<string>("");
+  const [message, setMessage] = useState<string>("");
+  const { register } = useAuth();
 
   const updateUsername = (e: React.FormEvent<HTMLInputElement>): void => {
     setUsername(e.currentTarget.value);
@@ -17,9 +19,10 @@ const Register = () => {
     setPwd(e.currentTarget.value);
   }
 
-  const handleClick = (): void => {
+  const handleClick = async () => {
     if (username !== "" && pwd !== "") {
-      console.log("Click !");
+      const res = await register(username, pwd);
+      setMessage(res);
     }
   }
 
@@ -28,6 +31,7 @@ const Register = () => {
       <div className="register-form">
         <div className="register-form-title">Register</div>
         <div className="register-form-entry">
+          <div className="message">{message}</div>
           <div className="name">Username</div>
           <input type="test" placeholder="Username" value={username} onChange={e => updateUsername(e)} />
         </div>
