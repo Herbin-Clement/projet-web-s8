@@ -349,8 +349,18 @@ public class Facade {
 	    }
 	 
 	 
-	 public QuizzDataReview getCorrectionQuizz(String quizzTitle) {
+	 public QuizzDataReview getCorrectionQuizz(String quizzTitle,String username) {
 			 Quizz quizz = em.createQuery("SELECT q FROM Quizz q WHERE q.link = '" + quizzTitle +"'", Quizz.class).getSingleResult();
+			 
+			 TypedQuery<User> query = em.createQuery("SELECT u FROM User u WHERE u.username = :username", User.class);
+		        query.setParameter("username", username);
+		        User user = query.getSingleResult();
+
+		        if (user == null) {
+		            return null;
+		        }
+		        
+		        
 	        if (quizz == null) {
 	            return null;
 	        }
@@ -359,7 +369,12 @@ public class Facade {
 	        for (Mcq mcq : quizz.getMcqs()) {
 	            List<AnswerReview> answerReviewList = new ArrayList<>();
 	            for (ResponseClient response : mcq.getResponses()) {
-	                boolean res = response.getInputs().stream().anyMatch(Input::isSaisie);
+	            	
+	            	boolean res = response.getInputs().stream()
+                            .filter(input -> input.getUser().getUsername().equals(user.getUsername()))
+                            .findFirst()
+                            .map(Input::isSaisie)
+                            .orElse(false);
 	                answerReviewList.add(new AnswerReview(response.getResponse(), response.getId(), res, response.isValue()));
 	            }
 	            questionReviewList.add(new QuestionReview(mcq.getQuestion(), mcq.getId(), answerReviewList));

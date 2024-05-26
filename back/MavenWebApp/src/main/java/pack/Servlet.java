@@ -239,11 +239,13 @@ public class Servlet extends HttpServlet {
 		} else if (op.equals("getCorrectionQuizz")) { // Ruben : OK
 			// in : l'ID du quizz
 			// out : le JSon représentant les corrections des réponses dans l'ordre du quizz, sous la forme interface.tsx => QuizzDataReview
-			InfoTitle info = new Gson().fromJson(request.getReader(), InfoTitle.class);
+			InfoUserTitle info = new Gson().fromJson(request.getReader(), InfoUserTitle.class);
 			
-			String title = info.getInfo();
+			String title = info.getTitle();
 			
-			QuizzDataReview quizzDataReview = facade.getCorrectionQuizz(title);
+			String username = info.getUsername();
+			
+			QuizzDataReview quizzDataReview = facade.getCorrectionQuizz(title,username);
 			
 
 			if (quizzDataReview != null) {
