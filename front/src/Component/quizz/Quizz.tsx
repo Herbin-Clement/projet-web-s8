@@ -2,12 +2,13 @@ import './quizz.css';
 
 import Header from '../header/Header';
 import Answer from './Answer';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { QuizzData, AnswerData, AnswerResponse, QuestionResponse } from '../../Type/interface';
+import { useNavigate } from 'react-router-dom';
 
 interface QuizzProps {
-    data: QuizzData,
+    title: string,
 }
 
 const AnswerToAnswerResponse = (ans: AnswerData): AnswerResponse => {
@@ -17,27 +18,41 @@ const AnswerToAnswerResponse = (ans: AnswerData): AnswerResponse => {
     }
 }
 
-const Quizz = ({ data }: QuizzProps) => {
+const Quizz = ({ title }: QuizzProps) => {
 
     const [questionId, setQuestionId] = useState<number>(0);
     const [answers, setAnswers] = useState<QuestionResponse[]>([]);
-    const [currentAnswers, setCurrentAnswers] = useState<AnswerResponse[]>(data.questions[questionId].answers.map(ans => AnswerToAnswerResponse(ans)));
+    const [currentAnswers, setCurrentAnswers] = useState<AnswerResponse[]>([]);
+    const [quizz, setQuizz] = useState<QuizzData | undefined>(undefined);
+    const navigate = useNavigate();
 
-    const handleClick = () => {
+    const handleClick = async () => {
+        if (quizz === undefined) {
+            return
+        }
         setAnswers(prev => {
             prev.push({
-                id: data.questions[questionId].id,
+                id: quizz.questions[questionId].id,
                 answers: currentAnswers,
             });
             return prev;
         })
-        if (questionId + 1 === data.questions.length) {
-            console.log("Quizz finished");
-            console.log(answers);
+        if (questionId + 1 === quizz.questions.length) {
+            const response = await fetch("http://localhost:8080/server/servlet/?op=addAnsQuizz", {
+                method: "POST",
+                body: JSON.stringify({
+                    title: title,
+                    questions: answers,
+                }),
+            });
+            const data = await response.json();
+            if (data.status === "ok") {
+                navigate("/home");
+            }
         } else {
             setQuestionId(prev => {
                 const res = prev + 1;
-                setCurrentAnswers(data.questions[res].answers.map(ans => AnswerToAnswerResponse(ans)));
+                setCurrentAnswers(quizz.questions[res].answers.map(ans => AnswerToAnswerResponse(ans)));
                 return res
             });
         }
@@ -55,33 +70,55 @@ const Quizz = ({ data }: QuizzProps) => {
         })
     }
 
+    useEffect(() => {
+        if (title === "") {
+            return
+        }
+        const prout = async () => {
+            const response = await fetch("http://localhost:8080/server/servlet/?op=joinQuizzLink", {
+                method: "POST",
+                body: JSON.stringify({
+                    title: title,
+                }),
+            });
+            const data = await response.json();
+            const q: QuizzData = data.quizzData;
+            setQuizz(q);
+            setCurrentAnswers(() => {
+                const next = q.questions[questionId].answers.map(ans => AnswerToAnswerResponse(ans));
+                return next;
+            })
+        }
+        prout();
+    }, [title]);
+
     return (
         <div className="home">
             <Header />
             <div className="quizz-content">
                 <div className="quizz-question">
                     <div className="quizz-title">
-                        {data.title}
+                        {quizz !== undefined ? quizz.title : ""}
                     </div>
                     <div className="quizz-question-name">
-                        {data.questions[questionId].question}
+                        {quizz !== undefined ? quizz.questions[questionId].question : ""}
                     </div>
                     <div className="quizz-question-answers">
                         {
-                            data.questions[questionId].answers.map((answer, id) =>
+                            quizz !== undefined ? quizz.questions[questionId].answers.map((answer, id) =>
                                 <Answer key={answer.id}
                                     id={answer.id}
                                     name={answer.text}
                                     handleAnswerClick={handleAnswerClick}
                                     selected={currentAnswers[id].res} />
-                            )
+                            ) : []
                         }
                     </div>
                 </div>
                 <div className="quizz-next">
                     <button className="quizz-button-add-question"
                         onClick={() => handleClick()}>
-                        {questionId + 1 === data.questions.length ? "Finish" : "Next question"}
+                        {quizz !== undefined ? questionId + 1 === quizz.questions.length ? "Finish" : "Next question" : ""}
                     </button>
                 </div>
             </div>

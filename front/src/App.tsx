@@ -1,5 +1,7 @@
 import './App.css';
 
+import { useState } from 'react';
+
 import {
   BrowserRouter as Router,
   Routes,
@@ -20,6 +22,7 @@ import { NotProtectedRoute } from './Component/utils/NotProtectedRoute';
 
 export const quizz = {
   "title": "Premier quizz",
+  "creatorUsername": "ruben",
   "questions": [
     {
       "question": "Suis-je la question 1 ?",
@@ -167,6 +170,12 @@ export const quizzreview = {
 
 const App = () => {
 
+  const [quizz, setQuizz] = useState<string>("");
+
+  const quizzSelected = (title: string): void => {
+    setQuizz(title);
+  }
+
   return (
     <div className="App">
       <Router>
@@ -198,7 +207,7 @@ const App = () => {
 
             <Route path="/join" element={
               <ProtectedRoute>
-                <Join />
+                <Join callback={quizzSelected} />
               </ProtectedRoute>
             } />
 
@@ -210,7 +219,7 @@ const App = () => {
 
             <Route path="/quizz" element={
               <ProtectedRoute>
-                <Quizz data={quizz} />
+                <Quizz title={quizz} />
               </ProtectedRoute>
             } />
 

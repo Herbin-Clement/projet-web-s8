@@ -6,6 +6,8 @@ import Line from '../utils/Line';
 import './create.css';
 
 import { QuizzData } from '../../Type/interface';
+import { useAuth } from '../../Hooks/useAuth';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 
 const checkQuizzData = (data: QuizzData): boolean => {
@@ -23,9 +25,12 @@ const Create = () => {
 
     const [title, setTitle] = useState<string>("");
     const [nbQuestion, setNbQuestion] = useState<number>(1);
+    const { user } = useAuth();
+    const navigate = useNavigate();
     const [quizz, setQuizz] = useState<QuizzData>(
         {
             title: "",
+            creatorUsername: user,
             questions: [
                 {
                     question: "",
@@ -140,12 +145,14 @@ const Create = () => {
     }
 
     const submitQuizz = async () => {
-        const response = await fetch("http://localhost:8080/server/servlet/?op=", {
+        const response = await fetch("http://localhost:8080/server/servlet/?op=addQuizz", {
             method: "POST",
             body: JSON.stringify(quizz),
         });
         const data = await response.json();
-        console.log(data);
+        if (data.status === "ok") {
+            navigate("/home");
+        }
     }
 
     return (

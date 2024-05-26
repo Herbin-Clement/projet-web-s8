@@ -33,13 +33,13 @@ const Profil = () => {
 
     useEffect(() => {
         const fetchProfile = async () => {
-            const res = await fetch("http://localhost:8080/server/servlet/?op=getProfile", {
+            const response = await fetch("http://localhost:8080/server/servlet/?op=getProfile", {
                 method: "POST",
                 body: JSON.stringify({
                     username: user,
                 })
             })
-            const data = await res.json();
+            const data = await response.json();
             if (data.status === "ok") {
                 setProfile({
                     nb_quizz_cree: data.nb_quizz_cree,
@@ -50,7 +50,7 @@ const Profil = () => {
         }
 
         fetchProfile();
-    })
+    }, [])
 
     return (
         <div className="home">
