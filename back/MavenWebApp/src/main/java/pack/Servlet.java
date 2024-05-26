@@ -50,13 +50,7 @@ public class Servlet extends HttpServlet {
 			Collection<User> listUsers = facade.listUsers();
 			String jsonResponse = objectMapper.writeValueAsString(listUsers);
 	        response.getWriter().write(jsonResponse);
-	        
-	    
-		} else if (op.equals("listQuizzes")) {
-			Collection<Quizz> listQuizzes = facade.listQuizzes();
-			String jsonResponse = objectMapper.writeValueAsString(listQuizzes);
-	        response.getWriter().write(jsonResponse);
-	        
+	        	        
 		} else if (op.equals("getUserByName")) {
 			String username = request.getParameter("username");
 			User user = facade.getUserByUsername(username);
@@ -144,15 +138,47 @@ public class Servlet extends HttpServlet {
 			// in : ID du quizz
 			// out : Quizz vierge, sans correction
 		// List de tous les quizz disponible
-		} else if (op.equals("listQuizzes")) { // Ruben
+		} else if (op.equals("listQuizzes")) { // Ruben : OK
 			// in : username de la personne connectée
-			// out : la liste des Quizz de la base, sauf sauf crées par le user courant
-		} else if (op.equals("getCreatedQuizzes")) { // Ruben
+			// out : la liste des Quizz de la base, sauf ceux crées par le user courant
+			InfoUsername info = new Gson().fromJson(request.getReader(), InfoUsername.class);
+			String username = info.getInfo();
+			Collection<QuizzData> listQuizzesData = facade.getListQuizzesUser(username);
+			if (listQuizzesData != null) {
+            	StatusQuizzDataList sortie = new StatusQuizzDataList("ok, vous avez bien récupéré la liste des quizzs vierges", listQuizzesData);
+                String jsonResponse = objectMapper.writeValueAsString(sortie);
+                response.getWriter().write(jsonResponse);
+            } else {
+                response.getWriter().write("{\"status\":\"ko\",\"message\":\"Il y a eu un problème lors de la récupération de la liste des quizzs\"}");;
+            }
+		} else if (op.equals("getCreatedQuizzes")) { // Ruben : OK
 			// in : username
 			// out : quizzes crées par le user vierges
+			InfoUsername info = new Gson().fromJson(request.getReader(), InfoUsername.class);
+			String username = info.getInfo();
+			Collection<QuizzData> listQuizzesData = facade.getCreatedQuizzesUser(username);
+			if (listQuizzesData != null) {
+            	StatusQuizzDataList sortie = new StatusQuizzDataList("ok, vous avez bien récupéré la liste des quizzs vierges crées par le User", listQuizzesData);
+                String jsonResponse = objectMapper.writeValueAsString(sortie);
+                response.getWriter().write(jsonResponse);
+            } else {
+                response.getWriter().write("{\"status\":\"ko\",\"message\":\"Il y a eu un problème lors de la récupération de la liste des quizzs\"}");;
+            }
 		} else if (op.equals("getAnsweredQuizzes")) { // Ruben
 			// in : username
 			// out : quizzes répondus  par le user avec les réponses du user
+			/*{
+			InfoUsername info = new Gson().fromJson(request.getReader(), InfoUsername.class);
+			String username = info.getInfo();
+			Collection<QuizzResponse> listQuizzesResponse = facade.getListQuizzesResponseUser(username);
+			if (listQuizzesResponse != null) {
+            	StatusQuizzResponseList sortie = new StatusQuizzResponseList("ok, vous avez bien récupéré la liste des réponses de l'utilisateur aux différents quizzs.", listQuizzesResponse);
+                String jsonResponse = objectMapper.writeValueAsString(sortie);
+                response.getWriter().write(jsonResponse);
+            } else {
+                response.getWriter().write("{\"status\":\"ko\",\"message\":\"Il y a eu un problème lors de la récupération de la liste des quizzs\"}");;
+            }
+            }*/
 		} else if (op.equals("getStatsQuizz")) { 
 			// TODO : on le fait pas pour l'instant
 		} else if (op.equals("getProfile")) { // Anishan

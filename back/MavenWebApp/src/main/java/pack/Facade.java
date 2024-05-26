@@ -90,11 +90,82 @@ public class Facade {
 	 /* Interactions with class Quizz */
 	 
     
-	 public Collection<Quizz> listQuizzes() {
+	 public Collection<QuizzData> listQuizzes() {
 		 Collection<Quizz> listQuizzes = em.createQuery("SELECT q FROM Quizz q", Quizz.class).getResultList();
-		 return copyCollection(listQuizzes, Quizz.class);
+		 Collection<QuizzData> listQuizzesData = new LinkedList<QuizzData>();
+		 for (Quizz quizz : listQuizzes) {
+			 List<QuestionData> questionDataList = new ArrayList<>();
+		        for (Mcq mcq : quizz.getMcqs()) {
+		            List<AnswerData> answerDataList = new ArrayList<>();
+		            for (ResponseClient response : mcq.getResponses()) {
+		                answerDataList.add(new AnswerData(response.getResponse(), response.getId(), false)); // Don't include 'ok' value
+		            }
+		            questionDataList.add(new QuestionData(mcq.getQuestion(), mcq.getId(), answerDataList));
+		        }
+			  listQuizzesData.add(new QuizzData(quizz.getLink(), questionDataList, quizz.getCreator().getUsername()));
+		 }
+		 return listQuizzesData;
 	 }
     
+	 public Collection<QuizzData> getListQuizzesUser(String username) {
+		 Collection<Quizz> listQuizzes = em.createQuery("SELECT q FROM Quizz q", Quizz.class).getResultList();
+		 Collection<QuizzData> listQuizzesData = new LinkedList<QuizzData>();
+		 for (Quizz quizz : listQuizzes) {
+			 System.out.println(quizz.getCreator().getUsername() + " | " + username);
+			 if (!quizz.getCreator().getUsername().equals(username)) {
+				 List<QuestionData> questionDataList = new ArrayList<>();
+			        for (Mcq mcq : quizz.getMcqs()) {
+			            List<AnswerData> answerDataList = new ArrayList<>();
+			            for (ResponseClient response : mcq.getResponses()) {
+			                answerDataList.add(new AnswerData(response.getResponse(), response.getId(), false)); // Don't include 'ok' value
+			            }
+			            questionDataList.add(new QuestionData(mcq.getQuestion(), mcq.getId(), answerDataList));
+			        }
+				  listQuizzesData.add(new QuizzData(quizz.getLink(), questionDataList, username));
+			 }
+		 }
+		 return listQuizzesData;
+			 
+	 }
+	 
+	 public Collection<QuizzData> getCreatedQuizzesUser(String username) {
+		 Collection<Quizz> listQuizzes = em.createQuery("SELECT q FROM Quizz q WHERE q.creator.username = '" + username + "'", Quizz.class).getResultList();
+		 Collection<QuizzData> listQuizzesData = new LinkedList<QuizzData>();
+		 for (Quizz quizz : listQuizzes) {
+			 System.out.println(quizz.getCreator().getUsername() + " | " + username);
+			 List<QuestionData> questionDataList = new ArrayList<>();
+		        for (Mcq mcq : quizz.getMcqs()) {
+		            List<AnswerData> answerDataList = new ArrayList<>();
+		            for (ResponseClient response : mcq.getResponses()) {
+		                answerDataList.add(new AnswerData(response.getResponse(), response.getId(), false)); // Don't include 'ok' value
+		            }
+		            questionDataList.add(new QuestionData(mcq.getQuestion(), mcq.getId(), answerDataList));
+		        }
+			  listQuizzesData.add(new QuizzData(quizz.getLink(), questionDataList, username));
+		 }
+		 return listQuizzesData;
+	 }
+	
+	 /*{
+	 public Collection<QuizzResponse> getListQuizzesResponseUser(String username) {
+		 Collection<Input> listInputsUser = em.createQuery("SELECT i FROM Input i WHERE i.user.username = '" + username + "'", Input.class).getResultList();
+		 Collection<QuizzResponse> listQuizzesResponse = new LinkedList<QuizzResponse>();
+		 for (Input input : listInputsUser) {
+			 //System.out.println(input.getUser().getUsername() + " | " + username);
+			 List<QuestionResponse> questionResponseList = new ArrayList<QuestionResponse>();
+		        for () {
+		            List<AnswerResponse> answerResponseList = new ArrayList<AnswerResponse>();
+		            for (ResponseClient response : mcq.getResponses()) {
+		                answerResponseList.add(new AnswerResponse(id, res)); // Don't include 'ok' value
+		            }
+		            questionResponseList.add(new QuestionResponse(id, answerResponseList));
+		        }
+			  listQuizzesResponse.add(new QuizzResponse(quizz.getLink(), questionDataList, username));
+		 }
+		 return listQuizzesData;
+	 }
+	 ]*/
+	 
 	 public Stats getStatsQuizz(int quizzId) {
          Stats stats = em.find(Stats.class, quizzId);
          /*{
@@ -125,6 +196,8 @@ public class Facade {
 	            Quizz quizz = new Quizz();
 	            quizz.setLink(quizzData.getTitle()); // Utiliser le titre comme lien pour cet exemple
 	            quizz.setMcqs(new LinkedList<>());
+	            User u = em.createQuery("SELECT u FROM User u WHERE username = '" + quizzData.getCreatorUsername() + "'", User.class).getSingleResult();
+	            quizz.setCreator(u);
 
 	            // Parcourir les questions et les ajouter au quizz
 	            for (QuestionData questionData : quizzData.getQuestions()) {

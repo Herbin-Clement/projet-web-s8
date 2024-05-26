@@ -6,6 +6,11 @@ public class QuizzResponse {
     private String title;
     private List<QuestionResponse> questions;
 
+    public QuizzResponse(String title, List<QuestionResponse> questions) {
+    	this.title = title;
+    	this.questions = questions;
+    }
+    
     // Getters and setters
     public String getTitle() {
         return title;

@@ -12,6 +12,7 @@ export interface QuestionData {
 
 export interface QuizzData {
     title: string,
+    creatorUsername: string,
     questions: QuestionData[],
 }
 
