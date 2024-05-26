@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 
 import { QuizzData, AnswerData, AnswerResponse, QuestionResponse } from '../../Type/interface';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../Hooks/useAuth';
 
 interface QuizzProps {
     title: string,
@@ -24,6 +25,7 @@ const Quizz = ({ title }: QuizzProps) => {
     const [answers, setAnswers] = useState<QuestionResponse[]>([]);
     const [currentAnswers, setCurrentAnswers] = useState<AnswerResponse[]>([]);
     const [quizz, setQuizz] = useState<QuizzData | undefined>(undefined);
+    const { user } = useAuth();
     const navigate = useNavigate();
 
     const handleClick = async () => {
@@ -42,13 +44,15 @@ const Quizz = ({ title }: QuizzProps) => {
                 method: "POST",
                 body: JSON.stringify({
                     title: title,
+                    username: user,
                     questions: answers,
                 }),
             });
             console.log(JSON.stringify({
                 title: title,
+                username: user,
                 questions: answers,
-            }));
+            }))
             const data = await response.json();
             console.log(data);
             if (data.status === "ok") {
