@@ -72,7 +72,7 @@ public class Servlet extends HttpServlet {
 			//response.getWriter().write("{\"status\":\"ok\",\"message\":\"test1\"}");
 			
 			
-			User user = new Gson().fromJson(request.getReader(), User.class);
+			Login user = new Gson().fromJson(request.getReader(), Login.class);
 		
 			//boolean loginSuccessful = false;
 			if (facade.verfiLogin(user.getUsername(),user.getPassword())) {
