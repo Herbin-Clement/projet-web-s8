@@ -45,7 +45,12 @@ const Quizz = ({ title }: QuizzProps) => {
                     questions: answers,
                 }),
             });
+            console.log(JSON.stringify({
+                title: title,
+                questions: answers,
+            }));
             const data = await response.json();
+            console.log(data);
             if (data.status === "ok") {
                 navigate("/home");
             }
@@ -74,7 +79,7 @@ const Quizz = ({ title }: QuizzProps) => {
         if (title === "") {
             return
         }
-        const prout = async () => {
+        const getQuizz = async () => {
             const response = await fetch("http://localhost:8080/server/servlet/?op=joinQuizzLink", {
                 method: "POST",
                 body: JSON.stringify({
@@ -89,7 +94,7 @@ const Quizz = ({ title }: QuizzProps) => {
                 return next;
             })
         }
-        prout();
+        getQuizz();
     }, [title]);
 
     return (

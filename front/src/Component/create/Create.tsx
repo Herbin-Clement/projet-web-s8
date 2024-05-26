@@ -149,6 +149,7 @@ const Create = () => {
             method: "POST",
             body: JSON.stringify(quizz),
         });
+        console.log(JSON.stringify(quizz));
         const data = await response.json();
         if (data.status === "ok") {
             navigate("/home");

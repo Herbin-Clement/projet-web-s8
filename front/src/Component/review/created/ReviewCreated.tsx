@@ -3,7 +3,7 @@ import Question from './Question';
 import { QuizzData } from '../../../Type/interface';
 
 interface ReviewCreatedProps {
-    data: QuizzData;
+    data: QuizzData | undefined;
 }
 
 const ReviewCreated = ({ data }: ReviewCreatedProps) => {
@@ -14,15 +14,15 @@ const ReviewCreated = ({ data }: ReviewCreatedProps) => {
                 <div className="create-title">
                     <div className="create-input">
                         <div>Titre du Quizz</div>
-                        <input type="text" placeholder="Quizz" value={data.title} disabled />
+                        <input type="text" placeholder="Quizz" value={data !== undefined ? data.title : ""} disabled />
                     </div>
                 </div>
                 <Line />
-                {data.questions.map((question, id) => (
+                {data !== undefined ? data.questions.map((question, id) => (
                     <Question key={id}
                         id={id}
                         data={question} />
-                ))}
+                )) : []}
             </div>
         </div>
     )

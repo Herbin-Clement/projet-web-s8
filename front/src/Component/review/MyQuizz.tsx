@@ -8,23 +8,27 @@ import ReviewAnswered from "./answered/ReviewAnswered";
 
 import './myquizz.css';
 import { useAuth } from "../../Hooks/useAuth";
+import { QuizzData } from "../../Type/interface";
 
 const MyQuizz = () => {
 
     const [mod, setMod] = useState<string>("list");
+    const [quizzCreated, setQuizzCreated] = useState<QuizzData | undefined>(undefined);
     const [quizzListCreated, setQuizzListCreated] = useState<string[]>([]);
     const [quizzListAnswered, setQuizzListAnswered] = useState<string[]>([]);
     const { user } = useAuth();
 
     const handleListClick = async (title: string, method: string) => {
-        const response = await fetch("http://localhost:8080/server/servlet/?op=", {
+        const response = await fetch("http://localhost:8080/server/servlet/?op=joinQuizzLink", {
             method: "POST",
             body: JSON.stringify({
                 title: title,
             }),
         });
         const data = await response.json();
-        if (data.status === "ok") {
+        if (data.status.startsWith('ok')) {
+            const q: QuizzData = data.quizzData;
+            setQuizzCreated(q);
             setMod(method);
         } else {
             console.log(data.message);
@@ -33,22 +37,21 @@ const MyQuizz = () => {
 
     useEffect(() => {
         const fetchQuizzListCreated = async () => {
-            const response = await fetch("http://localhost:8080/server/servlet/?op=quizzList", {
+            const response = await fetch("http://localhost:8080/server/servlet/?op=getCreatedQuizzes", {
                 method: "POST",
-                mode: "no-cors",
                 body: JSON.stringify({
                     username: user,
                 })
             });
             const data = await response.json();
-            setQuizzListCreated(data.data);
-            console.log(data);
+            let arr: string[] = [];
+            data.quizzDataList.forEach((el: any) => arr.push(el.title));
+            setQuizzListCreated(arr);
         }
 
         const fetchQuizzListAnswered = async () => {
-            const response = await fetch("http://localhost:8080/server/servlet/?op=quizzList", {
+            const response = await fetch("http://localhost:8080/server/servlet/?op=getAnsweredQuizzes", {
                 method: "POST",
-                mode: "no-cors",
                 body: JSON.stringify({
                     username: user,
                 })
@@ -59,8 +62,8 @@ const MyQuizz = () => {
         }
 
         fetchQuizzListCreated();
-        fetchQuizzListAnswered();
-    })
+        // fetchQuizzListAnswered();
+    }, [])
 
     return (
         <div className="home">
@@ -78,7 +81,7 @@ const MyQuizz = () => {
                 </>
             }
             {
-                mod === "created" && <ReviewCreated data={quizz} />
+                mod === "created" && <ReviewCreated data={quizzCreated} />
             }
             {
                 mod === "answered" && <ReviewAnswered data={quizzreview} />
