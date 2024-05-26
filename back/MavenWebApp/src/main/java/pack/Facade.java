@@ -274,6 +274,7 @@ public class Facade {
 	                    input.setQcm(mcq);
 	                    input.setReponse(responseClient);
 	                    input.setSaisie(ans.isRes());
+	                    input.setUser(user);
 
 	                    em.persist(input);
 
