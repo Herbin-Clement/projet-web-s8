@@ -384,7 +384,7 @@ public class Facade {
 	                List<AnswerResponse> answerResponses = new ArrayList<>();
 	                for (ResponseClient response : mcq.getResponses()) {
 	                    boolean res = response.getInputs().stream()
-	                                          .anyMatch(input -> input.getUser().equals(user) && input.isSaisie());
+	                                          .anyMatch(input -> input.getUser().getUsername().equals(user.getUsername()) && input.isSaisie());
 	                    answerResponses.add(new AnswerResponse(response.getId(), res));
 	                }
 	                questionResponses.add(new QuestionResponse(mcq.getId(), answerResponses));
