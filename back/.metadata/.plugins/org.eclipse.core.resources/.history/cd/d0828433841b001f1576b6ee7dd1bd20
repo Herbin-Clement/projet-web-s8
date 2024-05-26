@@ -27,9 +27,9 @@ public class Facade {
 		    return count == 0;
 	}
 	 
-	 private boolean quizzNameNotUsed(String link) {
-		    Long count = em.createQuery("SELECT COUNT(q) FROM Quizz q WHERE q.link = :link", Long.class)
-		                   .setParameter("link", link)
+	 private boolean quizzNameNotUsed(String quizzname) {
+		    Long count = em.createQuery("SELECT COUNT(q) FROM Quizz q WHERE q.link = :quizzname", Long.class)
+		                   .setParameter("link", quizzname)
 		                   .getSingleResult();
 		    return count == 0;
 	}
@@ -352,8 +352,11 @@ public class Facade {
 	    }
 	 
 	 
-	 public QuizzDataReview getCorrectionQuizz(String quizzTitle) {
-			 Quizz quizz = em.createQuery("SELECT q FROM Quizz q WHERE q.link = '" + quizzTitle +"'", Quizz.class).getSingleResult();
+	 public QuizzDataReview getCorrectionQuizz(String quizzTitle)) {
+			 Quizz quizz = em.createQuery("SELECT q FROM Quizz q WHERE q.link = '" + username +"'", User.class).getSingleResult();
+			 return u.copyExcludingID();
+	        Quizz quizz = em.find(Quizz.class, quizzId);
+
 	        if (quizz == null) {
 	            return null;
 	        }
