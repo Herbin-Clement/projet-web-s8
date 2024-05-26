@@ -3,6 +3,7 @@ package pack;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -164,11 +165,28 @@ public class Servlet extends HttpServlet {
                 String jsonResponse = objectMapper.writeValueAsString(sortie);
                 response.getWriter().write(jsonResponse);
             } else {
-                response.getWriter().write("{\"status\":\"ko\",\"message\":\"Il y a eu un problème lors de la récupération de la liste des quizzs\"}");;
+                response.getWriter().write("{\"status\":\"ko\",\"message\":\"Il y a eu un problème lors de la récupération de la liste des quizzs\"}");
             }
 		} else if (op.equals("getAnsweredQuizzes")) { // Ruben
 			// in : username
 			// out : quizzes répondus  par le user avec les réponses du user
+			
+			
+			InfoUsername info = new Gson().fromJson(request.getReader(), InfoUsername.class);
+			String username = info.getInfo();
+			
+			if (username != null && !username.isEmpty()) {
+                List<QuizzResponse> answeredQuizzes = facade.getAnsweredQuizzesList(username);
+                if (answeredQuizzes != null) {
+                	StatusQuizzResponseList sortie = new StatusQuizzResponseList("ok", answeredQuizzes);
+                    String jsonResponse = objectMapper.writeValueAsString(sortie);
+                    response.getWriter().write(jsonResponse);
+                } else {
+                	response.getWriter().write("{\"status\":\"ko\",\"message\":\"Il y a eu un problème lors de la récupération de la liste des quizzs répondu\"}");
+                }
+            } else {
+            	response.getWriter().write("{\"status\":\"ko\",\"message\":\"L'username n'existe pas\"}");
+            }
 			/*{
 			InfoUsername info = new Gson().fromJson(request.getReader(), InfoUsername.class);
 			String username = info.getInfo();

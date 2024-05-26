@@ -368,5 +368,33 @@ public class Facade {
 	    }
 	 
 	 
+	 public List<QuizzResponse> getAnsweredQuizzesList(String username) {
+	        TypedQuery<User> query = em.createQuery("SELECT u FROM User u WHERE u.username = :username", User.class);
+	        query.setParameter("username", username);
+	        User user = query.getSingleResult();
+
+	        if (user == null) {
+	            return null;
+	        }
+
+	        List<QuizzResponse> quizzResponses = new ArrayList<>();
+	        for (Quizz quizz : user.getAnsweredQuizzes()) {
+	            List<QuestionResponse> questionResponses = new ArrayList<>();
+	            for (Mcq mcq : quizz.getMcqs()) {
+	                List<AnswerResponse> answerResponses = new ArrayList<>();
+	                for (ResponseClient response : mcq.getResponses()) {
+	                    boolean res = response.getInputs().stream()
+	                                          .anyMatch(input -> input.getUser().equals(user) && input.isSaisie());
+	                    answerResponses.add(new AnswerResponse(response.getId(), res));
+	                }
+	                questionResponses.add(new QuestionResponse(mcq.getId(), answerResponses));
+	            }
+	            quizzResponses.add(new QuizzResponse(user.getUsername(), quizz.getLink(), questionResponses));
+	        }
+
+	        return quizzResponses;
+	    }
+	 
+	 
 	 
 }

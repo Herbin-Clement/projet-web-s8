@@ -12,6 +12,12 @@ public class QuizzResponse {
     	this.questions = questions;
     }
     
+    public QuizzResponse(String username, String title, List<QuestionResponse> questions) {
+        this.username = username;
+        this.title = title;
+        this.questions = questions;
+    }
+    
     // Getters and setters
     public String getTitle() {
         return title;
