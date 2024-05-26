@@ -384,8 +384,11 @@ public class Facade {
 	            for (Mcq mcq : quizz.getMcqs()) {
 	            	Collection<AnswerResponse> answerResponses = new ArrayList<>();
 	                for (ResponseClient response : mcq.getResponses()) {
-	                    boolean res = response.getInputs().stream()
-	                                          .anyMatch(input -> input.getUser().getUsername().equals(user.getUsername()) && input.isSaisie());
+	                	boolean res = response.getInputs().stream()
+	                            .filter(input -> input.getUser().getUsername().equals(user.getUsername()))
+	                            .findFirst()
+	                            .map(Input::isSaisie)
+	                            .orElse(false);
 	                    answerResponses.add(new AnswerResponse(response.getId(), res));
 	                }
 	                questionResponses.add(new QuestionResponse(mcq.getId(), answerResponses));
