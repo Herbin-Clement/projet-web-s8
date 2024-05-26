@@ -239,6 +239,9 @@ public class Facade {
 	 public boolean processQuizzAnswers(QuizzResponse quizzData) {
 		 
 		 try {
+			 
+			 User user = em.createQuery("SELECT u FROM User u WHERE u.username = '" + quizzData.getUsername()+"'", User.class).getSingleResult();
+			 
 	            for (QuestionResponse questionData : quizzData.getQuestions()) {
 	                Mcq mcq = em.find(Mcq.class, questionData.getId());
 	                if (mcq == null) {
@@ -261,9 +264,12 @@ public class Facade {
 	                    // Add the input to the corresponding collections
 	                    mcq.getInputs().add(input);
 	                    responseClient.getInputs().add(input);
+	                    user.getInputs().add(input);
+	                    
 
 	                    em.merge(mcq);
 	                    em.merge(responseClient);
+	                    em.merge(user);
 	                }
 	            }
 	            return true;
