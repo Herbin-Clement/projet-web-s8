@@ -242,6 +242,15 @@ public class Facade {
 			 
 			 User user = em.createQuery("SELECT u FROM User u WHERE u.username = '" + quizzData.getUsername()+"'", User.class).getSingleResult();
 			 
+			 
+			 Quizz quizzRep = em.createQuery("SELECT q FROM Quizz q WHERE q.link = '" + quizzData.getTitle() + "'", Quizz.class).getSingleResult();
+			  
+			 user.getAnsweredQuizzes().add(quizzRep);
+			 
+			 quizzRep.getParticipants().add(user);
+			 
+			 em.merge(quizzRep);
+			 
 	            for (QuestionResponse questionData : quizzData.getQuestions()) {
 	                Mcq mcq = em.find(Mcq.class, questionData.getId());
 	                if (mcq == null) {
