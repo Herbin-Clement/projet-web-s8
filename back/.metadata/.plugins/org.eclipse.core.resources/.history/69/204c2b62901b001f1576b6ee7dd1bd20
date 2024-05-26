@@ -320,7 +320,7 @@ public class Facade {
 	            questionDataList.add(new QuestionData(mcq.getQuestion(), mcq.getId(), answerDataList));
 	        }
 
-	        return new QuizzData(quizz.getLink(), questionDataList, quizz.getCreator().getUsername());
+	        return new QuizzData(quizz.getLink(), questionDataList);
 	    }
 	 
 	 
