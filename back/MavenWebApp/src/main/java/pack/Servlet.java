@@ -219,6 +219,25 @@ public class Servlet extends HttpServlet {
 		} else if (op.equals("getCorrectionQuizz")) { // Ruben
 			// in : l'ID du quizz
 			// out : le JSon représentant les corrections des réponses dans l'ordre du quizz, sous la forme interface.tsx => QuizzDataReview
+			InfoID info = new Gson().fromJson(request.getReader(), InfoID.class);
+			
+			int id = info.getInfo();
+			
+			QuizzDataReview quizzDataReview = facade.getCorrectionQuizz(id);
+			
+
+			if (quizzDataReview != null) {
+		        
+				StatusQuizzDataReview quizz = new StatusQuizzDataReview("ok",quizzDataReview);
+				String jsonResponse = objectMapper.writeValueAsString(quizz);
+                response.getWriter().write(jsonResponse);
+   
+            } else {
+           
+                response.getWriter().write("{\"status\":\"ko\",\"message\":\"Il y a eu un problème lors de la récupération de la correction du quizz\"}");;
+            }
+            
+			
 		} else {
 	        response.getWriter().write("{\"status\":\"ko\",\"message\":\"No matching operation in the server.\"}");
 		}

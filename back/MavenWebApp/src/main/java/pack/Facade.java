@@ -341,5 +341,26 @@ public class Facade {
 	    }
 	 
 	 
+	 public QuizzDataReview getCorrectionQuizz(int quizzId) {
+	        Quizz quizz = em.find(Quizz.class, quizzId);
+
+	        if (quizz == null) {
+	            return null;
+	        }
+
+	        List<QuestionReview> questionReviewList = new ArrayList<>();
+	        for (Mcq mcq : quizz.getMcqs()) {
+	            List<AnswerReview> answerReviewList = new ArrayList<>();
+	            for (ResponseClient response : mcq.getResponses()) {
+	                boolean res = response.getInputs().stream().anyMatch(Input::isSaisie);
+	                answerReviewList.add(new AnswerReview(response.getResponse(), response.getId(), res, response.isValue()));
+	            }
+	            questionReviewList.add(new QuestionReview(mcq.getQuestion(), mcq.getId(), answerReviewList));
+	        }
+
+	        return new QuizzDataReview(quizz.getLink(), questionReviewList);
+	    }
+	 
+	 
 	 
 }
