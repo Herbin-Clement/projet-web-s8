@@ -102,7 +102,7 @@ public class Servlet extends HttpServlet {
             // Répondre en fonction du résultat de l'ajout
             if (quizzData != null) {
            
-            	StatusQuizzData sortie = new StatusQuizzData("ok",quizzData);
+            	StatusQuizzData sortie = new StatusQuizzData("ok, vous avez bien récupéré le quizz vierge",quizzData);
        
                 String jsonResponse = objectMapper.writeValueAsString(sortie);
                 response.getWriter().write(jsonResponse);
@@ -145,13 +145,11 @@ public class Servlet extends HttpServlet {
 			String username = info.getInfo();
 			Collection<QuizzData> listQuizzesData = facade.getListQuizzesUser(username);
 			if (listQuizzesData != null && username != null) {
-            	StatusQuizzDataList sortie = new StatusQuizzDataList("ok", listQuizzesData);
+            	StatusQuizzDataList sortie = new StatusQuizzDataList("ok, vous avez bien récupéré la liste des quizzs vierges", listQuizzesData);
                 String jsonResponse = objectMapper.writeValueAsString(sortie);
                 response.getWriter().write(jsonResponse);
-            } else if (listQuizzesData == null){
-                response.getWriter().write("{\"status\":\"ko\",\"message\":\"Il y a eu un problème lors de la récupération de la liste des quizzs.\"}");
-            } else if (username == null) {
-            	response.getWriter().write("{\"status\":\"ko\",\"message\":\"Il faut fournir le username du user courant.\"}");;
+            } else {
+                response.getWriter().write("{\"status\":\"ko\",\"message\":\"Il y a eu un problème lors de la récupération de la liste des quizzs\"}");;
             }
 		} else if (op.equals("getCreatedQuizzes")) { // Ruben : OK
 			// in : username
@@ -160,7 +158,7 @@ public class Servlet extends HttpServlet {
 			String username = info.getInfo();
 			Collection<QuizzData> listQuizzesData = facade.getCreatedQuizzesUser(username);
 			if (listQuizzesData != null) {
-            	StatusQuizzDataList sortie = new StatusQuizzDataList("ok", listQuizzesData);
+            	StatusQuizzDataList sortie = new StatusQuizzDataList("ok, vous avez bien récupéré la liste des quizzs vierges crées par le User", listQuizzesData);
                 String jsonResponse = objectMapper.writeValueAsString(sortie);
                 response.getWriter().write(jsonResponse);
             } else {

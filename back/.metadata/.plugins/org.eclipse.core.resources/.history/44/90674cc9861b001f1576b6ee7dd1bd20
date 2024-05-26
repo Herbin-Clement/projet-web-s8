@@ -47,8 +47,12 @@ public class Facade {
 	 
 	 // FONCTIONNE
 	 public Collection<User> listUsers() {
-		 Collection<User> listUsers = em.createQuery("select u from User u", User.class).getResultList();;
-		 return copyCollection(listUsers,User.class);
+		 Collection<User> listUsersAux = em.createQuery("select u from User u", User.class).getResultList();
+		 Collection<User> listUsers = new LinkedList<User>();
+		 for (User u : listUsersAux) {
+			 listUsers.add(u.copyExcludingID());
+		 }
+		 return listUsers;
 	 }
 	 
 	 // FONCTIONNE

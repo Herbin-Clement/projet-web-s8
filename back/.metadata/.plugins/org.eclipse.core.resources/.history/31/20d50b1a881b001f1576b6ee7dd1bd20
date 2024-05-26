@@ -102,7 +102,7 @@ public class Servlet extends HttpServlet {
             // Répondre en fonction du résultat de l'ajout
             if (quizzData != null) {
            
-            	StatusQuizzData sortie = new StatusQuizzData("ok",quizzData);
+            	StatusQuizzData sortie = new StatusQuizzData("ok, vous avez bien récupéré le quizz vierge",quizzData);
        
                 String jsonResponse = objectMapper.writeValueAsString(sortie);
                 response.getWriter().write(jsonResponse);
@@ -160,7 +160,7 @@ public class Servlet extends HttpServlet {
 			String username = info.getInfo();
 			Collection<QuizzData> listQuizzesData = facade.getCreatedQuizzesUser(username);
 			if (listQuizzesData != null) {
-            	StatusQuizzDataList sortie = new StatusQuizzDataList("ok", listQuizzesData);
+            	StatusQuizzDataList sortie = new StatusQuizzDataList("ok, vous avez bien récupéré la liste des quizzs vierges crées par le User", listQuizzesData);
                 String jsonResponse = objectMapper.writeValueAsString(sortie);
                 response.getWriter().write(jsonResponse);
             } else {
