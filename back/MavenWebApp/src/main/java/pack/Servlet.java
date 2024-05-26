@@ -176,7 +176,7 @@ public class Servlet extends HttpServlet {
 			String username = info.getInfo();
 			
 			if (username != null && !username.isEmpty()) {
-                List<QuizzResponse> answeredQuizzes = facade.getAnsweredQuizzesList(username);
+                Collection<QuizzResponse> answeredQuizzes = facade.getAnsweredQuizzesList(username);
                 if (answeredQuizzes != null) {
                 	StatusQuizzResponseList sortie = new StatusQuizzResponseList("ok", answeredQuizzes);
                     String jsonResponse = objectMapper.writeValueAsString(sortie);

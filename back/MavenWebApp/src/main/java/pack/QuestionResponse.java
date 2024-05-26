@@ -1,16 +1,17 @@
 package pack;
 
+import java.util.Collection;
 import java.util.List;
 
 public class QuestionResponse {
     private int id;
-    private List<AnswerResponse> answers;
+    private Collection<AnswerResponse> answers;
 
     // Default constructor
     public QuestionResponse() {}
 
     // Parameterized constructor
-    public QuestionResponse(int id, List<AnswerResponse> answers) {
+    public QuestionResponse(int id, Collection<AnswerResponse> answers) {
         this.id = id;
         this.answers = answers;
     }
@@ -24,11 +25,11 @@ public class QuestionResponse {
         this.id = id;
     }
 
-    public List<AnswerResponse> getAnswers() {
+    public Collection<AnswerResponse> getAnswers() {
         return answers;
     }
 
-    public void setAnswers(List<AnswerResponse> answers) {
+    public void setAnswers(Collection<AnswerResponse> answers) {
         this.answers = answers;
     }
 }

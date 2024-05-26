@@ -256,7 +256,7 @@ public class Facade {
 			 
 			 quizzRep.getParticipants().add(user);
 			 
-			 em.merge(quizzRep);
+			
 			 
 	            for (QuestionResponse questionData : quizzData.getQuestions()) {
 	                Mcq mcq = em.find(Mcq.class, questionData.getId());
@@ -288,6 +288,7 @@ public class Facade {
 	                    em.merge(user);
 	                }
 	            }
+	            em.merge(quizzRep);
 	            return true;
 	        } catch (Exception e) {
 	            e.printStackTrace();
@@ -368,7 +369,7 @@ public class Facade {
 	    }
 	 
 	 
-	 public List<QuizzResponse> getAnsweredQuizzesList(String username) {
+	 public Collection<QuizzResponse> getAnsweredQuizzesList(String username) {
 	        TypedQuery<User> query = em.createQuery("SELECT u FROM User u WHERE u.username = :username", User.class);
 	        query.setParameter("username", username);
 	        User user = query.getSingleResult();
@@ -377,11 +378,11 @@ public class Facade {
 	            return null;
 	        }
 
-	        List<QuizzResponse> quizzResponses = new ArrayList<>();
+	        Collection<QuizzResponse> quizzResponses = new ArrayList<>();
 	        for (Quizz quizz : user.getAnsweredQuizzes()) {
-	            List<QuestionResponse> questionResponses = new ArrayList<>();
+	            Collection<QuestionResponse> questionResponses = new ArrayList<>();
 	            for (Mcq mcq : quizz.getMcqs()) {
-	                List<AnswerResponse> answerResponses = new ArrayList<>();
+	            	Collection<AnswerResponse> answerResponses = new ArrayList<>();
 	                for (ResponseClient response : mcq.getResponses()) {
 	                    boolean res = response.getInputs().stream()
 	                                          .anyMatch(input -> input.getUser().getUsername().equals(user.getUsername()) && input.isSaisie());

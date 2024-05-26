@@ -1,18 +1,19 @@
 package pack;
 
+import java.util.Collection;
 import java.util.List;
 
 public class QuizzResponse {
 	private String username; 
     private String title;
-    private List<QuestionResponse> questions;
+    private Collection<QuestionResponse> questions;
 
-    public QuizzResponse(String title, List<QuestionResponse> questions) {
+    public QuizzResponse(String title, Collection<QuestionResponse> questions) {
     	this.title = title;
     	this.questions = questions;
     }
     
-    public QuizzResponse(String username, String title, List<QuestionResponse> questions) {
+    public QuizzResponse(String username, String title, Collection<QuestionResponse> questions) {
         this.username = username;
         this.title = title;
         this.questions = questions;
@@ -27,11 +28,11 @@ public class QuizzResponse {
         this.title = title;
     }
 
-    public List<QuestionResponse> getQuestions() {
+    public Collection<QuestionResponse> getQuestions() {
         return questions;
     }
 
-    public void setQuestions(List<QuestionResponse> questions) {
+    public void setQuestions(Collection<QuestionResponse> questions) {
         this.questions = questions;
     }
 
