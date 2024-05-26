@@ -5,6 +5,16 @@ public class AnswerReview {
     private int id;
     private boolean res;
     private boolean ok;
+    
+    
+    public AnswerReview(String text, int id, boolean res, boolean ok) {
+        this.text = text;
+        this.id = id;
+        this.res = res;
+        this.ok = ok;
+    }
+    
+    
 	public String getText() {
 		return text;
 	}

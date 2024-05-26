@@ -27,6 +27,7 @@ export interface QuestionResponse {
 }
 
 export interface QuizzResponse {
+    username: String,
     title: string,
     questions: QuestionResponse[],
 }

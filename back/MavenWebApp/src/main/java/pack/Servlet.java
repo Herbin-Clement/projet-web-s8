@@ -102,7 +102,7 @@ public class Servlet extends HttpServlet {
             // Répondre en fonction du résultat de l'ajout
             if (quizzData != null) {
            
-            	StatusQuizzData sortie = new StatusQuizzData("ok, vous avez bien récupéré le quizz vierge",quizzData);
+            	StatusQuizzData sortie = new StatusQuizzData("ok",quizzData);
        
                 String jsonResponse = objectMapper.writeValueAsString(sortie);
                 response.getWriter().write(jsonResponse);
@@ -144,12 +144,14 @@ public class Servlet extends HttpServlet {
 			InfoUsername info = new Gson().fromJson(request.getReader(), InfoUsername.class);
 			String username = info.getInfo();
 			Collection<QuizzData> listQuizzesData = facade.getListQuizzesUser(username);
-			if (listQuizzesData != null) {
-            	StatusQuizzDataList sortie = new StatusQuizzDataList("ok, vous avez bien récupéré la liste des quizzs vierges", listQuizzesData);
+			if (listQuizzesData != null && username != null) {
+            	StatusQuizzDataList sortie = new StatusQuizzDataList("ok", listQuizzesData);
                 String jsonResponse = objectMapper.writeValueAsString(sortie);
                 response.getWriter().write(jsonResponse);
-            } else {
-                response.getWriter().write("{\"status\":\"ko\",\"message\":\"Il y a eu un problème lors de la récupération de la liste des quizzs\"}");;
+            } else if (listQuizzesData == null){
+                response.getWriter().write("{\"status\":\"ko\",\"message\":\"Il y a eu un problème lors de la récupération de la liste des quizzs.\"}");
+            } else if (username == null) {
+            	response.getWriter().write("{\"status\":\"ko\",\"message\":\"Il faut fournir le username du user courant.\"}");;
             }
 		} else if (op.equals("getCreatedQuizzes")) { // Ruben : OK
 			// in : username
@@ -158,7 +160,7 @@ public class Servlet extends HttpServlet {
 			String username = info.getInfo();
 			Collection<QuizzData> listQuizzesData = facade.getCreatedQuizzesUser(username);
 			if (listQuizzesData != null) {
-            	StatusQuizzDataList sortie = new StatusQuizzDataList("ok, vous avez bien récupéré la liste des quizzs vierges crées par le User", listQuizzesData);
+            	StatusQuizzDataList sortie = new StatusQuizzDataList("ok", listQuizzesData);
                 String jsonResponse = objectMapper.writeValueAsString(sortie);
                 response.getWriter().write(jsonResponse);
             } else {
@@ -216,9 +218,28 @@ public class Servlet extends HttpServlet {
             }
             
             
-		} else if (op.equals("getCorrectionQuizz")) { // Ruben
+		} else if (op.equals("getCorrectionQuizz")) { // Ruben : OK
 			// in : l'ID du quizz
 			// out : le JSon représentant les corrections des réponses dans l'ordre du quizz, sous la forme interface.tsx => QuizzDataReview
+			InfoTitle info = new Gson().fromJson(request.getReader(), InfoTitle.class);
+			
+			String title = info.getInfo();
+			
+			QuizzDataReview quizzDataReview = facade.getCorrectionQuizz(title);
+			
+
+			if (quizzDataReview != null) {
+		        
+				StatusQuizzDataReview quizz = new StatusQuizzDataReview("ok",quizzDataReview);
+				String jsonResponse = objectMapper.writeValueAsString(quizz);
+                response.getWriter().write(jsonResponse);
+   
+            } else {
+           
+                response.getWriter().write("{\"status\":\"ko\",\"message\":\"Il y a eu un problème lors de la récupération de la correction du quizz\"}");;
+            }
+            
+			
 		} else {
 	        response.getWriter().write("{\"status\":\"ko\",\"message\":\"No matching operation in the server.\"}");
 		}

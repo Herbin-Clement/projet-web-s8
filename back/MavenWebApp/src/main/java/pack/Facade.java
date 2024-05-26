@@ -27,6 +27,13 @@ public class Facade {
 		    return count == 0;
 	}
 	 
+	 private boolean quizzNameNotUsed(String link) {
+		    Long count = em.createQuery("SELECT COUNT(q) FROM Quizz q WHERE q.link = :link", Long.class)
+		                   .setParameter("link", link)
+		                   .getSingleResult();
+		    return count == 0;
+	}
+	 
 	// FONCTIONNE
 	 public boolean addUser(User user) {
 		 boolean usernameNotUsed = UsernameNotUsed(user.getUsername());
@@ -40,12 +47,8 @@ public class Facade {
 	 
 	 // FONCTIONNE
 	 public Collection<User> listUsers() {
-		 Collection<User> listUsersAux = em.createQuery("select u from User u", User.class).getResultList();
-		 Collection<User> listUsers = new LinkedList<User>();
-		 for (User u : listUsersAux) {
-			 listUsers.add(u.copyExcludingID());
-		 }
-		 return listUsers;
+		 Collection<User> listUsers = em.createQuery("select u from User u", User.class).getResultList();;
+		 return copyCollection(listUsers,User.class);
 	 }
 	 
 	 // FONCTIONNE
@@ -191,54 +194,70 @@ public class Facade {
 	 }
 	 
 	 public boolean addQuizz(QuizzData quizzData) {
-	        try {
-	            // Créer un nouvel objet Quizz
-	            Quizz quizz = new Quizz();
-	            quizz.setLink(quizzData.getTitle()); // Utiliser le titre comme lien pour cet exemple
-	            quizz.setMcqs(new LinkedList<>());
-	            User u = em.createQuery("SELECT u FROM User u WHERE username = '" + quizzData.getCreatorUsername() + "'", User.class).getSingleResult();
-	            quizz.setCreator(u);
-
-	            // Parcourir les questions et les ajouter au quizz
-	            for (QuestionData questionData : quizzData.getQuestions()) {
-	                Mcq mcq = new Mcq();
-	                mcq.setQuestion(questionData.getQuestion());
-	                mcq.setRank(questionData.getId());
-	                mcq.setQuizz(quizz);
-	                mcq.setResponses(new LinkedList<>());
-	                mcq.setInputs(new LinkedList<>());
-	                quizz.addMcq(mcq);
-	                em.persist(mcq);
-
-	                // Parcourir les réponses et les associer à la question (Mcq)
-	                for (AnswerData answerData : questionData.getAnswers()) {
-	                    ResponseClient responseClient = new ResponseClient();
-	                    responseClient.setResponse(answerData.getText());
-	                    responseClient.setRank(answerData.getId());
-	                    responseClient.setValue(answerData.isOk());
-	                    responseClient.setQcm(mcq);
-	                    responseClient.setInputs(new LinkedList<>());
-	                    
-	                    mcq.addResponse(responseClient);
-	                    
-	                    em.persist(responseClient);
-	                }
-	            }
-
-	            // Persister le quizzC
-	            em.persist(quizz);
-
-	            return true;
+		 	if (quizzNameNotUsed(quizzData.getTitle())) {
+		        try {
+		            // Créer un nouvel objet Quizz
+		        	Quizz quizz = new Quizz();
+		            quizz.setLink(quizzData.getTitle()); // Utiliser le titre comme lien pour cet exemple
+		            quizz.setMcqs(new LinkedList<>());
+		            User u = em.createQuery("SELECT u FROM User u WHERE username = '" + quizzData.getCreatorUsername() + "'", User.class).getSingleResult();
+		            quizz.setCreator(u);
+	
+		            // Parcourir les questions et les ajouter au quizz
+		            for (QuestionData questionData : quizzData.getQuestions()) {
+		                Mcq mcq = new Mcq();
+		                mcq.setQuestion(questionData.getQuestion());
+		                mcq.setRank(questionData.getId());
+		                mcq.setQuizz(quizz);
+		                mcq.setResponses(new LinkedList<>());
+		                mcq.setInputs(new LinkedList<>());
+		                quizz.addMcq(mcq);
+		                em.persist(mcq);
+	
+		                // Parcourir les réponses et les associer à la question (Mcq)
+		                for (AnswerData answerData : questionData.getAnswers()) {
+		                    ResponseClient responseClient = new ResponseClient();
+		                    responseClient.setResponse(answerData.getText());
+		                    responseClient.setRank(answerData.getId());
+		                    responseClient.setValue(answerData.isOk());
+		                    responseClient.setQcm(mcq);
+		                    responseClient.setInputs(new LinkedList<>());
+		                    
+		                    mcq.addResponse(responseClient);
+		                    
+		                    em.persist(responseClient);
+		                }
+		            }
+	
+		            // Persister le quizzC
+		            em.persist(quizz);
+	
+		            return true;
 	        } catch (Exception e) {
 	            e.printStackTrace();
 	            return false;
 	        }
+		 	} else {
+	        	return false;
+		 	}
 	    }
 	 
 	 
 	 public boolean processQuizzAnswers(QuizzResponse quizzData) {
 		 
 		 try {
+			 
+			 User user = em.createQuery("SELECT u FROM User u WHERE u.username = '" + quizzData.getUsername()+"'", User.class).getSingleResult();
+			 
+			 
+			 Quizz quizzRep = em.createQuery("SELECT q FROM Quizz q WHERE q.link = '" + quizzData.getTitle() + "'", Quizz.class).getSingleResult();
+			  
+			 user.getAnsweredQuizzes().add(quizzRep);
+			 
+			 quizzRep.getParticipants().add(user);
+			 
+			 em.merge(quizzRep);
+			 
 	            for (QuestionResponse questionData : quizzData.getQuestions()) {
 	                Mcq mcq = em.find(Mcq.class, questionData.getId());
 	                if (mcq == null) {
@@ -261,9 +280,12 @@ public class Facade {
 	                    // Add the input to the corresponding collections
 	                    mcq.getInputs().add(input);
 	                    responseClient.getInputs().add(input);
+	                    user.getInputs().add(input);
+	                    
 
 	                    em.merge(mcq);
 	                    em.merge(responseClient);
+	                    em.merge(user);
 	                }
 	            }
 	            return true;
@@ -323,6 +345,26 @@ public class Facade {
 	        int correctAnswerPercentage = totalAnswersCount == 0 ? 0 : (int) ((double) correctAnswersCount / totalAnswersCount * 100);
 
 	        return new StatusProfil("ok", user.getUsername(), createdQuizzesCount, answeredQuizzesCount, correctAnswerPercentage);
+	    }
+	 
+	 
+	 public QuizzDataReview getCorrectionQuizz(String quizzTitle) {
+			 Quizz quizz = em.createQuery("SELECT q FROM Quizz q WHERE q.link = '" + quizzTitle +"'", Quizz.class).getSingleResult();
+	        if (quizz == null) {
+	            return null;
+	        }
+
+	        List<QuestionReview> questionReviewList = new ArrayList<>();
+	        for (Mcq mcq : quizz.getMcqs()) {
+	            List<AnswerReview> answerReviewList = new ArrayList<>();
+	            for (ResponseClient response : mcq.getResponses()) {
+	                boolean res = response.getInputs().stream().anyMatch(Input::isSaisie);
+	                answerReviewList.add(new AnswerReview(response.getResponse(), response.getId(), res, response.isValue()));
+	            }
+	            questionReviewList.add(new QuestionReview(mcq.getQuestion(), mcq.getId(), answerReviewList));
+	        }
+
+	        return new QuizzDataReview(quizz.getLink(), questionReviewList);
 	    }
 	 
 	 

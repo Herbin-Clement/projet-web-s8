@@ -5,6 +5,12 @@ import java.util.List;
 public class QuizzDataReview {
     private String title;
     private List<QuestionReview> questions;
+    
+    public QuizzDataReview(String title, List<QuestionReview> questions) {
+        this.title = title;
+        this.questions = questions;
+    }
+    
 	public String getTitle() {
 		return title;
 	}

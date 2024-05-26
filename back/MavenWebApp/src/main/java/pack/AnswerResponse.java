@@ -13,6 +13,7 @@ public class AnswerResponse {
         this.res = res;
     }
 
+
     // Getters and Setters
     public int getId() {
         return id;
