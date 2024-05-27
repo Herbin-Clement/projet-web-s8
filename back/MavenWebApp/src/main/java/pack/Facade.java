@@ -353,7 +353,7 @@ public class Facade {
 	        int answeredQuizzesCount = user.getAnsweredQuizzes().size();
 
 	        long correctAnswersCount = user.getInputs().stream()
-	                .filter(input -> input.isSaisie() && input.getReponse().isValue()|| (!input.isSaisie() && !input.getReponse().isValue()))
+	                .filter(input -> (input.isSaisie() && input.getReponse().isValue())|| (!input.isSaisie() && !input.getReponse().isValue()))
 	                .count();
 	        long totalAnswersCount = user.getInputs().size();
 
