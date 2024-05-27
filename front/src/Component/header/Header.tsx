@@ -23,7 +23,7 @@ const Header = () => {
                     <div className="header-text">Mes Quizz</div>
                 </Link>
                 <Link to="/profil">
-                    <div className="header-text">Profile</div>
+                    <div className="header-text">Profil</div>
                 </Link>
                 <div className="header-profil-logo"></div>
             </div>
