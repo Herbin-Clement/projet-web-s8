@@ -32,6 +32,11 @@ public class Servlet extends HttpServlet {
 
     // TOOD : il faut un status dans tous les cas. Si status ok, mettre dans data les données envoyées au client
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		String requestOrigin = request.getHeader("Origin");
+        response.addHeader("Access-Control-Allow-Origin", requestOrigin);
+        response.addHeader("Access-Control-Allow-Headers", "*");
+        response.addHeader("Access-Control-Allow-Methods", "GET, OPTIONS, HEAD, PUT, POST, DELETE");
 		response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");	
 		String op = request.getParameter("op");
@@ -74,6 +79,8 @@ public class Servlet extends HttpServlet {
 			
 			
 			Login user = new Gson().fromJson(request.getReader(), Login.class);
+			
+			System.out.println(user);
 		
 			//boolean loginSuccessful = false;
 			if (facade.verfiLogin(user.getUsername(),user.getPassword())) {
