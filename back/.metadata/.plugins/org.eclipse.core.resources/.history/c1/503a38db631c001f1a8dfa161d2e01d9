@@ -31,8 +31,7 @@ public abstract class Entite<T extends Entite<T>> {
                         
                         for (Object item : originalCollection) {
                             if (item instanceof Entite) {
-                            	System.out.println(item.toString());
-                            	System.out.println(((Entite<?>) item).toString());
+                            	System.out.println(item.toString())
                                 copiedCollection.add(((Entite<?>) item).copyExcludingID());
                             } else {
                                 copiedCollection.add(item);
