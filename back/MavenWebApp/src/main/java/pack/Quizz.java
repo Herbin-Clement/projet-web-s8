@@ -85,4 +85,9 @@ public class Quizz  extends Entite<Quizz> {
 		return this.participants;
 		
 	}
+
+	public int getId() {
+		// TODO Auto-generated method stub
+		return this.id;
+	}
 }

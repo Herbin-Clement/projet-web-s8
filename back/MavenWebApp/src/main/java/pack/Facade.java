@@ -194,6 +194,7 @@ public class Facade {
 	 }
 	 
 	 public boolean addQuizz(QuizzData quizzData) {
+		 
 		 	if (quizzNameNotUsed(quizzData.getTitle())) {
 		        try {
 		            // Créer un nouvel objet Quizz
@@ -252,21 +253,27 @@ public class Facade {
 			 
 			 Quizz quizzRep = em.createQuery("SELECT q FROM Quizz q WHERE q.link = '" + quizzData.getTitle() + "'", Quizz.class).getSingleResult();
 			  
-			 user.getAnsweredQuizzes().add(quizzRep);
 			 
-			 quizzRep.getParticipants().add(user);
 			 
 			
 			 
 	            for (QuestionResponse questionData : quizzData.getQuestions()) {
-	                Mcq mcq = em.find(Mcq.class, questionData.getId());
+	            	Mcq mcq = em.createQuery("SELECT m FROM Mcq m WHERE m.rank = :rank AND m.quizzOfTheMcq.link = :quizzId", Mcq.class)
+	                        .setParameter("rank", questionData.getId())
+	                        .setParameter("quizzId", quizzRep.getLink())
+	                        .getSingleResult();
 	                if (mcq == null) {
+	                	System.out.println("mcq est null");
 	                    return false; // Mcq not found
 	                }
 
 	                for (AnswerResponse ans : questionData.getAnswers()) {
-	                    ResponseClient responseClient = em.find(ResponseClient.class, ans.getId());
+	                	ResponseClient responseClient = em.createQuery("SELECT r FROM ResponseClient r WHERE r.rank = :rank AND r.qcm.id = :mcqId", ResponseClient.class)
+                                .setParameter("rank", ans.getId())
+                                .setParameter("mcqId", mcq.getId())
+                                .getSingleResult();
 	                    if (responseClient == null) {
+	                    	System.out.println("responseClient est null");
 	                        return false; // ResponseClient not found
 	                    }
 
@@ -283,15 +290,21 @@ public class Facade {
 	                    responseClient.getInputs().add(input);
 	                    user.getInputs().add(input);
 	                    
+	                    em.merge(input);
 
 	                    em.merge(mcq);
 	                    em.merge(responseClient);
 	                    em.merge(user);
 	                }
 	            }
+	            
+	            user.getAnsweredQuizzes().add(quizzRep);
+				quizzRep.getParticipants().add(user);
+				em.merge(user);
 	            em.merge(quizzRep);
 	            return true;
 	        } catch (Exception e) {
+	        	System.out.println("Exception detecté");
 	            e.printStackTrace();
 	            return false;
 	        }

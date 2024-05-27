@@ -3,6 +3,7 @@ package pack;
 public class AnswerResponse {
     private int id;
     private boolean res;
+    
 
     // Default constructor
     public AnswerResponse() {}
