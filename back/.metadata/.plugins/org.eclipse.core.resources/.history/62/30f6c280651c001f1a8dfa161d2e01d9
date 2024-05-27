@@ -183,7 +183,7 @@ public class Facade {
 	 
 	 public boolean verfiLogin(String username,String password) {
 		
-		 Collection<User> listUsers = em.createQuery("select u from User u", User.class).getResultList();
+		 Collection<User> listUsers = em.createQuery("select u from User u", User.class).getResultList();;;
 	    for (User user : listUsers) {
 	        if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
 	            return true;

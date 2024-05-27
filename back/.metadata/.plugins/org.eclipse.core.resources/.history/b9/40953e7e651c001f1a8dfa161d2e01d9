@@ -47,7 +47,7 @@ public class Facade {
 	 
 	 // FONCTIONNE
 	 public Collection<User> listUsers() {
-		 Collection<User> listUsers = em.createQuery("select u from User u", User.class).getResultList();
+		 Collection<User> listUsers = em.createQuery("select u from User u", User.class).getResultList();;
 		 return copyCollection(listUsers,User.class);
 	 }
 	 
@@ -183,8 +183,8 @@ public class Facade {
 	 
 	 public boolean verfiLogin(String username,String password) {
 		
-		 Collection<User> listUsers = em.createQuery("select u from User u", User.class).getResultList();
-	    for (User user : listUsers) {
+		 Collection<User> listUsersAux = this.listUsers();
+	    for (User user : listUsersAux) {
 	        if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
 	            return true;
 	        }
