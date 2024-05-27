@@ -81,7 +81,7 @@ public class Facade {
 	        Collection<T> resultat = new LinkedList<>();
 	        for (Entite<?> entite : collection) {
 	            if (clazz.isInstance(entite)) {
-	                resultat.add(clazz.cast(entite).copyExcludingID());
+	                resultat.add(clazz.cast(entite.copyExcludingID()));
 	            } else {
 	                throw new IllegalArgumentException("Tous les éléments de la collection ne sont pas du type " + clazz.getName());
 	            }
