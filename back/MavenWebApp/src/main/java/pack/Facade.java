@@ -330,9 +330,9 @@ public class Facade {
 	        for (Mcq mcq : quizz.getMcqs()) {
 	            List<AnswerData> answerDataList = new ArrayList<>();
 	            for (ResponseClient response : mcq.getResponses()) {
-	                answerDataList.add(new AnswerData(response.getResponse(), response.getId(), response.isValue())); // Don't include 'ok' value
+	                answerDataList.add(new AnswerData(response.getResponse(), response.getRank(), response.isValue())); // Don't include 'ok' value
 	            }
-	            questionDataList.add(new QuestionData(mcq.getQuestion(), mcq.getId(), answerDataList));
+	            questionDataList.add(new QuestionData(mcq.getQuestion(), mcq.getRank(), answerDataList));
 	        }
 
 	        return new QuizzData(quizz.getLink(), questionDataList, quizz.getCreator().getUsername());
