@@ -22,14 +22,13 @@ interface ProfileData {
 
 const Profil = () => {
 
-    const { logout } = useAuth();
+    const { logout, user } = useAuth();
 
     const [profile, setProfile] = useState<ProfileData>({
         nb_quizz_cree: 0,
         nb_quizz_repondu: 0,
         pourcentage_bonne_reponse: 0
     });
-    const { user } = useAuth();
 
     useEffect(() => {
         const fetchProfile = async () => {
@@ -57,6 +56,7 @@ const Profil = () => {
             <Header />
             <div className="profil-content">
                 <div className="profil-stat">
+                    <div>Username : {user}</div>
                     <div>Nombre de Quizz créé : {profile.nb_quizz_cree}</div>
                     <div>Nombre de Quizz répondu : {profile.nb_quizz_repondu}</div>
                     <div>Pourcentage de bonnes réponses : {profile.pourcentage_bonne_reponse}</div>

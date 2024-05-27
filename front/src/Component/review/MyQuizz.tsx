@@ -57,12 +57,13 @@ const MyQuizz = () => {
                 })
             });
             const data = await response.json();
-            setQuizzListAnswered(data.data);
-            console.log(data);
+            let arr: string[] = [];
+            data.quizzDataList.forEach((el: any) => arr.push(el.title));
+            setQuizzListAnswered(arr);
         }
 
         fetchQuizzListCreated();
-        // fetchQuizzListAnswered();
+        fetchQuizzListAnswered();
     }, [])
 
     return (

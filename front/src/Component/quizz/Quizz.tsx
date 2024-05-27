@@ -92,6 +92,7 @@ const Quizz = ({ title }: QuizzProps) => {
             });
             const data = await response.json();
             const q: QuizzData = data.quizzData;
+            console.log(data);
             setQuizz(q);
             setCurrentAnswers(() => {
                 const next = q.questions[questionId].answers.map(ans => AnswerToAnswerResponse(ans));
