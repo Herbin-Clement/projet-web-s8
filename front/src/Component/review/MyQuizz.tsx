@@ -8,30 +8,49 @@ import ReviewAnswered from "./answered/ReviewAnswered";
 
 import './myquizz.css';
 import { useAuth } from "../../Hooks/useAuth";
-import { QuizzData } from "../../Type/interface";
+import { QuizzData, QuizzDataReview } from "../../Type/interface";
 
 const MyQuizz = () => {
 
     const [mod, setMod] = useState<string>("list");
     const [quizzCreated, setQuizzCreated] = useState<QuizzData | undefined>(undefined);
+    const [quizzAnswered, setQuizzAnswered] = useState<QuizzDataReview | undefined>(undefined);
     const [quizzListCreated, setQuizzListCreated] = useState<string[]>([]);
     const [quizzListAnswered, setQuizzListAnswered] = useState<string[]>([]);
     const { user } = useAuth();
 
     const handleListClick = async (title: string, method: string) => {
-        const response = await fetch("http://localhost:8080/server/servlet/?op=joinQuizzLink", {
-            method: "POST",
-            body: JSON.stringify({
-                title: title,
-            }),
-        });
-        const data = await response.json();
-        if (data.status.startsWith('ok')) {
-            const q: QuizzData = data.quizzData;
-            setQuizzCreated(q);
-            setMod(method);
+        if (method === "created") {
+            const response = await fetch("http://localhost:8080/server/servlet/?op=joinQuizzLink", {
+                method: "POST",
+                body: JSON.stringify({
+                    title: title,
+                }),
+            });
+            const data = await response.json();
+            if (data.status.startsWith('ok')) {
+                const q: QuizzData = data.quizzData;
+                setQuizzCreated(q);
+                setMod(method);
+            } else {
+                console.log(data.message);
+            }
         } else {
-            console.log(data.message);
+            const response = await fetch("http://localhost:8080/server/servlet/?op=getCorrectionQuizz", {
+                method: "POST",
+                body: JSON.stringify({
+                    title: title,
+                    username: user,
+                }),
+            });
+            const data = await response.json();
+            if (data.status.startsWith('ok')) {
+                const q: QuizzDataReview = data.quizzDataReview;
+                setQuizzAnswered(q);
+                setMod(method);
+            } else {
+                console.log(data.message);
+            }
         }
     }
 
@@ -85,7 +104,7 @@ const MyQuizz = () => {
                 mod === "created" && <ReviewCreated data={quizzCreated} />
             }
             {
-                mod === "answered" && <ReviewAnswered data={quizzreview} />
+                mod === "answered" && <ReviewAnswered data={quizzAnswered} />
             }
         </div>
     )
