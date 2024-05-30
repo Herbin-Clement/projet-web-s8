@@ -1,0 +1,77 @@
+Clément Herbin - groupe M1
+Ruben Crico - groupe M1
+Julien Huang - groupe M1
+Anishan Sebanathan - groupe L4
+Rapport projet applications web (état final de l'application)
+
+Pour les rapports de chaque séance : voir mails "JEE: herbin-crico-huang-sebanathan"
+
+# Etat final de l'application : 
+
+Entités : 
+- User : un compte utilisateur du site web
+- Quizz : un quizz du site, c'est-à-dire un ensemble ordonné de QCMs
+- QCM : une question à choix multiples (un choix = une "ResponseUser", avec sa correction
+- ResponseUser : un des choix possible d'une réponse à un QCM
+- Input : la saisie (=sélection) d'un choix (une ResponseUser) d'un User dans un QCM
+- Stats : un ensemble de statistiques associées à un Quizz, liées aux réponses des utilisateurs à ce quizz
+(nous ne l'avons finalement pas utilisé)
+
+User <=> OneToMany <=> Quizz (création)
+User <=> ManyToMany <=> Quizz (réponse)
+User <=> OneToMany <=> Input
+Quizz <=> OneToMany <=> QCM 
+Quizz <=> OneToOne <=> Stats
+QCM <=> OneToMany <=> ResponseUser
+QCM <=> OneToMany <=> Input
+ReponseUser <=> OneToMany <=> Input
+
+Fonctionnalités du site implémentées :
+- Register/Login : création d’un compte utilisateur - connexion à son compte
+- Création d’un Quizz : définition d’une liste des questions/réponses proposées avec la correction
+- Publication du Quizz sur le site : les autres utilisateurs peuvent y répondre
+- Affichage de la liste des Quizz publiés par les autres utilisateurs
+- Recherche d’un Quizz par la liste ou par son titre
+- Réponse à un Quizz
+- Stockage des réponses de l’utilisateur à différents Quizz
+- Profil utilisateur : nombre de Quizz crées et répondus - pourcentage de bonnes réponses
+
+Architecture du client (front-end):  
+Environnement technique: ReactJS, Typescript
+/login : connexion à son compte
+/register : inscription
+/home : page principale de l’application
+/join : page pour rejoindre un Quizz
+/create : page pour créer un Quizz
+/quizz : page pour répondre à un Quizz
+/myquizz : page pour consulter les Quizz créé et répondu
+/profil : page pour consulter son profil
+
+Architecture du serveur (back-end):
+Servlet - Base de données - EJB
+Réception et envoie des données au format Json avec la servlet
+Opérations de la servlet:
+-listUsers : liste des User de la base
+-getUserByName 
+-getQuizzByTitle
+-login : ajoute un User à la base si username non utilisé
+-joinQuizzLink 
+-addQuizz
+-joinQuizzID
+-listQuizzes
+-getCreatedQuizzes
+-getAnsweredQuizzes
+-getProfile
+-addAnsQuizz
+-getCorrectionQuizz
+
+Répartition des tâches :
+- deux personnes pour le front-end
+- deux personnes pour le back-end
+
+Gestion de projet:
+Côté back-end, nous avons d'abord cherché à pouvoir échanger des données au format Json en incluant des traitement dans 
+la base de données (en testant avec Postman). Nous n'avons pas réussi à le faire avec Rest donc nous avons finalement
+opté pour une servlet classique. Nous avons ici réussi à réaliser ces échanges, puis nous avons développé le back-end 
+plus en profondeur (méthodes de la facade, ...).
+
